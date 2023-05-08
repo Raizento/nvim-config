@@ -1,0 +1,8 @@
+require "raizento.options"
+require "raizento.keymaps"
+require "raizento.plugins"
+require "raizento.colorscheme"
+require "raizento.cmp"
+require "raizento.lsp"
+require "raizento.nvim_tree"
+require "raizento.lualine"

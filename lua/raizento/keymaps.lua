@@ -30,11 +30,3 @@ vim.g.maplocalleader = " "
 -- keymap("n", "<C-k>", "<C-w>k", opts)
 -- keymap("n", "<C-l>", "<C-w>l", opts)
 
--- TODO change command to function 
--- Focus nvim-tree if not focused; otherwise, close nvim-tree
-local nvim_tree_status_ok, nvim_tree = pcall(require, "nvim-tree")
-if not nvim_tree_status_ok then
-    return
-end
-
---keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)

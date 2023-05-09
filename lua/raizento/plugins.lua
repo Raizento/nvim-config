@@ -49,8 +49,8 @@ return packer.startup(function(use)
     use "navarasu/onedark.nvim"
     use { "catppuccin/nvim", as = "catppuccin" }
     use "tyrannicaltoucan/vim-quantum"
-    -- Currently having some issues; check later
-    use {'hardhackerlabs/theme-vim', as = 'hardhacker' }
+    use { "hardhackerlabs/theme-vim", as = "hardhacker" }
+    use "folke/tokyonight.nvim"
 
     -- cmp plugins
     use "hrsh7th/nvim-cmp" -- completion plugin

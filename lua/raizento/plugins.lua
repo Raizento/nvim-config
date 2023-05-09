@@ -55,13 +55,12 @@ return packer.startup(function(use)
     use "hrsh7th/cmp-buffer" -- buffer completion
     use "hrsh7th/cmp-path" -- path completion
     use "hrsh7th/cmp-cmdline" -- cmdline completion
-    use "saadparwaiz1/cmp_luasnip" -- snippet completion 
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-nvim-lua"
 
     -- snippets
     use "L3MON4D3/LuaSnip"
-    use "saadparwaiz1/cmp_luasnip"
+    use "saadparwaiz1/cmp_luasnip" -- snippet completion 
     use "rafamadriz/friendly-snippets"
 
     -- LSP 
@@ -79,6 +78,14 @@ return packer.startup(function(use)
         requires = { 'nvim-tree/nvim-web-devicons', opt = true }
     }
 
+    -- Tree sitter 
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function()
+            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            ts_update()
+        end,
+    }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

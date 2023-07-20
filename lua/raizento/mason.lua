@@ -50,8 +50,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
         }, { buffer = ev.buf })
 
         whichkey.register({
-            name = "workspace",
             W = {
+                name = "workspace",
                 a = { vim.lsp.buf.add_workspace_folder, "Add folder" },
                 r = { vim.lsp.buf.remove_workspace_folder, "Remove folder" },
                 l = { 
@@ -64,8 +64,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
         }, { prefix = "<leader>", buffer = ev.buf})
 
         whichkey.register({
-            name = "jump to",
             j = {
+                name = "jump to",
                 D = { vim.lsp.buf.declaration, "Declaration" }, 
                 d = { vim.lsp.buf.definition, "Definition" },
                 i = { vim.lsp.buf.implementation, "Implementation" },
@@ -75,8 +75,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
         }, { prefix = "<leader>", buffer = ev.buf })
 
         whichkey.register({
-            name = "code",
             c = {
+                name = "code",
                 a = { vim.lsp.buf.code_action, "Actions", mode = { "n", "v" }},
                 f = { 
                     function()

@@ -102,14 +102,8 @@ return require("packer").startup(function(use)
     }
 
     -- Show key mappings when using keys
-    use {
-        "folke/which-key.nvim",
-        config = function()
-            vim.opt.timeout = true
-            vim.opt.timeoutlen = 500
-            require("which-key").setup {}
-        end
-    }
+    use "folke/which-key.nvim"
+    
 
     if packer_bootstrap then
         require("packer").sync()

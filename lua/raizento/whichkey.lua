@@ -27,6 +27,7 @@ wk.register({
     n = {
         name = "neotree",
         t = { "<cmd>Neotree toggle<cr>", "Toggle" },
+        f = { "<cmd>Neotree focus<cr>", "Focus"},
     }, 
 
 }, { prefix = "<leader>" })

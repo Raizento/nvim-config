@@ -14,12 +14,13 @@ require("mason-lspconfig").setup {
 
 -- Rust tools setup
 -- Sets up the rust-analyzer lsp; do not setup manually!
-local rt = require("rust-tools")
+require("rust-tools")
 
 local lspconfig = require("lspconfig")
-lspconfig.gradle_ls.setup{}
-lspconfig.groovyls.setup{}
-lspconfig.jdtls.setup{}
+lspconfig.gradle_ls.setup {}
+lspconfig.groovyls.setup {}
+lspconfig.lua_ls.setup {}
+lspconfig.jdtls.setup {}
 
 local whichkey = require("which-key")
 
@@ -54,19 +55,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 name = "workspace",
                 a = { vim.lsp.buf.add_workspace_folder, "Add folder" },
                 r = { vim.lsp.buf.remove_workspace_folder, "Remove folder" },
-                l = { 
+                l = {
                     function()
                         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
                     end,
                     "List folders"
                 },
             }
-        }, { prefix = "<leader>", buffer = ev.buf})
+        }, { prefix = "<leader>", buffer = ev.buf })
 
         whichkey.register({
             j = {
                 name = "jump to",
-                D = { vim.lsp.buf.declaration, "Declaration" }, 
+                D = { vim.lsp.buf.declaration, "Declaration" },
                 d = { vim.lsp.buf.definition, "Definition" },
                 i = { vim.lsp.buf.implementation, "Implementation" },
                 r = { vim.lsp.buf.references, "References" },
@@ -77,8 +78,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
         whichkey.register({
             c = {
                 name = "code",
-                a = { vim.lsp.buf.code_action, "Actions", mode = { "n", "v" }},
-                f = { 
+                a = { vim.lsp.buf.code_action, "Actions", mode = { "n", "v" } },
+                f = {
                     function()
                         vim.lsp.buf.format { async = true }
                     end,

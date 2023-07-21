@@ -1,6 +1,6 @@
+require "raizento.plugins"
 require "raizento.options"
 require "raizento.vimscripts"
-require "raizento.plugins"
 require "raizento.colorscheme"
 require "raizento.treesitter"
 require "raizento.mason"

@@ -14,13 +14,12 @@ local function exists(file)
 end
 
 local ok, _ = exists(lsp_path)
-
 if not ok then
     os.execute("mkdir " .. lsp_path)
 end
 
+-- Install jdtls if it does not exist
 ok, _ = exists(path_to_jdtls)
-
 if not ok then
     vim.notify("Downloading jdtls, please wait...")
     os.execute("mkdir " .. path_to_jdtls .. " > /dev/null")

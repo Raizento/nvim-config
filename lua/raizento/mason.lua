@@ -16,11 +16,11 @@ require("mason-lspconfig").setup {
 -- Sets up the rust-analyzer lsp; do not setup manually!
 require("rust-tools")
 
+-- jdtls setup can be found in .config/nvim/ftplugin/java.lua 
 local lspconfig = require("lspconfig")
 lspconfig.gradle_ls.setup {}
 lspconfig.groovyls.setup {}
 lspconfig.lua_ls.setup {}
-lspconfig.jdtls.setup {}
 
 local whichkey = require("which-key")
 

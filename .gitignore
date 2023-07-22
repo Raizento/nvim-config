@@ -2,3 +2,6 @@
 tags
 
 plugin
+
+# Ignore LSP directory as only LSPs get installed there
+lsp

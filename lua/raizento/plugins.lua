@@ -62,12 +62,14 @@ return require("packer").startup(function(use)
 
     use "simrat39/rust-tools.nvim"
 
+    use "mfussenegger/nvim-jdtls"
+
     -- Fuzzy Finder
     use {
         "nvim-telescope/telescope.nvim",
         requires = { { "nvim-lua/plenary.nvim" } }
     }
-    
+
     -- File tree
     use {
         "nvim-neo-tree/neo-tree.nvim",

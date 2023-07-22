@@ -15,7 +15,7 @@ vim.opt.smarttab        = true
 
 vim.opt.mouse		    = ""
 
-vim.opt.foldcolumn	    = "4"
+vim.opt.foldcolumn	    = "6"
 
 vim.opt.incsearch	    = true 
 vim.opt.ignorecase      = true
@@ -40,3 +40,5 @@ vim.opt.wrap            = false
 vim.opt.termguicolors   = true
 
 vim.opt.title           = true
+
+vim.opt.showmode        = false -- Lualine takes care of indicating the mode

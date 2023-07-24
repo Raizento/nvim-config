@@ -2,6 +2,8 @@ local jdtls_version = '1.9'
 local lsp_path = vim.fn.stdpath('config') .. '/lsp/'
 local path_to_jdtls = lsp_path .. 'jdtls/'
 
+local fn = vim.fn
+
 local function exists(file)
     local ok, err, code = os.rename(file, file)
     if not ok then
@@ -22,10 +24,15 @@ end
 ok, _ = exists(path_to_jdtls)
 if not ok then
     vim.notify("Downloading jdtls, please wait...")
-    os.execute("mkdir " .. path_to_jdtls .. " > /dev/null")
-    os.execute("wget -qP " .. path_to_jdtls .. " https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.9.0/jdt-language-server-1.9.0-202203031534.tar.gz >/dev/null")
+    fn.system({"mkdir", path_to_jdtls})
+    fn.system({"wget", "-qP", path_to_jdtls, "https://www.eclipse.org/downloads/download.php?file=/jdtls/milestones/1.9.0/jdt-language-server-1.9.0-202203031534.tar.gz"})
+
+
+    -- These two commands don't work with vim.fn.system - don't know why yet
     os.execute("tar -xvf " .. path_to_jdtls .. "*jdt-language-server* -C " .. path_to_jdtls .. " > /dev/null")
-    os.execute("rm " .. path_to_jdtls .. "*.tar.gz > /dev/null")
+    os.execute("rm " .. path_to_jdtls .. "*.tar.gz")
+
+    fn.system({"rm", path_to_jdtls .. "*.tar.gz"})
 end
 
 

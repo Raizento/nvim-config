@@ -16,7 +16,7 @@ wk.register({
         t = { "<cmd>Telescope tags<cr>", "Search Tags" },
     },
 
-    s = { "<cmd>w<cr>", "Save" },
+    w = { "<cmd>w<cr>", "Write" },
     q = { "<cmd>q<cr>", "Quit"},
 
     g = {
@@ -28,14 +28,6 @@ wk.register({
         name = "neotree",
         t = { "<cmd>Neotree toggle<cr>", "Toggle" },
         f = { "<cmd>Neotree focus<cr>", "Focus"},
-    },
-
-    w = {
-        name = "window",
-        h = { "<C-w>h", "Move to left window" },
-        l = { "<C-w>l", "Move to right window" },
-        k = { "<C-w>k", "Move to upper window" },
-        j = { "<C-w>j", "Move to lower window" },
     },
 
 }, { prefix = "<leader>" })

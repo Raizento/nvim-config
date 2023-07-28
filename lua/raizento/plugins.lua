@@ -80,7 +80,18 @@ return require("packer").startup(function(use)
             "nvim-lua/plenary.nvim",
             "nvim-tree/nvim-web-devicons",
             "Muniftanjim/nui.nvim",
-        }
+        },
+        config = function()
+            require("neo-tree").setup({
+                filesystem = {
+                    filtered_items = {
+                        -- Show hidden files
+                        visible = true,
+                    },
+                }
+            })
+        end
+
     }
 
     -- Git integration

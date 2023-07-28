@@ -16,7 +16,7 @@ wk.register({
         t = { "<cmd>Telescope tags<cr>", "Search Tags" },
     },
 
-    w = { "<cmd>w<cr>", "Write" },
+    s = { "<cmd>w<cr>", "Save" },
     q = { "<cmd>q<cr>", "Quit"},
 
     g = {

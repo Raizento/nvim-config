@@ -64,6 +64,8 @@ return require("packer").startup(function(use)
 
     use "mfussenegger/nvim-jdtls"
 
+    use { "folke/neodev.nvim", opts = {} }
+
     -- Fuzzy Finder
     use {
         "nvim-telescope/telescope.nvim",

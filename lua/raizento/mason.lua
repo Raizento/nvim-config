@@ -23,7 +23,15 @@ require("rust-tools")
 local lspconfig = require("lspconfig")
 lspconfig.gradle_ls.setup {}
 lspconfig.groovyls.setup {}
-lspconfig.lua_ls.setup {}
+lspconfig.lua_ls.setup {
+    settings = {
+        Lua = {
+            competion = {
+                callSnippet = "Replace"
+            }
+        }
+    }
+}
 
 local whichkey = require("which-key")
 

@@ -62,11 +62,10 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "path" },
     }, {
         { name = "buffer" },
     })
-
-
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()

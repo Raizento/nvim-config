@@ -13,11 +13,9 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
   "folke/which-key.nvim",
-  { "ms-jpq/coq_nvim", branch = "coq" },
-  { "ms-jpq/coq.artifacts", branch = "artifacts" },
-  { "ms-jpq/coq.thirdparty", branch = "3p" },
   "neovim/nvim-lspconfig",
   "navarasu/onedark.nvim",
 })
+
 
 

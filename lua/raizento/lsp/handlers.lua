@@ -17,7 +17,7 @@ local M = {}
 M.handlers = {
   function(server_name)
     lsp_config[server_name].setup {
-      --capabilities = capabilities,
+      capabilities = capabilities,
     }
   end
 }

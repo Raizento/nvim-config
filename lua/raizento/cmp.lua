@@ -32,6 +32,7 @@ cmp.setup({
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "ctags" },
+    { name = "path" },
   }, {
     { name = "buffer" },
   }),

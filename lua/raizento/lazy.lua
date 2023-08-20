@@ -24,4 +24,8 @@ require("lazy").setup({
   "delphinus/cmp-ctags",
   "L3MON4D3/LuaSnip",
   "saadparwaiz1/cmp_luasnip",
+
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
+  "simrat39/rust-tools.nvim",
 })

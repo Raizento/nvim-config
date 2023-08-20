@@ -28,4 +28,5 @@ require("lazy").setup({
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
   "simrat39/rust-tools.nvim",
+  "mfussenegger/nvim-jdtls",
 })

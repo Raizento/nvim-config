@@ -10,15 +10,9 @@ if not status then
   return
 end
 
-local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
 local check_backspace = function()
   local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col).match" %s"
+  return col == 0 or vim.fn.getline("."):sub(col, col):match" %s"
 end
 
 cmp.setup({
@@ -61,6 +55,8 @@ cmp.setup({
 	luasnip.jump(-1)
       elseif check_backspace() then
 	fallback()
+      else 
+        fallback()
       end
     end, { "i", "s", }),
   }),

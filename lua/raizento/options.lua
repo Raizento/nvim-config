@@ -44,3 +44,6 @@ vim.opt.termguicolors   = true
 vim.opt.title           = true
 
 vim.opt.showmode        = false -- Lualine takes care of indicating the mode
+
+vim.opt.foldmethod      = "expr"
+vim.opt.foldexpr        = "nvim_treesitter#foldexpr()"

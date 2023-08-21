@@ -10,6 +10,15 @@ if not lsp_status then
   return
 end
 
+local neodev_status, neodev = pcall(require, "neodev")
+if not neodev_status then
+  print("Could not load neodev, using normal lua_ls config...")
+else
+  neodev.setup({})
+end
+
+
+
 local capabilities = cmp_lsp.default_capabilities()
 
 local M = {}

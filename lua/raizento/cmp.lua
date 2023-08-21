@@ -1,11 +1,11 @@
-local status, cmp = pcall(require, "cmp")
-if not status then
+local cmp_status, cmp = pcall(require, "cmp")
+if not cmp_status then
   print("cmp not found!")
   return
 end
 
-local status, luasnip = pcall(require, "luasnip")
-if not status then
+local luasnip_status, luasnip = pcall(require, "luasnip")
+if not luasnip_status then
   print("luasnip not found!")
   return
 end
@@ -30,7 +30,7 @@ cmp.setup({
   }, {
     { name = "buffer" },
   }),
-  
+
   mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -55,7 +55,7 @@ cmp.setup({
 	luasnip.jump(-1)
       elseif check_backspace() then
 	fallback()
-      else 
+      else
         fallback()
       end
     end, { "i", "s", }),

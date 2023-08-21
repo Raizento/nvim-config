@@ -29,4 +29,6 @@ require("lazy").setup({
   "williamboman/mason-lspconfig.nvim",
   "simrat39/rust-tools.nvim",
   "mfussenegger/nvim-jdtls",
+
+  "folke/neodev.nvim",
 })

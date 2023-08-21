@@ -14,10 +14,3 @@ vim.cmd([[
         autocmd BufWinEnter * silent! loadview
     augroup END
 ]])
-
-vim.cmd([[
-    augroup auto_unfold_folds
-        autocmd!
-        autocmd BufWinEnter,BufReadPost,FileReadPost * normal zR
-    augroup end
-]])

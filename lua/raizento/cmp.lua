@@ -4,6 +4,13 @@ if not cmp_status then
   return
 end
 
+local autopairs_status, autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+if not autopairs_status then
+  print("Using cmp without autopairs...")
+else
+  cmp.event:on("confirm_done", autopairs.on_confirm_done())
+end
+
 local luasnip_status, luasnip = pcall(require, "luasnip")
 if not luasnip_status then
   print("luasnip not found!")

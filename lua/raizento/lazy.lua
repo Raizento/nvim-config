@@ -31,4 +31,5 @@ require("lazy").setup({
   "mfussenegger/nvim-jdtls",
 
   "folke/neodev.nvim",
+  "windwp/nvim-autopairs",
 })

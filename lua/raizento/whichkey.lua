@@ -26,9 +26,13 @@ if telescope_status then
       b = { telescope.buffers, "buffers" },
       h = { telescope.help_tags, "help tags" },
       c = { telescope.commands, "commands" },
-      l = { telescope.loclist, "loclist" },
+      l = { function()
+              vim.diagnostic.setloclist({ open = false })
+              telescope.loclist()
+            end , "loclist" },
       t = { telescope.tags, "tags" },
       j = { telescope.jumplist, "jumps" },
+      s = { telescope.search_history, "search history" },
     }
   }, { prefix = "<Leader>" })
 end

@@ -32,4 +32,5 @@ require("lazy").setup({
 
   "folke/neodev.nvim",
   { "windwp/nvim-autopairs", event = "InsertEnter" },
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 })

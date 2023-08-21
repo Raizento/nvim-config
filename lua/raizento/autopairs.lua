@@ -4,4 +4,5 @@ if not autopairs_status then
   return
 end
 
+-- TODO add rules with TreeSitter support?
 autopairs.setup {}

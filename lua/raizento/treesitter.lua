@@ -8,4 +8,7 @@ treesitter.setup {
     ensure_installed = { "vim", "vimdoc", "yaml", "toml", "regex", "json", "json5", "html", "gitignore", "gitcommit",
         "gitattributes", "csv", "comment", "bash", },
     auto_install = true,
+    highlight = {
+        enable = true,
+    },
 }

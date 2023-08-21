@@ -10,6 +10,11 @@ if not mason_lsp_config_status then
   return
 end
 
+local whichkey_status, whichkey = pcall(require, "which-key")
+if not whichkey_status then
+  print("Could not load which-key!")
+  return
+end
 
 mason.setup({
   ui = {
@@ -29,3 +34,13 @@ end
 
 mason_lsp.setup()
 mason_lsp.setup_handlers(handlers.handlers)
+
+whichkey.register({
+  d = {
+    name = "diagnostic",
+    e = { vim.diagnostic.open_float, "Open float", },
+    p = { vim.diagnostic.goto_prev, "Previous", },
+    n = { vim.diagnostic.goto_next, "Next", },
+    q = { vim.diagnostic.setloclist, "Open loclist", },
+  },
+}, { prefix = "<Leader>" })

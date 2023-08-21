@@ -77,6 +77,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         i = { vim.lsp.buf.implementation, "Implementation" },
         r = { vim.lsp.buf.references, "References" },
         t = { vim.lsp.buf.type_definition, "Type definition" },
-    } { buffer = ev.buf, prefix = "<Leader>" })
+    }, { buffer = ev.buf, prefix = "<Leader>" })
   end
 })

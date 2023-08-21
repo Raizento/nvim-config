@@ -12,6 +12,7 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
+  "nvim-tree/nvim-web-devicons",
   "folke/which-key.nvim",
   "neovim/nvim-lspconfig",
   "navarasu/onedark.nvim",
@@ -33,4 +34,7 @@ require("lazy").setup({
   "folke/neodev.nvim",
   { "windwp/nvim-autopairs", event = "InsertEnter" },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+
+  -- Telescope
+  { "nvim-telescope/telescope.nvim", dependencies = "nvim-lua/plenary.nvim", },
 })

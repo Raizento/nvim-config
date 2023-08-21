@@ -6,12 +6,29 @@ if not status then
 end
 
 whichkey.register({
-  ["::"] = { "q:", "Command history" },
-  ["//"] = { "q/", "Fwd search history" },
-  ["??"] = { "q?", "Bwd search history" },
+  ["::"] = { "q:", "command history" },
+  ["//"] = { "q/", "fwd search history" },
+  ["??"] = { "q?", "bwd search history" },
 })
 
 whichkey.register({
-  w = { ":w<CR>", "Write file" },
-  q = { ":q<CR>", "Quit" },
+  w = { ":w<CR>", "write file" },
+  q = { ":q<CR>", "quit" },
 }, { prefix = "<Leader>" })
+
+local telescope_status, telescope = pcall(require, "telescope.builtin")
+if telescope_status then
+  whichkey.register({
+    f = {
+      name = "Find",
+      f = { telescope.find_files, "files" },
+      g = { telescope.live_grep, "live grep" },
+      b = { telescope.buffers, "buffers" },
+      h = { telescope.help_tags, "help tags" },
+      c = { telescope.commands, "commands" },
+      l = { telescope.loclist, "loclist" },
+      t = { telescope.tags, "tags" },
+      j = { telescope.jumplist, "jumps" },
+    }
+  }, { prefix = "<Leader>" })
+end

@@ -1,4 +1,5 @@
 require "raizento.options"
+require "raizento.vimscript"
 require "raizento.lazy"
 require "raizento.colorscheme"
 require "raizento.whichkey"

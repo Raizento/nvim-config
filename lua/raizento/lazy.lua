@@ -27,7 +27,6 @@ require("lazy").setup({
   "L3MON4D3/LuaSnip",
   { "saadparwaiz1/cmp_luasnip", dependencies = { "rafamadriz/friendly-snippets" } },
 
-
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
   "simrat39/rust-tools.nvim",
@@ -39,5 +38,7 @@ require("lazy").setup({
   { "nvim-treesitter/nvim-treesitter-refactor" },
 
   -- Telescope
-  { "nvim-telescope/telescope.nvim", dependencies = "nvim-lua/plenary.nvim", },
+  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" }, },
+
+  { "kdheepak/lazygit.nvim", dependencies = { "nvim-lua/plenary.nvim", } },
 })

@@ -40,3 +40,17 @@ if telescope_status then
     }
   }, { prefix = "<Leader>" })
 end
+
+whichkey.register({
+  g = {
+    name = "Git",
+  }
+}, { prefix = "<Leader>" })
+
+local lazygit_status, _ = pcall(require, "lazygit")
+if lazygit_status then
+  whichkey.register({
+    gl = { "<CMD>LazyGit<CR>", "lazygit" },
+  }, { prefix = "<Leader>" })
+end
+

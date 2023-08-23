@@ -46,4 +46,5 @@ require("lazy").setup({
             require("telescope").load_extension("lazygit")
         end
     },
+    "lewis6991/gitsigns.nvim",
 })

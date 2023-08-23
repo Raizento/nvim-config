@@ -51,6 +51,7 @@ local lazygit_status, _ = pcall(require, "lazygit")
 if lazygit_status then
   whichkey.register({
     gl = { "<CMD>LazyGit<CR>", "lazygit" },
+    gr = { "<CMD>Telescope lazygit<CR>", "repositories (lazygit)" },
   }, { prefix = "<Leader>" })
 end
 

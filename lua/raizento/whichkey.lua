@@ -1,39 +1,57 @@
-vim.opt.timeout = true
-vim.opt.timeoutlen = 500
-local wk = require("which-key")
+local status, whichkey = pcall(require, "which-key")
 
-vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+if not status then
+  print("Which-key could not be found!")
+  return
+end
 
-wk.register({
-    f = {
-        name = "telescope",
-        f = { "<cmd>Telescope find_files<cr>", "Find File" },
-        g = { "<cmd>Telescope live_grep<cr>", "Search" },
-        b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-        h = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
-        t = { "<cmd>Telescope tags<cr>", "Search Tags" },
-    },
-
-    w = { "<cmd>w<cr>", "Write" },
-    q = { "<cmd>q<cr>", "Quit"},
-
-    g = {
-        name = "git",
-        g = { "<cmd>LazyGit<cr>", "Open LaziGit" },
-    },
-
-    n = {
-        name = "neotree",
-        t = { "<cmd>Neotree toggle<cr>", "Toggle" },
-        f = { "<cmd>Neotree focus<cr>", "Focus"},
-    },
-
-}, { prefix = "<leader>" })
-
-wk.register({
-    ["//"] = { "q/", "fwd search history" },
-    ["??"] = { "q?", "bwd search history" },
-    ["::"] = { "q:", "Command history" },
+whichkey.register({
+  ["::"] = { "q:", "command history" },
+  ["//"] = { "q/", "fwd search history" },
+  ["??"] = { "q?", "bwd search history" },
 })
+
+whichkey.register({
+  w = { ":w<CR>", "write file" },
+  q = { ":q<CR>", "quit" },
+  B = { "<CMD>Telescope file_browser<CR>", "Telescope file browser" },
+}, { prefix = "<Leader>" })
+
+whichkey.register({
+    t = "TreeSitter" ,
+}, { prefix = "<Leader>"})
+
+local telescope_status, telescope = pcall(require, "telescope.builtin")
+if telescope_status then
+  whichkey.register({
+    f = {
+      name = "Find",
+      f = { telescope.find_files, "files" },
+      g = { telescope.live_grep, "live grep" },
+      b = { telescope.buffers, "buffers" },
+      h = { telescope.help_tags, "help tags" },
+      c = { telescope.commands, "commands" },
+      l = { function()
+              vim.diagnostic.setloclist({ open = false })
+              telescope.loclist()
+            end , "loclist" },
+      t = { telescope.tags, "tags" },
+      j = { telescope.jumplist, "jumps" },
+      s = { telescope.search_history, "search history" },
+    }
+  }, { prefix = "<Leader>" })
+end
+
+whichkey.register({
+  g = {
+    name = "Git",
+  }
+}, { prefix = "<Leader>" })
+
+local lazygit_status, _ = pcall(require, "lazygit")
+if lazygit_status then
+  whichkey.register({
+    gl = { "<CMD>LazyGit<CR>", "lazygit" },
+    gr = { "<CMD>Telescope lazygit<CR>", "repositories (lazygit)" },
+  }, { prefix = "<Leader>" })
+end

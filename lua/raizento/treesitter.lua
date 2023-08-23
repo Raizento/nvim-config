@@ -1,11 +1,26 @@
-require("nvim-treesitter.install").prefer_git = true
-require "nvim-treesitter.configs".setup {
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "gitignore", "json", "yaml", "toml", "regex", "groovy", "java" },
+local treesitter_status, treesitter = pcall(require, "nvim-treesitter.configs")
+if not treesitter_status then
+    print("Could not load treesitter!")
+    return
+end
 
+treesitter.setup {
+    ensure_installed = { "vim", "vimdoc", "yaml", "toml", "regex", "json", "json5", "html", "gitignore", "gitcommit",
+        "gitattributes", "csv", "comment", "bash", },
+    auto_install = true,
     highlight = {
         enable = true,
-    }
+    },
+    refactor = {
+        highlight_definitions = {
+            enable = true,
+            clear_on_cursor_move = false,
+        },
+        smart_rename = {
+            enable = true,
+            keymaps = {
+                smart_rename = "<Leader>tr"
+            }
+        },
+    },
 }
-
-vim.opt.foldmethod      = "expr"
-vim.opt.foldexpr        = "nvim_treesitter#foldexpr()"

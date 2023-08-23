@@ -1,3 +1,4 @@
-local colorscheme = "onedark"
-
-vim.cmd("colorscheme " .. colorscheme)
+vim.api.nvim_cmd({
+  cmd = "colorscheme",
+  args = { "onedark" },
+}, {})

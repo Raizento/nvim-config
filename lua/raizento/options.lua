@@ -1,5 +1,5 @@
 -- Vim options
--- Options regarding automatic folding can be found in "treesitter.lua" as it uses a treesitter function, which may not be loaded here otherwise
+vim.g.mapleader = " " 
 
 vim.opt.number          = true
 vim.opt.relativenumber  = true
@@ -42,3 +42,10 @@ vim.opt.termguicolors   = true
 vim.opt.title           = true
 
 vim.opt.showmode        = false -- Lualine takes care of indicating the mode
+
+vim.opt.foldmethod      = "expr"
+vim.opt.foldexpr        = "nvim_treesitter#foldexpr()"
+
+vim.opt.foldlevelstart  = 99
+
+vim.opt.updatetime      = 100 -- TreeSitter updates definition highlighting every {updatetime} ms

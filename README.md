@@ -15,7 +15,7 @@ sudo install lazygit /usr/local/bin
 ```
 
 ## Keymaps
-This config uses (which-key)[https://github.com/folke/which-key.nvim]. As such, all keybindings can be found out by simply messing around. Have fun!
+This config uses [which-key](https://github.com/folke/which-key.nvim). As such, all keybindings can be found out by simply messing around. Have fun!
 
 ## Adding a new LSP
 Installing a new LSP is done via the `:LspInstall {servername}` command. 
@@ -39,5 +39,8 @@ end
 return M
 ```
 
-For the config to recognize the file, it has to have the exact same name as `lspconfig` uses (so {lspconfig_servername}.lua).
-You need to create a table which has a `config`-entry. It, in turn, needs to return a function covering all your configuration steps.
+You need to add a file `lua/raizento/lsp/config/servername.lua` 
+
+For the config to recognize the file, it has to have the exact same name as `lspconfig` uses (so `{lspconfig_servername}.lua`).
+
+Inside your file, you need to create a table which has a `config`-entry. It, in turn, needs to return a function covering all your configuration steps.

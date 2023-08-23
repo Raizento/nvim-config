@@ -4,8 +4,6 @@ if not treesitter_status then
     return
 end
 
-local whichkey = require "which-key"
-
 treesitter.setup {
     ensure_installed = { "vim", "vimdoc", "yaml", "toml", "regex", "json", "json5", "html", "gitignore", "gitcommit",
         "gitattributes", "csv", "comment", "bash", },

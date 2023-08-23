@@ -18,7 +18,6 @@ treesitter.setup {
         },
         smart_rename = {
             enable = true,
-            -- TODO use whichkey for mappings
             keymaps = {
                 smart_rename = "<Leader>tr"
             }

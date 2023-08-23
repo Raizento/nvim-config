@@ -1,5 +1,4 @@
 -- Vim options
--- Options regarding automatic folding can be found in "treesitter.lua" as it uses a treesitter function, which may not be loaded here otherwise
 vim.g.mapleader = " " 
 
 vim.opt.number          = true

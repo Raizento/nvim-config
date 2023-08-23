@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 local status, whichkey = pcall(require, "which-key")
 
 if not status then

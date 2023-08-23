@@ -25,19 +25,20 @@ require("lazy").setup({
     "delphinus/cmp-ctags",
     "hrsh7th/nvim-cmp",
     "L3MON4D3/LuaSnip",
-    { "saadparwaiz1/cmp_luasnip",                dependencies = { "rafamadriz/friendly-snippets" } },
+    { "saadparwaiz1/cmp_luasnip",                   dependencies = { "rafamadriz/friendly-snippets" } },
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "simrat39/rust-tools.nvim",
     "mfussenegger/nvim-jdtls",
 
     "folke/neodev.nvim",
-    { "windwp/nvim-autopairs",                   event = "InsertEnter" },
-    { "nvim-treesitter/nvim-treesitter",         build = ":TSUpdate" },
+    { "windwp/nvim-autopairs",                      event = "InsertEnter" },
+    { "nvim-treesitter/nvim-treesitter",            build = ":TSUpdate" },
     { "nvim-treesitter/nvim-treesitter-refactor" },
 
     -- Telescope
-    { "nvim-telescope/telescope.nvim",           dependencies = { "nvim-lua/plenary.nvim" }, },
+    { "nvim-telescope/telescope.nvim",              dependencies = { "nvim-lua/plenary.nvim" }, },
+    { "nvim-telescope/telescope-file-browser.nvim", dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }, },
     {
         "kdheepak/lazygit.nvim",
         dependencies = { "nvim-lua/plenary.nvim",

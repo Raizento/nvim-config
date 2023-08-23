@@ -14,6 +14,7 @@ whichkey.register({
 whichkey.register({
   w = { ":w<CR>", "write file" },
   q = { ":q<CR>", "quit" },
+  B = { "<CMD>Telescope file_browser<CR>", "Telescope file browser" },
 }, { prefix = "<Leader>" })
 
 whichkey.register({

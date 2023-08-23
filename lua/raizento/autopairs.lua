@@ -5,4 +5,4 @@ if not autopairs_status then
 end
 
 -- TODO add rules with TreeSitter support?
-autopairs.setup {}
+autopairs.setup({})

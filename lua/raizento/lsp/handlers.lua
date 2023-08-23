@@ -17,18 +17,16 @@ else
   neodev.setup({})
 end
 
-
-
 local capabilities = cmp_lsp.default_capabilities()
 
 local M = {}
 
 M.handlers = {
   function(server_name)
-    lsp_config[server_name].setup {
+    lsp_config[server_name].setup({
       capabilities = capabilities,
-    }
-  end
+    })
+  end,
 }
 
 local path = vim.fn.stdpath("config") .. "/lua/raizento/lsp/config"

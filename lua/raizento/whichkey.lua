@@ -18,8 +18,8 @@ whichkey.register({
 }, { prefix = "<Leader>" })
 
 whichkey.register({
-    t = "TreeSitter" ,
-}, { prefix = "<Leader>"})
+  t = "TreeSitter",
+}, { prefix = "<Leader>" })
 
 local telescope_status, telescope = pcall(require, "telescope.builtin")
 if telescope_status then
@@ -31,21 +31,24 @@ if telescope_status then
       b = { telescope.buffers, "buffers" },
       h = { telescope.help_tags, "help tags" },
       c = { telescope.commands, "commands" },
-      l = { function()
-              vim.diagnostic.setloclist({ open = false })
-              telescope.loclist()
-            end , "loclist" },
+      l = {
+        function()
+          vim.diagnostic.setloclist({ open = false })
+          telescope.loclist()
+        end,
+        "loclist",
+      },
       t = { telescope.tags, "tags" },
       j = { telescope.jumplist, "jumps" },
       s = { telescope.search_history, "search history" },
-    }
+    },
   }, { prefix = "<Leader>" })
 end
 
 whichkey.register({
   g = {
     name = "Git",
-  }
+  },
 }, { prefix = "<Leader>" })
 
 local lazygit_status, _ = pcall(require, "lazygit")

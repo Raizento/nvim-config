@@ -1,4 +1,4 @@
--- Save view of current file (only if file actually has a name, check prevents errors) 
+-- Save view of current file (only if file actually has a name, check prevents errors)
 vim.cmd([[
     function MakeViewOnlyIfFileNameIsNotEmpty()
         let file_name = expand('%:t:r')

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 local status, whichkey = pcall(require, "which-key")
 
 if not status then
@@ -55,4 +56,3 @@ if lazygit_status then
     gr = { "<CMD>Telescope lazygit<CR>", "repositories (lazygit)" },
   }, { prefix = "<Leader>" })
 end
-

@@ -3,3 +3,7 @@ lazy-lock.json
 lsp
 
 */.luarc.json
+
+*.swp
+tags
+

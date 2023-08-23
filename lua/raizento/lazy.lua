@@ -21,9 +21,9 @@ require("lazy").setup({
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",
   "hrsh7th/cmp-cmdline",
-  "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-nvim-lsp-signature-help",
   "delphinus/cmp-ctags",
+  "hrsh7th/nvim-cmp",
   "L3MON4D3/LuaSnip",
   "saadparwaiz1/cmp_luasnip",
 
@@ -35,6 +35,7 @@ require("lazy").setup({
   "folke/neodev.nvim",
   { "windwp/nvim-autopairs", event = "InsertEnter" },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  { "nvim-treesitter/nvim-treesitter-refactor" },
 
   -- Telescope
   { "nvim-telescope/telescope.nvim", dependencies = "nvim-lua/plenary.nvim", },

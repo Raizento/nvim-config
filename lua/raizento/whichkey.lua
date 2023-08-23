@@ -16,6 +16,7 @@ whichkey.register({
   q = { ":q<CR>", "quit" },
 }, { prefix = "<Leader>" })
 
+
 local telescope_status, telescope = pcall(require, "telescope.builtin")
 if telescope_status then
   whichkey.register({

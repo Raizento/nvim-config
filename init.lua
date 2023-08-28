@@ -1,1 +1,1 @@
-require "raizento"
+require("raizento")

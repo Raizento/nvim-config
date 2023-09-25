@@ -6,6 +6,14 @@ if not status then
 end
 
 whichkey.register({
+    ["<C-h>"] = { "<C-w>h", "move to left window" },
+    ["<C-j>"] = { "<C-w>j", "move to lower window" },
+    ["<C-k>"] = { "<C-w>k", "move to upper window" },
+    ["<C-l>"] = { "<C-w>l", "move to right window" },
+})
+
+
+whichkey.register({
   ["::"] = { "q:", "command history" },
   ["//"] = { "q/", "fwd search history" },
   ["??"] = { "q?", "bwd search history" },
@@ -15,6 +23,9 @@ whichkey.register({
   w = { ":w<CR>", "write file" },
   q = { ":q<CR>", "quit" },
   B = { "<CMD>Telescope file_browser<CR>", "Telescope file browser" },
+  v = { "<C-w>v", "Split vertically" },
+  s = { "<C-w>s", "Split horizontally" },
+  c = { "<C-w>c", "Close window" },
 }, { prefix = "<Leader>" })
 
 whichkey.register({

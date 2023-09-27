@@ -51,8 +51,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
     whichkey.register({
-      K = { vim.lsp.buf.hover, "Hover" },
-      ["<C-k>"] = { vim.lsp.buf.signature_help, "Signature help" },
+      S = { vim.lsp.buf.hover, "Hover" },
+      ["<C-s>"] = { vim.lsp.buf.signature_help, "Signature help" },
     }, { buffer = ev.buf })
 
     whichkey.register({

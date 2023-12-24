@@ -49,3 +49,8 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldlevelstart = 99
 
 vim.opt.updatetime = 100 -- TreeSitter updates definition highlighting every {updatetime} ms
+
+vim.opt.virtualedit = "block"
+
+vim.opt.inccommand = "split"
+vim.opt.cmdwinheight = 16

@@ -12,7 +12,10 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup({
-  "nvim-tree/nvim-web-devicons",
+  {
+      "nvim-tree/nvim-web-devicons",
+      config = true,
+  },
   "folke/which-key.nvim",
   "neovim/nvim-lspconfig",
   "navarasu/onedark.nvim",

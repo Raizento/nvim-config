@@ -40,7 +40,12 @@ require("lazy").setup({
   "mfussenegger/nvim-jdtls",
 
   "folke/neodev.nvim",
-  { "windwp/nvim-autopairs", event = "InsertEnter" },
+  { 
+      "windwp/nvim-autopairs",
+      event = "InsertEnter" ,
+      -- TODO add rules with TreeSitter support?
+      config = true,
+  },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { "nvim-treesitter/nvim-treesitter-refactor" },
 

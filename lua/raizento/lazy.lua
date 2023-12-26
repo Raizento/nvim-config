@@ -18,7 +18,12 @@ require("lazy").setup({
   },
   "folke/which-key.nvim",
   "neovim/nvim-lspconfig",
-  "navarasu/onedark.nvim",
+  {
+      "navarasu/onedark.nvim",
+      config = function()
+        vim.cmd.colorscheme("onedark")
+      end
+  },
 
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",

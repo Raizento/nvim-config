@@ -22,7 +22,8 @@ require("lazy").setup({
       "navarasu/onedark.nvim",
       config = function()
         vim.cmd.colorscheme("onedark")
-      end
+      end,
+      priority = 99,
   },
 
   "hrsh7th/cmp-nvim-lsp",

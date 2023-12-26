@@ -58,7 +58,7 @@ require("lazy").setup({
           telescope.setup({
               extensions = {
                   file_browser = {
-                      higjack_netrw = true
+                      hijack_netrw = true
                   }
               }
           })

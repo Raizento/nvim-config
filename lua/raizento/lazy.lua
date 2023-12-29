@@ -47,8 +47,48 @@ require("lazy").setup({
       -- TODO add rules with TreeSitter support?
       config = true,
   },
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-  { "nvim-treesitter/nvim-treesitter-refactor" },
+  { 
+      "nvim-treesitter/nvim-treesitter", 
+      build = ":TSUpdate", 
+      dependencies =  { "nvim-treesitter/nvim-treesitter-refactor" },
+      config = function()
+        require("nvim-treesitter.configs").setup({
+          ensure_installed = {
+            "vim",
+            "vimdoc",
+            "yaml",
+            "toml",
+            "regex",
+            "json",
+            "json5",
+            "html",
+            "gitignore",
+            "gitcommit",
+            "gitattributes",
+            "csv",
+            "comment",
+            "bash",
+          },
+          auto_install = true,
+          highlight = {
+            enable = true,
+          },
+          refactor = {
+            highlight_definitions = {
+              enable = true,
+              clear_on_cursor_move = false,
+            },
+            smart_rename = {
+              enable = true,
+              keymaps = {
+                smart_rename = "<Leader>tr",
+              },
+            },
+          },
+        })
+      end,
+  },
+  
 
   -- Telescope
   { 

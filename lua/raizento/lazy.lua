@@ -89,7 +89,6 @@ require("lazy").setup({
 
     },
 
-    "neovim/nvim-lspconfig",
 
     {
         "navarasu/onedark.nvim",
@@ -99,13 +98,21 @@ require("lazy").setup({
         priority = 99,
     },
 
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/cmp-nvim-lsp-signature-help",
+
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
+        }
+    },
+
     "delphinus/cmp-ctags",
-    "hrsh7th/nvim-cmp",
+    "neovim/nvim-lspconfig",
+
     "L3MON4D3/LuaSnip",
     { "saadparwaiz1/cmp_luasnip", dependencies = { "rafamadriz/friendly-snippets" } },
     "williamboman/mason.nvim",
@@ -120,6 +127,7 @@ require("lazy").setup({
         -- TODO add rules with TreeSitter support?
         config = true,
     },
+
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
@@ -162,11 +170,12 @@ require("lazy").setup({
         end,
     },
 
-
-    -- Telescope
     {
         "nvim-telescope/telescope.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-file-browser.nvim",
+        },
         config = function()
             local telescope = require("telescope")
             telescope.setup({
@@ -180,16 +189,13 @@ require("lazy").setup({
         end
     },
     {
-        "nvim-telescope/telescope-file-browser.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-    },
-    {
         "kdheepak/lazygit.nvim",
         dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope.nvim" },
         config = function()
             require("telescope").load_extension("lazygit")
         end,
     },
+
     "lewis6991/gitsigns.nvim",
 
     {

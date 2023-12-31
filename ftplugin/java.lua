@@ -1,5 +1,5 @@
 local jdtls_version = "1.9"
-local lsp_path = vim.fn.stdpath("config") .. "/lsp/"
+local lsp_path = vim.fn.stdpath("data") .. "/lsp/"
 local path_to_jdtls = lsp_path .. "jdtls/"
 local jdtls_addons_path = path_to_jdtls .. "addons/"
 
@@ -46,8 +46,6 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
 -- This will place the Workspace directory for jdtls into your HOME directory
 local workspace_dir = path_to_jdtls .. "/workspace/" .. project_name
-
-print(jdtls_addons_path .. "lombok.jar")
 
 local config = {
   cmd = {

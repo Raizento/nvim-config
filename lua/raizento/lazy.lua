@@ -19,6 +19,10 @@ require("lazy").setup({
 
   {
     "folke/which-key.nvim",
+    init = function()
+        vim.opt.timeout = true
+        vim.opt.timeoutlen = 300
+    end,
     config = function()
       local whichkey = require("which-key")
 
@@ -91,7 +95,7 @@ require("lazy").setup({
   {
     "navarasu/onedark.nvim",
     config = function()
-      vim.cmd.colorscheme("onedark")
+        require("onedark").load()
     end,
     priority = 99,
   },

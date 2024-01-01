@@ -108,6 +108,7 @@ require("lazy").setup({
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-nvim-lsp-signature-help",
+      "delphinus/cmp-ctags",
       "windwp/nvim-autopairs",
     },
     config = function()
@@ -134,6 +135,13 @@ require("lazy").setup({
           { name = "nvim_lsp_signature_help" },
           { name = "luasnip" },
           { name = "ctags" },
+            name = "ctags",
+            option = {
+              executable = "ctags",
+              trigger_characters = { "." },
+              trigger_characters_ft = {},
+            },
+          },
           { name = "path" },
         }, {
           { name = "buffer" },

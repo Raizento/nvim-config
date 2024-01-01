@@ -361,9 +361,6 @@ require("lazy").setup({
 
             })
         end,
-        dependencies = {
-            "folke/which-key.nvim",
-        },
     },
 
     {

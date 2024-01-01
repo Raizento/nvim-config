@@ -20,8 +20,8 @@ require("lazy").setup({
   {
     "folke/which-key.nvim",
     init = function()
-        vim.opt.timeout = true
-        vim.opt.timeoutlen = 300
+      vim.opt.timeout = true
+      vim.opt.timeoutlen = 300
     end,
     config = function()
       local whichkey = require("which-key")
@@ -95,7 +95,7 @@ require("lazy").setup({
   {
     "navarasu/onedark.nvim",
     config = function()
-        require("onedark").load()
+      require("onedark").load()
     end,
     priority = 99,
   },
@@ -134,7 +134,7 @@ require("lazy").setup({
           { name = "nvim_lsp" },
           { name = "nvim_lsp_signature_help" },
           { name = "luasnip" },
-          { name = "ctags" },
+          {
             name = "ctags",
             option = {
               executable = "ctags",
@@ -212,7 +212,6 @@ require("lazy").setup({
     end,
   },
 
-  "delphinus/cmp-ctags",
   "neovim/nvim-lspconfig",
 
   "L3MON4D3/LuaSnip",

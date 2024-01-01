@@ -79,6 +79,7 @@ require("lazy").setup({
             whichkey.register({
                 g = {
                     name = "Git",
+                    t = "Toggle",
                 },
             }, { prefix = "<Leader>" })
 

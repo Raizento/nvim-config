@@ -27,13 +27,6 @@ require("lazy").setup({
             local whichkey = require("which-key")
 
             whichkey.register({
-                ["<C-h>"] = { "<C-w>h", "move to left window" },
-                ["<C-j>"] = { "<C-w>j", "move to lower window" },
-                ["<C-k>"] = { "<C-w>k", "move to upper window" },
-                ["<C-l>"] = { "<C-w>l", "move to right window" },
-            })
-
-            whichkey.register({
                 ["::"] = { "q:", "command history" },
                 ["//"] = { "q/", "fwd search history" },
                 ["??"] = { "q?", "bwd search history" },
@@ -369,4 +362,15 @@ require("lazy").setup({
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = true,
     },
+
+    {
+        "alexghergh/nvim-tmux-navigation",
+        config = true,
+        keys = {
+            { "<C-h>", "<Cmd>NvimTmuxNavigateLeft<CR>", desc = "L"},
+            { "<C-j>", "<Cmd>NvimTmuxNavigateDown<CR>", desc = "J"},
+            { "<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>", desc = "K"},
+            { "<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>", desc = "R"},
+        }
+    }
 })

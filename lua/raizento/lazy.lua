@@ -251,20 +251,10 @@ require("lazy").setup({
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
+                    "lua",
                     "vim",
                     "vimdoc",
-                    "yaml",
-                    "toml",
-                    "regex",
-                    "json",
-                    "json5",
-                    "html",
-                    "gitignore",
-                    "gitcommit",
-                    "gitattributes",
-                    "csv",
-                    "comment",
-                    "bash",
+                    "query",
                 },
                 auto_install = true,
                 highlight = {

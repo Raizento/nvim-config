@@ -37,18 +37,7 @@ require("lazy").setup({
             local whichkey = require("which-key")
 
             whichkey.register({
-                ["::"] = { "q:", "command history" },
-                ["//"] = { "q/", "fwd search history" },
-                ["??"] = { "q?", "bwd search history" },
-            })
-
-            whichkey.register({
-                w = { ":w<CR>", "write file" },
-                q = { ":q<CR>", "quit" },
                 B = { "<CMD>Telescope file_browser<CR>", "Telescope file browser" },
-                v = { "<C-w>v", "Split vertically" },
-                s = { "<C-w>s", "Split horizontally" },
-                c = { "<C-w>c", "Close window" },
             }, { prefix = "<Leader>" })
 
             whichkey.register({
@@ -238,7 +227,7 @@ require("lazy").setup({
             vim.opt.foldmethod = "expr"
             vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-            vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter", "InsertLeave"}, {
+            vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "InsertLeave" }, {
                 callback = function()
                     vim.opt.foldmethod = "expr"
                     vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
@@ -374,7 +363,7 @@ require("lazy").setup({
                             return "<Ignore>"
                         end,
                         { desc = "toggle deleted", expr = true })
-                    map({"o", "x"}, "<Leader>gih", gs.select_hunk, { desc = "select hunk" })
+                    map({ "o", "x" }, "<Leader>gih", gs.select_hunk, { desc = "select hunk" })
                 end,
 
             })
@@ -391,10 +380,14 @@ require("lazy").setup({
         "alexghergh/nvim-tmux-navigation",
         config = true,
         keys = {
-            { "<C-h>", "<Cmd>NvimTmuxNavigateLeft<CR>", desc = "L"},
-            { "<C-j>", "<Cmd>NvimTmuxNavigateDown<CR>", desc = "J"},
-            { "<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>", desc = "K"},
-            { "<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>", desc = "R"},
+            { "<C-h>", "<Cmd>NvimTmuxNavigateLeft<CR>",  desc = "L" },
+            { "<C-j>", "<Cmd>NvimTmuxNavigateDown<CR>",  desc = "J" },
+            { "<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>",    desc = "K" },
+            { "<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>", desc = "R" },
         }
     }
+}, {
+    install = {
+            colorscheme = { "onedark", "default" },
+        }
 })

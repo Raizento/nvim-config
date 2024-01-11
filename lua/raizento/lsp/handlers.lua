@@ -33,13 +33,11 @@ local path = vim.fn.stdpath("config") .. "/lua/raizento/lsp/config"
 local prefix = "raizento.lsp.config"
 
 for fname in io.popen("ls -pa " .. path .. " | grep -v /"):lines() do
-  if fname ~= "." and fname ~= ".." then
-    local server_name = fname:match("(.+)%..+$")
-    local module_name = prefix .. "." .. server_name
+  local server_name = fname:match("(.+)%..+$")
+  local module_name = prefix .. "." .. server_name
 
-    local config = require(module_name).config(lsp_config, capabilities)
-    M.handlers[server_name] = config
-  end
+  local config = require(module_name).config(lsp_config, capabilities)
+  M.handlers[server_name] = config
 end
 
 return M

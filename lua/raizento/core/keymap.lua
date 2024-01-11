@@ -21,4 +21,3 @@ vim.keymap.set("n", "<Leader>q", ":q<CR>", { noremap = true, silent = true, desc
 vim.keymap.set("n", "<Leader>v", "<C-w>v", { noremap = true, silent = true, desc = "Split vertically" })
 vim.keymap.set("n", "<Leader>s", "<C-w>s", { noremap = true, silent = true, desc = "Split horizontally" })
 vim.keymap.set("n", "<Leader>c", "<C-w>c", { noremap = true, silent = true, desc = "Close window" })
-

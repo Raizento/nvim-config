@@ -7,12 +7,8 @@ local M = {
         "MunifTanjim/nui.nvim",
     },
     keys = {
-        { "<Leader>e",
-            function()
-                vim.cmd("Neotree toggle")
-            end,
-            desc = "toggle/focus neotree"
-        }
+        { "<Leader>et", "<CMD>Neotree toggle<CR>", desc = "toggle" },
+        { "<Leader>ef", "<CMD>Neotree focus<CR>", desc = "focus" },
     }
 }
 

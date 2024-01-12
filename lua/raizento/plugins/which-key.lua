@@ -14,6 +14,22 @@ M.config = function()
   }, { prefix = "<Leader>" })
 
   whichkey.register({
+    e = {
+            name = "Explorer"
+        }
+  }, { prefix = "<Leader>" })
+
+  whichkey.register({
+    f = {
+            name = "Find"
+        }
+  }, { prefix = "<Leader>" })
+
+  whichkey.register({
+    m = "Markdown"
+  }, { prefix = "<Leader>" })
+
+  whichkey.register({
     g = {
       name = "Git",
       t = "Toggle",

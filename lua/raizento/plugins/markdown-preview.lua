@@ -6,7 +6,7 @@ local M = {
     vim.fn["mkdp#util#install"]()
   end,
   keys = {
-    { "<Leader>mp", "<CMD>MarkdownPreviewToggle<CR>", desc = "Toggle markdown preview" },
+    { "<Leader>mp", "<CMD>MarkdownPreviewToggle<CR>", ft = "markdown", desc = "Toggle markdown preview" },
   },
 }
 

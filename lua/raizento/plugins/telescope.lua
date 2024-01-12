@@ -13,7 +13,7 @@ local M = {
     {
       "<Leader>fl",
       "<CMD>lua vim.diagnostic.setloclist({ open = false })<CR><CMD>Telescope loclist<CR>",
-      desc = "loclist"
+      desc = "loclist",
     },
     { "<Leader>ft", "<CMD>Telescope tags<CR>", desc = "tags" },
     { "<Leader>fj", "<CMD>Telescope jumplist<CR>", desc = "jumps" },

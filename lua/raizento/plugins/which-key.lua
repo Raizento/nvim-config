@@ -15,18 +15,18 @@ M.config = function()
 
   whichkey.register({
     e = {
-            name = "Explorer"
-        }
+      name = "Explorer",
+    },
   }, { prefix = "<Leader>" })
 
   whichkey.register({
     f = {
-            name = "Find"
-        }
+      name = "Find",
+    },
   }, { prefix = "<Leader>" })
 
   whichkey.register({
-    m = "Markdown"
+    m = "Markdown",
   }, { prefix = "<Leader>" })
 
   whichkey.register({

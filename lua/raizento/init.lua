@@ -13,6 +13,7 @@ spec("raizento.plugins.cmp")
 spec("raizento.plugins.lualine")
 spec("raizento.plugins.gitsigns")
 spec("raizento.plugins.lazygit")
+spec("raizento.plugins.neo-tree")
 spec("raizento.plugins.which-key")
 spec("raizento.plugins.lsp")
 

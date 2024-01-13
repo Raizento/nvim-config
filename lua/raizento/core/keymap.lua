@@ -18,6 +18,6 @@ vim.keymap.set("n", "<Leader>w", ":w<CR>", { noremap = true, silent = true, desc
 vim.keymap.set("n", "<Leader>q", ":q<CR>", { noremap = true, silent = true, desc = "quit" })
 
 -- Window splitting
-vim.keymap.set("n", "<Leader>v", "<C-w>v", { noremap = true, silent = true, desc = "Split vertically" })
-vim.keymap.set("n", "<Leader>s", "<C-w>s", { noremap = true, silent = true, desc = "Split horizontally" })
-vim.keymap.set("n", "<Leader>c", "<C-w>c", { noremap = true, silent = true, desc = "Close window" })
+vim.keymap.set("n", "<Leader>v", "<C-w>v", { noremap = true, silent = true, desc = "split vertically" })
+vim.keymap.set("n", "<Leader>s", "<C-w>s", { noremap = true, silent = true, desc = "split horizontally" })
+vim.keymap.set("n", "<Leader>c", "<C-w>c", { noremap = true, silent = true, desc = "close window" })

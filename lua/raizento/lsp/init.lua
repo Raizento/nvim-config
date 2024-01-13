@@ -35,59 +35,34 @@ end
 mason_lsp.setup()
 mason_lsp.setup_handlers(handlers.handlers)
 
-whichkey.register({
-  d = {
-    name = "Diagnostic",
-    e = { vim.diagnostic.open_float, "Open float" },
-    p = { vim.diagnostic.goto_prev, "Previous" },
-    n = { vim.diagnostic.goto_next, "Next" },
-    q = { vim.diagnostic.setloclist, "Open loclist" },
-  },
-}, { prefix = "<Leader>" })
+vim.keymap.set("n", "<Leader>de", vim.diagnostic.open_float, { desc = "open float" })
+vim.keymap.set("n", "<Leader>dp", vim.diagnostic.goto_prev, { desc = "previous" })
+vim.keymap.set("n", "<Leader>dn", vim.diagnostic.goto_next, { desc = "next" })
+vim.keymap.set("n", "<Leader>dq", vim.diagnostic.setloclist, { desc = "open loclist" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
     vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-    whichkey.register({
-      S = { vim.lsp.buf.hover, "Hover" },
-      ["<C-s>"] = { vim.lsp.buf.signature_help, "Signature help" },
-    }, { buffer = ev.buf })
+    vim.keymap.set("n", "S", vim.lsp.buf.hover, { desc = "hover", buffer = ev.buf })
+    vim.keymap.set("n", "<C-S>", vim.lsp.buf.signature_help, { desc = "signature help", buffer = ev.buf })
 
-    whichkey.register({
-      l = {
-        name = "LSP",
-        w = {
-          name = "Workspace",
-          a = { vim.lsp.buf.add_workspace_folder, "Add folder" },
-          r = { vim.lsp.buf.remove_workspace_folder, "Remove folder" },
-          l = {
-            function()
-              print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-            end,
-            "List folders",
-          },
-        },
-        a = { vim.lsp.buf.code_action, "Actions", mode = { "n", "v" } },
-        f = {
-          function()
-            vim.lsp.buf.format({ async = true })
-          end,
-          "Format",
-        },
-      },
-    }, { buffer = ev.buf, prefix = "<Leader>" })
+    vim.keymap.set("n", "<Leader>lwa", vim.lsp.buf.add_workspace_folder, { desc = "add folder", buffer = ev.buf })
+    vim.keymap.set("n", "<Leader>lwr", vim.lsp.buf.remove_workspace_folder, { desc = "remove folder", buffer = ev.buf })
+    vim.keymap.set("n", "<Leader>lwl", function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, { desc = "list folders", buffer = ev.buf })
 
-    whichkey.register({
-      j = {
-        name = "jump to",
-        D = { vim.lsp.buf.declaration, "Declaration" },
-        d = { vim.lsp.buf.definition, "Definition" },
-        i = { vim.lsp.buf.implementation, "Implementation" },
-        r = { vim.lsp.buf.references, "References" },
-        t = { vim.lsp.buf.type_definition, "Type definition" },
-      },
-    }, { buffer = ev.buf, prefix = "<Leader>" })
+    vim.keymap.set({ "n", "v" }, "<Leaders>la", vim.lsp.buf.code_action, { desc = "actions", buffer = ev.buf })
+    vim.keymap.set("n", "<Leaders>lf", function()
+      vim.lsp.buf.format({ async = true })
+    end, { desc = "format", buffer = ev.buf })
+
+    vim.keymap.set("n", "<Leader>jD", vim.lsp.buf.declaration, { desc = "declaration", buffer = ev.buf })
+    vim.keymap.set("n", "<Leader>jd", vim.lsp.buf.definition, { desc = "definition", buffer = ev.buf })
+    vim.keymap.set("n", "<Leader>ji", vim.lsp.buf.implementation, { desc = "implementation", buffer = ev.buf })
+    vim.keymap.set("n", "<Leader>jr", vim.lsp.buf.references, { desc = "references", buffer = ev.buf })
+    vim.keymap.set("n", "<Leader>jt", vim.lsp.buf.type_definition, { desc = "type definition", buffer = ev.buf })
   end,
 })

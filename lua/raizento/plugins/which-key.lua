@@ -35,6 +35,21 @@ M.config = function()
       t = "Toggle",
     },
   }, { prefix = "<Leader>" })
+
+  whichkey.register({
+    j = "Jump to",
+  }, { prefix = "<Leader>" })
+
+  whichkey.register({
+    d = "Diagnostics",
+  }, { prefix = "<Leader>" })
+
+  whichkey.register({
+    l = {
+      name = "LSP",
+      w = "Workspace",
+    },
+  }, { prefix = "<Leader>" })
 end
 
 return M

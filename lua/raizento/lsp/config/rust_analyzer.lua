@@ -1,6 +1,6 @@
 local M = {}
 
-M.config = function(lsp_config, capabilities)
+M.config = function(capabilities)
   return function()
     require("rust-tools").setup({})
   end

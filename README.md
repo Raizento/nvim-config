@@ -15,12 +15,13 @@ sudo install lazygit /usr/local/bin
 ```
 
 ## Keymaps
-This config uses [which-key](https://github.com/folke/which-key.nvim). As such, all keybindings can be found out by simply messing around. Have fun!
+Coming soon.
+In the meantime, you can use `which-key`
 
 ## Adding a new LSP
 Installing a new LSP is done via the `:LspInstall {servername}` command. 
 
-You may need to run `:LspStart` for the LSP to start after installing in a buffer which had no LSP attached.
+You may need to run `:LspStart` for cmp to properly use the LSP sources. 
 
 A new LSP will be configured using a default config. However, you can also configure an LSP on your own.
 
@@ -30,9 +31,9 @@ Take a look at `rust_analyzer.lua`:
 ```lua
 local M = {}
 
-M.config = function(lsp_config, capabilities)
+M.config = function(capabilities)
   return function()
-    require("rust-tools").setup{}
+    require("rust-tools").setup({})
   end
 end
 
@@ -41,6 +42,13 @@ return M
 
 You need to add a file `lua/raizento/lsp/config/servername.lua` 
 
-For the config to recognize the file, it has to have the exact same name as `lspconfig` uses (so `{lspconfig_servername}.lua`).
+For the config to recognize the file it has to have the exact same name as `lspconfig` uses (so `{lspconfig_servername}.lua`).
 
-Inside your file, you need to create a table which has a `config`-entry. It, in turn, needs to return a function covering all your configuration steps.
+Inside your file, you need to create a table which has a `config`-entry. It needs to return a function covering all your configuration steps.
+**This includes the call to `lspconfig` to setup the server.**
+
+### Using plugins for LSP configuration
+
+Plugins for LSP configuration such as `neodev` or `rust-tools` can be put into `lua/raizento/lsp/lsp-plugins.lua`.
+The corresponding servers should then be setup in the way described above.
+

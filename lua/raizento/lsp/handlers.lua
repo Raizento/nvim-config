@@ -20,7 +20,7 @@ M.common_capabilities = function()
 end
 
 M.handlers = {
-  -- Standard handler for LSPs which do not have a config in lua.raizento.lsp.config
+  -- Standard handler for LSPs which do not have a config in raizento.lsp.config
   function(server_name)
     require("lspconfig")[server_name].setup({
       capabilities = M.common_capabilities(),

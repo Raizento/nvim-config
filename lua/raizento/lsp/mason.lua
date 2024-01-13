@@ -1,39 +1,28 @@
-local mason_status, mason = pcall(require, "mason")
-if not mason_status then
-  print("Could not load Mason!")
-  return
-end
-
-local mason_lsp_config_status, mason_lsp = pcall(require, "mason-lspconfig")
-if not mason_lsp_config_status then
-  print("Could not load mason-lspconfig!")
-  return
-end
-
-local whichkey_status, whichkey = pcall(require, "which-key")
-if not whichkey_status then
-  print("Could not load which-key!")
-  return
-end
-
-mason.setup({
-  ui = {
-    icons = {
-      package_installed = "󰄵",
-      package_pending = "󰪞",
-      package_uninstalled = "󰄱",
-    },
+local M = {
+  "williamboman/mason-lspconfig.nvim",
+  dependencies = {
+    "williamboman/mason.nvim",
   },
-})
+}
 
-local handlers_status, handlers = pcall(require, "raizento.lsp.handlers")
-if not handlers_status then
-  print("Could not load handlers!")
-  return
-end
+M.config = function()
+  local servers = {}
 
-mason_lsp.setup()
-mason_lsp.setup_handlers(handlers.handlers)
+  require("mason").setup({
+    ui = {
+      icons = {
+        package_installed = "󰄵",
+        package_pending = "󰪞",
+        package_uninstalled = "󰄱",
+      },
+    },
+  })
+
+  local handlers = require("raizento.lsp.handlers")
+  require("mason-lspconfig").setup({
+    ensure_installed = servers,
+    handlers = handlers.handlers,
+  })
 
 vim.keymap.set("n", "<Leader>de", vim.diagnostic.open_float, { desc = "open float" })
 vim.keymap.set("n", "<Leader>dp", vim.diagnostic.goto_prev, { desc = "previous" })
@@ -43,8 +32,6 @@ vim.keymap.set("n", "<Leader>dq", vim.diagnostic.setloclist, { desc = "open locl
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
-    vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
     vim.keymap.set("n", "S", vim.lsp.buf.hover, { desc = "hover", buffer = ev.buf })
     vim.keymap.set("n", "<C-S>", vim.lsp.buf.signature_help, { desc = "signature help", buffer = ev.buf })
 
@@ -66,3 +53,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<Leader>jt", vim.lsp.buf.type_definition, { desc = "type definition", buffer = ev.buf })
   end,
 })
+end
+
+return M

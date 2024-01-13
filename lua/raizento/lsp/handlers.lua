@@ -1,42 +1,44 @@
-local cmp_lsp_status, cmp_lsp = pcall(require, "cmp_nvim_lsp")
-if not cmp_lsp_status then
-  print("Could not load cmp_nvim_lsp!")
-  return
-end
-
-local lsp_status, lsp_config = pcall(require, "lspconfig")
-if not lsp_status then
-  print("Could not load LspConfig!")
-  return
-end
-
-local neodev_status, neodev = pcall(require, "neodev")
-if not neodev_status then
-  print("Could not load neodev, using normal lua_ls config...")
-else
-  neodev.setup({})
-end
-
-local capabilities = cmp_lsp.default_capabilities()
-
 local M = {}
 
+M.common_capabilities = function()
+  local cmp_lsp_status, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+  if cmp_lsp_status then
+    return cmp_lsp.default_capabilities()
+  end
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      "documentation",
+      "details",
+      "additionalTextEdits",
+    },
+  }
+
+  return capabilities
+end
+
 M.handlers = {
+  -- Standard handler for LSPs which do not have a config in lua.raizento.lsp.config
   function(server_name)
-    lsp_config[server_name].setup({
-      capabilities = capabilities,
+    require("lspconfig")[server_name].setup({
+      capabilities = M.common_capabilities(),
     })
   end,
 }
 
-local path = vim.fn.stdpath("config") .. "/lua/raizento/lsp/config"
+local config_path = vim.fn.stdpath("config") .. "/lua/raizento/lsp/config"
 local prefix = "raizento.lsp.config"
 
-for fname in io.popen("ls -pa " .. path .. " | grep -v /"):lines() do
+-- Grep all filenames in config_path, exclude directories
+for fname in io.popen("ls -pa " .. config_path .. " | grep -v /"):lines() do
+  -- Remove the .lua file name ending
   local server_name = fname:match("(.+)%..+$")
   local module_name = prefix .. "." .. server_name
 
-  local config = require(module_name).config(lsp_config, capabilities)
+  -- Pass default capabilities if servers do not want to take care of the capabilities themselves
+  local config = require(module_name).config(M.common_capabilities())
   M.handlers[server_name] = config
 end
 

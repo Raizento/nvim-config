@@ -46,8 +46,8 @@ M.config = function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
       end, { desc = "list folders", buffer = ev.buf })
 
-      vim.keymap.set({ "n", "v" }, "<Leaders>la", vim.lsp.buf.code_action, { desc = "actions", buffer = ev.buf })
-      vim.keymap.set("n", "<Leaders>lf", function()
+      vim.keymap.set({ "n", "v" }, "<Leader>la", vim.lsp.buf.code_action, { desc = "actions", buffer = ev.buf })
+      vim.keymap.set("n", "<Leader>lf", function()
         vim.lsp.buf.format({ async = true })
       end, { desc = "format", buffer = ev.buf })
 

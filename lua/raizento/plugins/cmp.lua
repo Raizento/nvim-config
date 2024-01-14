@@ -9,6 +9,7 @@ local M = {
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "delphinus/cmp-ctags",
+    "hrsh7th/cmp-nvim-lua",
   },
 }
 
@@ -34,7 +35,6 @@ M.config = function()
     sources = cmp.config.sources({
       { name = "nvim_lsp" },
       { name = "nvim_lsp_signature_help" },
-      { name = "luasnip" },
       {
         name = "ctags",
         option = {
@@ -43,9 +43,10 @@ M.config = function()
           trigger_characters_ft = {},
         },
       },
-      { name = "path" },
-    }, {
+      { name = "luasnip" },
+      { name = "nvim_lua" },
       { name = "buffer" },
+      { name = "path" },
     }),
 
     mapping = cmp.mapping.preset.insert({

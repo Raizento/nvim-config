@@ -42,6 +42,17 @@ M.config = function()
       },
     },
   })
+
+  vim.opt.foldmethod = "expr"
+  vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+  vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "InsertLeave" }, {
+    callback = function()
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    end,
+    desc = "Folding with TreeSitter",
+  })
 end
 
 return M

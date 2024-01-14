@@ -44,6 +44,7 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "<Leader>jt", vim.lsp.buf.type_definition, { desc = "type definition", buffer = bufnr })
 
   if client.supports_method("textDocument/inlayHint") then
+    print("hallo")
     vim.lsp.inlay_hint.enable(bufnr, true)
   end
 end

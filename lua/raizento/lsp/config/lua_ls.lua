@@ -7,10 +7,12 @@ M.config = function(capabilities, on_attach)
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
-        hint = {
-          enable = true,
-          semicolon = "All",
-        },
+        Lua = {
+          hint = {
+            enable = true,
+            paramName = "All",
+          },
+        }
       }
     })
   end

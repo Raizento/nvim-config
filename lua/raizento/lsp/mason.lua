@@ -22,9 +22,6 @@ M.config = function()
   require("mason-lspconfig").setup({
     ensure_installed = servers,
     handlers = handlers.handlers,
-    opts = {
-      inlay_hints = { enabled = true }
-    }
   })
 
   vim.keymap.set("n", "<Leader>de", vim.diagnostic.open_float, { desc = "open float" })

@@ -12,8 +12,8 @@ M.config = function(capabilities, on_attach)
             enable = true,
             paramName = "All",
           },
-        }
-      }
+        },
+      },
     })
   end
 end

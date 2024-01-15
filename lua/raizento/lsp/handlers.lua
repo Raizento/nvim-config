@@ -22,7 +22,7 @@ M.common_capabilities = function()
   return capabilities
 end
 
-M.on_attach = function(client, bufnr)
+M.lsp_keymap = function(bufnr)
   vim.keymap.set("n", "S", vim.lsp.buf.hover, { desc = "hover", buffer = bufnr })
   vim.keymap.set("n", "<C-S>", vim.lsp.buf.signature_help, { desc = "signature help", buffer = bufnr })
 
@@ -42,6 +42,10 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "<Leader>ji", vim.lsp.buf.implementation, { desc = "implementation", buffer = bufnr })
   vim.keymap.set("n", "<Leader>jr", vim.lsp.buf.references, { desc = "references", buffer = bufnr })
   vim.keymap.set("n", "<Leader>jt", vim.lsp.buf.type_definition, { desc = "type definition", buffer = bufnr })
+end
+
+M.on_attach = function(client, bufnr)
+  M.lsp_keymap(bufnr)
 
   if client.supports_method("textDocument/inlayHint") then
     vim.lsp.inlay_hint.enable(bufnr, true)

@@ -17,8 +17,13 @@ spec("raizento.plugins.lazygit")
 spec("raizento.plugins.neo-tree")
 spec("raizento.plugins.ufo")
 spec("raizento.plugins.which-key")
+
+-- LSP
 spec("raizento.lsp.lsp-plugins")
 spec("raizento.lsp.mason")
 spec("raizento.lsp.lspconfig")
+
+-- DAP
+spec("raizento.plugins.dap")
 
 require("raizento.lazy")

@@ -5,24 +5,15 @@ local jdtls_addons_path = path_to_jdtls .. "addons/"
 
 local fn = vim.fn
 
-local function exists(file)
-  local ok, err, code = os.rename(file, file)
-  if not ok then
-    if code == 13 then
-      -- Permission denied, but file/dir exists
-      return true
-    end
-  end
-  return ok, err
-end
+local exists = require("raizento.util.exists")
 
-local ok, _ = exists(lsp_path)
+local ok, _ = exists.exists(lsp_path)
 if not ok then
   os.execute("mkdir " .. lsp_path)
 end
 
 -- Install jdtls if it does not exist
-ok, _ = exists(path_to_jdtls)
+ok, _ = exists.exists(path_to_jdtls)
 if not ok then
   vim.notify("Downloading jdtls, please wait...")
   fn.system({ "mkdir", path_to_jdtls })

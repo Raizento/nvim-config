@@ -47,7 +47,10 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 -- This will place the Workspace directory for jdtls into your HOME directory
 local workspace_dir = path_to_jdtls .. "/workspace/" .. project_name
 
+local handler = require("raizento.lsp.handlers")
+
 local config = {
+  on_attach = handler.on_attach,
   cmd = {
     "java",
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",

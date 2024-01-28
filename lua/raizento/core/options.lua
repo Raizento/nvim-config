@@ -13,7 +13,7 @@ vim.opt.tabstop = 4
 vim.opt.expandtab = true
 vim.opt.smarttab = true
 
-vim.opt.mouse = ""
+vim.opt.mouse = "a"
 
 vim.opt.foldcolumn = "6"
 

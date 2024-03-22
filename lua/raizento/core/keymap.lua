@@ -21,3 +21,8 @@ vim.keymap.set("n", "<Leader>q", ":q<CR>", { noremap = true, silent = true, desc
 vim.keymap.set("n", "<Leader>v", "<C-w>v", { noremap = true, silent = true, desc = "split vertically" })
 vim.keymap.set("n", "<Leader>s", "<C-w>s", { noremap = true, silent = true, desc = "split horizontally" })
 vim.keymap.set("n", "<Leader>c", "<C-w>c", { noremap = true, silent = true, desc = "close window" })
+
+-- Easier copying and pasting to and from clipboard
+vim.keymap.set({ "n", "v" }, "<Leader>y", [["+y]], { noremap = true, silent = true, desc = "copy to clipboard" })
+vim.keymap.set({ "n", "v" }, "<Leader>p", [["+p]], { noremap = true, silent = true, desc = "paste from clipboard" })
+vim.keymap.set({ "n", "v" }, "<Leader>P", [["+P]], { noremap = true, silent = true, desc = "paste from clipboard" })

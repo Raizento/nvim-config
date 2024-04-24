@@ -21,5 +21,6 @@ spec("raizento.plugins.which-key")
 spec("raizento.lsp.lsp-plugins")
 spec("raizento.lsp.mason")
 spec("raizento.lsp.lspconfig")
+spec("raizento.plugins.vimtex")
 
 require("raizento.lazy")

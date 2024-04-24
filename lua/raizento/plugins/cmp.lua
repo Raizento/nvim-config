@@ -10,6 +10,7 @@ local M = {
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "delphinus/cmp-ctags",
     "hrsh7th/cmp-nvim-lua",
+    "micangl/cmp-vimtex",
   },
 }
 
@@ -47,6 +48,7 @@ M.config = function()
       { name = "nvim_lua" },
       { name = "buffer" },
       { name = "path" },
+      { name = "vimtex" },
     }),
 
     mapping = cmp.mapping.preset.insert({

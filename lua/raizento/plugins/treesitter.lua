@@ -13,9 +13,13 @@ M.config = function()
       "query",
     },
     auto_install = true,
+    ignore_install = {
+      "latex"
+    },
     highlight = {
       enable = true,
-      additional_vim_regex_highlighting = false,
+      disable = { "latex" },
+      additional_vim_regex_highlighting = { "latex", "markdown" },
     },
     incremental_selection = {
       enable = true,

@@ -88,3 +88,4 @@ local config = {
 }
 
 require("jdtls").start_or_attach(config)
+vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, { desc = "rename", buffer = bufnr })

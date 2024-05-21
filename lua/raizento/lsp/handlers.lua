@@ -50,6 +50,10 @@ M.on_attach = function(client, bufnr)
   if client.supports_method("textDocument/inlayHint") then
     vim.lsp.inlay_hint.enable(true)
   end
+
+  if client.supports_method("textDocument/rename") then
+    vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, { desc = "rename", buffer = bufnr })
+  end
 end
 
 M.handlers = {

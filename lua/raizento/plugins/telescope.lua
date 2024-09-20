@@ -1,8 +1,36 @@
+-- Utilizes code from https://yeripratama.com/blog/customizing-nvim-telescope/
+-- Keep track of current option status
+local temp_showtabline
+local temp_laststatus
+
+-- Save status for showtabline and laststatus and disable both of them
+function _G.global_telescope_find_pre()
+    temp_showtabline = vim.o.showtabline
+    temp_laststatus = vim.o.laststatus
+    vim.o.showtabline = 0
+    vim.o.laststatus = 0
+end
+
+-- Recover status from global_telescope_find_pre()
+function _G.global_telescope_leave_prompt()
+    vim.o.laststatus = temp_laststatus
+    vim.o.showtabline = tem.showtabline
+end
+
+-- Make Telescope UI fullscreen on opening it
+-- Remove status and tabline when opening and restore when leaving Telescope prompt
+vim.cmd([[
+    augroup TelescopeFullscreen
+        autocmd!
+        autocmd User TelescopeFindPre lua global_telescope_find_pre()
+        autocmd FileType TelescopePrompt autocmd BufLeave <buffer> lua global_telescope_leave_prompt()
+    augroup END
+]])
+
 local M = {
   "nvim-telescope/telescope.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope-file-browser.nvim",
   },
   keys = {
     { "<Leader>ff", "<CMD>Telescope find_files<CR>", desc = "find files" },
@@ -17,21 +45,26 @@ local M = {
     },
     { "<Leader>ft", "<CMD>Telescope tags<CR>", desc = "tags" },
     { "<Leader>fj", "<CMD>Telescope jumplist<CR>", desc = "jumps" },
-    { "<Leader>fj", "<CMD>Telescope search_history<CR>", desc = "search history" },
-    { "<Leader>B", "<CMD>Telescope file_browser<CR>", desc = "telescope file browser" },
   },
 }
 
 M.config = function()
   local telescope = require("telescope")
   telescope.setup({
-    extensions = {
-      file_browser = {
-        hijack_netrw = true,
-      },
-    },
+    defaults = {
+        layout_strategy = "horizontal",
+        layout_config = {
+            width = { padding = 0 },
+            height = { padding = 0 },
+            preview_width = 0.6,
+        },
+        -- Empty borderchars will still keep the UI title centered
+        borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+        path_display = { "filename_first" },
+        
+    }
+
   })
-  telescope.load_extension("file_browser")
 end
 
 return M

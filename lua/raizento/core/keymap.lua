@@ -26,3 +26,6 @@ vim.keymap.set("n", "<Leader>c", "<C-w>c", { noremap = true, silent = true, desc
 vim.keymap.set({ "n", "v" }, "<Leader>y", [["+y]], { noremap = true, silent = true, desc = "copy to clipboard" })
 vim.keymap.set({ "n", "v" }, "<Leader>p", [["+p]], { noremap = true, silent = true, desc = "paste from clipboard" })
 vim.keymap.set({ "n", "v" }, "<Leader>P", [["+P]], { noremap = true, silent = true, desc = "paste from clipboard" })
+
+-- Place semicolon at the end of a line
+vim.keymap.set("n", "<Leader>;", [[mmA;<Esc>`m]], { noremap = true, silent = true, desc = "Place ; at end of line" })

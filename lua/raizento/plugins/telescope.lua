@@ -1,20 +1,29 @@
 -- Utilizes code from https://yeripratama.com/blog/customizing-nvim-telescope/
--- Keep track of current option status
+-- Keep track of current options status
 local temp_showtabline
 local temp_laststatus
+local temp_ruler
+local temp_cmdheight
 
--- Save status for showtabline and laststatus and disable both of them
+-- Save status for options and disable them
 function _G.global_telescope_find_pre()
     temp_showtabline = vim.o.showtabline
     temp_laststatus = vim.o.laststatus
+    temp_ruler = vim.o.ruler
+    temp_cmdheight = vim.o.cmdheight
+
+    vim.o.ruler = false
     vim.o.showtabline = 0
     vim.o.laststatus = 0
+    vim.o.cmdheight = 0
 end
 
 -- Recover status from global_telescope_find_pre()
 function _G.global_telescope_leave_prompt()
     vim.o.laststatus = temp_laststatus
-    vim.o.showtabline = tem.showtabline
+    vim.o.showtabline = temp_showtabline
+    vim.o.ruler = temp_ruler
+    vim.o.cmdheight = temp_cmdheight
 end
 
 -- Make Telescope UI fullscreen on opening it
@@ -53,15 +62,17 @@ M.config = function()
   telescope.setup({
     defaults = {
         layout_strategy = "horizontal",
+        -- Use fullscreen for Telescope; preview uses 60%, results/prompt 40%
         layout_config = {
             width = { padding = 0 },
             height = { padding = 0 },
             preview_width = 0.6,
         },
-        -- Empty borderchars will still keep the UI title centered
+
+        -- Empty borderchars will still keep the UI titles centered
         borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+
         path_display = { "filename_first" },
-        
     }
 
   })

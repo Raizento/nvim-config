@@ -36,13 +36,15 @@ vim.cmd([[
     augroup END
 ]])
 
+
+-- TODO implement LSP bindings
 local M = {
   "nvim-telescope/telescope.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
   keys = {
-    { "<Leader>ff", "<CMD>Telescope find_files<CR>", desc = "find files" },
+    { "<Leader>ff", "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>", desc = "find files" },
     { "<Leader>fg", "<CMD>Telescope live_grep<CR>", desc = "live grep" },
     { "<Leader>fb", "<CMD>Telescope buffers<CR>", desc = "buffers" },
     { "<Leader>fh", "<CMD>Telescope help_tags<CR>", desc = "help tags" },
@@ -73,6 +75,26 @@ M.config = function()
         borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
 
         path_display = { "filename_first" },
+
+        mappings = {
+            i = {
+                -- TODO don't really like these mappings; look for better ones
+                ["<C-Down>"] = require('telescope.actions').cycle_history_next,
+                ["<C-Up>"] = require('telescope.actions').cycle_history_prev,
+            }
+        },
+
+        vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            -- Also search through hidden files and directories when using rg
+            "--hidden",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case"
+        },
     }
 
   })

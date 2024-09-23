@@ -4,7 +4,7 @@ require("raizento.core.keymap")
 
 spec("raizento.plugins.onedark")
 spec("raizento.plugins.web-devicons")
---spec("raizento.plugins.treesitter")
+spec("raizento.plugins.treesitter")
 --spec("raizento.plugins.autopairs")
 spec("raizento.plugins.telescope")
 spec("raizento.plugins.tmux-navigation")

@@ -19,7 +19,7 @@ M.config = function()
     highlight = {
       enable = true,
       disable = { "latex" },
-      additional_vim_regex_highlighting = { "latex", "markdown" },
+      additional_vim_regex_highlighting = false,
     },
     incremental_selection = {
       enable = true,
@@ -37,12 +37,6 @@ M.config = function()
       highlight_definitions = {
         enable = true,
         clear_on_cursor_move = false,
-      },
-      smart_rename = {
-        enable = true,
-        keymaps = {
-          smart_rename = "<Leader>tr",
-        },
       },
     },
   })

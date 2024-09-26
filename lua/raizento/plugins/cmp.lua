@@ -10,7 +10,6 @@ local M = {
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "delphinus/cmp-ctags",
     "hrsh7th/cmp-nvim-lua",
-    "micangl/cmp-vimtex",
   },
 }
 
@@ -48,7 +47,6 @@ M.config = function()
       { name = "nvim_lua" },
       { name = "buffer" },
       { name = "path" },
-      { name = "vimtex" },
     }),
 
     mapping = cmp.mapping.preset.insert({
@@ -82,6 +80,7 @@ M.config = function()
     }),
   })
 
+  -- Completions for / and ? search based on current buffer
   cmp.setup.cmdline({ "/", "?" }, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
@@ -95,7 +94,11 @@ M.config = function()
     sources = cmp.config.sources({
       { name = "path" },
     }, {
-      { name = "cmdline" },
+        -- Maybe use the following: 
+        -- cmp-config.sources[n].entry_filter*
+      { name = "cmdline",
+        max_item_count = 100
+      },
     }),
   })
 

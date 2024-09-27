@@ -95,9 +95,10 @@ M.config = function()
       { name = "path" },
     }, {
       { name = "cmdline",
-        -- Completion only sets in after 3 characters
-        -- Limits lagging when completing 
-        keyword_length = 3,
+        -- Limit lagging on WSL
+        -- If inside a WSL Distro, only start completing after 3 characters
+        -- Lessens the effects the big WSL path (Windows path + Distro path) has on the synchronous search
+        keyword_length = os.getenv("WSL_DISTRO_NAME") ~= nil and 3 or 0,
       },
     }),
   })

@@ -6,6 +6,14 @@ M.config = function()
   local gitsigns = require("gitsigns")
 
   gitsigns.setup({
+    preview_config = {
+        -- Options passed to nvim_open_win
+        border = 'none',
+        style = 'minimal',
+        relative = 'cursor',
+        row = 0,
+        col = 1
+    },
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 

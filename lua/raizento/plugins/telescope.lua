@@ -48,6 +48,7 @@ local M = {
     { "<Leader>fg", "<CMD>Telescope live_grep<CR>", desc = "live grep" },
     { "<Leader>fb", "<CMD>Telescope buffers<CR>", desc = "buffers" },
     { "<Leader>fh", "<CMD>Telescope help_tags<CR>", desc = "help tags" },
+    { "<Leader>fh", "<CMD>Telescope tags<CR>", desc = "tags" },
     { "<Leader>fc", "<CMD>Telescope commands<CR>", desc = "commands" },
     {
       "<Leader>fl",

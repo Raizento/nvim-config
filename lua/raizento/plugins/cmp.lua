@@ -94,10 +94,10 @@ M.config = function()
     sources = cmp.config.sources({
       { name = "path" },
     }, {
-        -- Maybe use the following: 
-        -- cmp-config.sources[n].entry_filter*
       { name = "cmdline",
-        max_item_count = 100
+        -- Completion only sets in after 3 characters
+        -- Limits lagging when completing 
+        keyword_length = 3,
       },
     }),
   })

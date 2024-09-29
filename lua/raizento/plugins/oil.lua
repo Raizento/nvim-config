@@ -5,6 +5,9 @@ local M = {
   opts = {},
   -- Optional dependencies
   dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+  keys = {
+    { "<Leader>e", "<CMD>Oil<CR>", desc = "Open Oil" },
+  },
 }
 
 M.config = function()
@@ -15,21 +18,15 @@ M.config = function()
     keymaps = {
       ["g?"] = "actions.show_help",
       ["<CR>"] = "actions.select",
-      -- TODO Look for better mappings for these
-      --["<C-s>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
-      --["<C-h>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
-      ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
-      ["<C-p>"] = "actions.preview",
-      ["<C-c>"] = "actions.close",
+      ["<M-v>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+      ["<M-h>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
+      ["<M-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+      ["<M-p>"] = "actions.preview",
+      ["<Leader>q"] = "actions.close",
       ["<M-l>"] = "actions.refresh",
       ["<BS>"] = "actions.parent",
       ["_"] = "actions.open_cwd",
       ["`"] = "actions.cd",
-      -- TODO Mapping to change back into directory in which NVIM was opened
-      ["="] = { function() 
-                  require("oil.actions").cd.callback()
-                end, 
-                desc = "Open Oil in the directory nvim was started in" },
       ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory" },
       ["gs"] = "actions.change_sort",
       ["gx"] = "actions.open_external",

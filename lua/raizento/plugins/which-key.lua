@@ -1,55 +1,29 @@
 local M = {
   "folke/which-key.nvim",
-  init = function()
-    vim.opt.timeout = true
-    vim.opt.timeoutlen = 300
-  end,
 }
 
 M.config = function()
-  local whichkey = require("which-key")
-
-  whichkey.register({
-    t = "TreeSitter",
-  }, { prefix = "<Leader>" })
-
-  whichkey.register({
-    e = {
-      name = "Explorer",
+  local wk = require("which-key")
+  wk.setup({
+    delay = 300,
+    icons = {
+      mappings = false,
     },
-  }, { prefix = "<Leader>" })
+  })
 
-  whichkey.register({
-    f = {
-      name = "Find",
-    },
-  }, { prefix = "<Leader>" })
+  wk.add({ "<Leader>f", group = "Find" })
 
-  whichkey.register({
-    m = "Markdown",
-  }, { prefix = "<Leader>" })
+  wk.add({ "<Leader>m", group = "Markdown" })
 
-  whichkey.register({
-    g = {
-      name = "Git",
-      t = "Toggle",
-    },
-  }, { prefix = "<Leader>" })
+  wk.add({ "<Leader>g", group = "Git" })
+  wk.add({ "<Leader>gt", group = "Toggle" })
 
-  whichkey.register({
-    j = "Jump to",
-  }, { prefix = "<Leader>" })
+  wk.add({ "<Leader>j", group = "Jump to" })
 
-  whichkey.register({
-    d = "Diagnostics",
-  }, { prefix = "<Leader>" })
+  wk.add({ "<Leader>d", group = "Diagnostics" })
 
-  whichkey.register({
-    l = {
-      name = "LSP",
-      w = "Workspace",
-    },
-  }, { prefix = "<Leader>" })
+  wk.add({ "<Leader>l", group = "LSP" })
+  wk.add({ "<Leader>lw", group = "Workspace" })
 end
 
 return M

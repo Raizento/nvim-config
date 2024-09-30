@@ -17,6 +17,9 @@ spec("raizento.plugins.lazygit")
 spec("raizento.plugins.oil")
 spec("raizento.plugins.transparent")
 spec("raizento.plugins.which-key")
+
+spec("raizento.lsp.lazydev")
+
 spec("raizento.lsp.lsp-plugins")
 --spec("raizento.lsp.mason")
 --spec("raizento.lsp.lspconfig")

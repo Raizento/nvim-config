@@ -3,7 +3,7 @@ local M = {
 }
 
 M.config = function()
-  require("java").setup({})
+  require("java").setup()
 end
 
 return M

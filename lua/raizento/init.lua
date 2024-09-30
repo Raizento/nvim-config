@@ -20,7 +20,6 @@ spec("raizento.plugins.which-key")
 
 spec("raizento.lsp.lazydev")
 
-spec("raizento.lsp.lsp-plugins")
 spec("raizento.lsp.lspconfig")
 spec("raizento.lsp.mason")
 

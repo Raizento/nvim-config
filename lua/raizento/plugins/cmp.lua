@@ -45,6 +45,7 @@ M.config = function()
       },
       { name = "luasnip" },
       { name = "nvim_lua" },
+      { name = "lazydev" },
       { name = "buffer" },
       { name = "path" },
     }),

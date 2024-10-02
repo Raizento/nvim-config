@@ -9,7 +9,7 @@ local M = {
 }
 
 M.config = function()
-  require("nvim-tmux-navigation")
+  require("nvim-tmux-navigation").setup({})
 end
 
 return M

@@ -6,6 +6,14 @@ M.config = function()
   local gitsigns = require("gitsigns")
 
   gitsigns.setup({
+    preview_config = {
+        -- Options passed to nvim_open_win
+        border = 'none',
+        style = 'minimal',
+        relative = 'cursor',
+        row = 0,
+        col = 1
+    },
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 
@@ -38,7 +46,7 @@ M.config = function()
           gs.prev_hunk()
         end)
         return "<Ignore>"
-      end, { desc = "toggle deleted", expr = true })
+      end, { desc = "previous chunk", expr = true })
       map("n", "]g", function()
         if vim.wo.diff then
           return "n"
@@ -47,7 +55,7 @@ M.config = function()
           gs.next_hunk()
         end)
         return "<Ignore>"
-      end, { desc = "toggle deleted", expr = true })
+      end, { desc = "next chunk", expr = true })
       map({ "o", "x" }, "<Leader>gih", gs.select_hunk, { desc = "select hunk" })
     end,
   })

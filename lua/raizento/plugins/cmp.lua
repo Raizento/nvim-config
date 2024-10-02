@@ -10,7 +10,6 @@ local M = {
     "hrsh7th/cmp-nvim-lsp-signature-help",
     "delphinus/cmp-ctags",
     "hrsh7th/cmp-nvim-lua",
-    "micangl/cmp-vimtex",
   },
 }
 
@@ -46,9 +45,9 @@ M.config = function()
       },
       { name = "luasnip" },
       { name = "nvim_lua" },
+      { name = "lazydev" },
       { name = "buffer" },
       { name = "path" },
-      { name = "vimtex" },
     }),
 
     mapping = cmp.mapping.preset.insert({
@@ -82,6 +81,7 @@ M.config = function()
     }),
   })
 
+  -- Completions for / and ? search based on current buffer
   cmp.setup.cmdline({ "/", "?" }, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
@@ -95,7 +95,12 @@ M.config = function()
     sources = cmp.config.sources({
       { name = "path" },
     }, {
-      { name = "cmdline" },
+      { name = "cmdline",
+        -- Limit lagging on WSL
+        -- If inside a WSL Distro, only start completing after 3 characters
+        -- Lessens the effects the big WSL path (Windows path + Distro path) has on the synchronous search
+        keyword_length = os.getenv("WSL_DISTRO_NAME") ~= nil and 3 or 0,
+      },
     }),
   })
 

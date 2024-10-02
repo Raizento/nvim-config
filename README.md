@@ -17,8 +17,7 @@ sudo install lazygit /usr/local/bin
 ```
 
 ## Keymaps
-Coming soon.
-In the meantime, you can use `which-key`
+All keymaps have entries in `which-key`. 
 
 ## Adding a new LSP
 Installing a new LSP is done via the `:LspInstall {servername}` command. 
@@ -29,13 +28,24 @@ A new LSP will be configured using a default config. However, you can also confi
 
 ### Configuring an LSP
 If you want to do additional LSP configuring, head to the `lua/raizento/lsp/config` directory. 
-Take a look at `rust_analyzer.lua`:
+Take a look at `lua_ls.lua`:
 ```lua
 local M = {}
 
-M.config = function(capabilities)
+M.config = function(capabilities, on_attach)
   return function()
-    require("rust-tools").setup({})
+    require("lspconfig").lua_ls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        Lua = {
+          hint = {
+            enable = true,
+            paramName = "All",
+          },
+        },
+      },
+    })
   end
 end
 
@@ -44,13 +54,10 @@ return M
 
 You need to add a file `lua/raizento/lsp/config/servername.lua` 
 
-For the config to recognize the file it has to have the exact same name as `lspconfig` uses (so `{lspconfig_servername}.lua`).
+For the config to recognize the file it has to have the exact same name that `lspconfig` uses (so `{lspconfig_servername}.lua`).
 
-Inside your file, you need to create a table which has a `config`-entry. It needs to return a function covering all your configuration steps.
+Your `servername.lua` file needs a table which has a `config` entry. The `config` entry needs to return a function covering all your configuration steps.
 **This includes the call to `lspconfig` to setup the server.**
 
-### Using plugins for LSP configuration
-
-Plugins for LSP configuration such as `neodev` or `rust-tools` can be put into `lua/raizento/lsp/lsp-plugins.lua`.
-The corresponding servers should then be setup in the way described above.
-
+### Already set up LSPs
+`nvim-java` sets up `JDTLS` and `spring-boot-tools` for Java.

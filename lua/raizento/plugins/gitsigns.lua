@@ -46,7 +46,7 @@ M.config = function()
           gs.prev_hunk()
         end)
         return "<Ignore>"
-      end, { desc = "toggle deleted", expr = true })
+      end, { desc = "previous chunk", expr = true })
       map("n", "]g", function()
         if vim.wo.diff then
           return "n"
@@ -55,7 +55,7 @@ M.config = function()
           gs.next_hunk()
         end)
         return "<Ignore>"
-      end, { desc = "toggle deleted", expr = true })
+      end, { desc = "next chunk", expr = true })
       map({ "o", "x" }, "<Leader>gih", gs.select_hunk, { desc = "select hunk" })
     end,
   })

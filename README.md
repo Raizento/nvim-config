@@ -1,9 +1,9 @@
 # ReadMe
 
 ## Requirements
-For inlay hints to work, you need at least version 0.10.0 (currently only nightly).
+For inlay hints to work, you need at least version 0.10.0.
 
-To be able to fully use all of this configs features, a few requirements need to be installed:
+To be able to fully use all of this config's features, install the following dependencies:
 
 `sudo apt install gcc g++ ripgrep fd-find`
 

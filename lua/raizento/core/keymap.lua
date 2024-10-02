@@ -11,8 +11,8 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 -- Easier jumps to beginning/ending of line
-vim.keymap.set({ "n", "o", "x" }, "<s-h>", "^")
-vim.keymap.set({ "n", "o", "x" }, "<s-l>", "g_")
+vim.keymap.set({ "n", "o", "x", "v" }, "<s-h>", "^")
+vim.keymap.set({ "n", "o", "x", "v" }, "<s-l>", "g_")
 
 vim.keymap.set("n", "<Leader>w", ":w<CR>", { noremap = true, silent = true, desc = "write file" })
 vim.keymap.set("n", "<Leader>q", ":q<CR>", { noremap = true, silent = true, desc = "quit" })

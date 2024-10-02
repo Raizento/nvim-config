@@ -3,7 +3,7 @@
 ## Requirements
 For inlay hints to work, you need at least version 0.10.0.
 
-To be able to fully use all of this config's features, install the following dependencies:
+To be able to fully use all features of this config, install the following dependencies:
 
 `sudo apt install gcc g++ ripgrep fd-find`
 

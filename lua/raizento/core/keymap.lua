@@ -27,8 +27,7 @@ vim.keymap.set({ "n", "v" }, "<Leader>y", [["+y]], { noremap = true, silent = tr
 vim.keymap.set({ "n", "v" }, "<Leader>p", [["+p]], { noremap = true, silent = true, desc = "paste from clipboard" })
 vim.keymap.set({ "n", "v" }, "<Leader>P", [["+P]], { noremap = true, silent = true, desc = "paste from clipboard" })
 
--- Place semicolon at the end of a line
-vim.keymap.set("n", "<Leader>;", [[mmA;<Esc>`m]], { noremap = true, silent = true, desc = "Place ; at end of line" })
+vim.keymap.set("n", "<Leader>;", [[mmA;<Esc>`m]], { noremap = true, silent = true, desc = "place ; at end of line" })
 
 -- Navigate quickfix
 vim.keymap.set("n", "[q", "<CMD>cprev<CR>", { noremap = true, silent = true, desc = "prev quickfix item" })

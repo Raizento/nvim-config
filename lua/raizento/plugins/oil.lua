@@ -6,7 +6,7 @@ local M = {
   -- Optional dependencies
   dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
   keys = {
-    { "<Leader>e", "<CMD>Oil<CR>", desc = "Open Oil" },
+    { "<Leader>e", "<CMD>Oil<CR>", desc = "open Oil" },
   },
 }
 
@@ -18,9 +18,9 @@ M.config = function()
     keymaps = {
       ["g?"] = "actions.show_help",
       ["<CR>"] = "actions.select",
-      ["<M-v>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
-      ["<M-h>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
-      ["<M-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+      ["<M-v>"] = { "actions.select", opts = { vertical = true }, desc = "open the entry in a vertical split" },
+      ["<M-h>"] = { "actions.select", opts = { horizontal = true }, desc = "open the entry in a horizontal split" },
+      ["<M-t>"] = { "actions.select", opts = { tab = true }, desc = "open the entry in new tab" },
       ["<M-p>"] = "actions.preview",
       ["<Leader>q"] = "actions.close",
       ["<M-l>"] = "actions.refresh",

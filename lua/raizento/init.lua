@@ -13,9 +13,9 @@ spec("raizento.plugins.telescope")
 -- spec("raizento.plugins.indent-blankline")
 -- spec("raizento.plugins.gitsigns")
 -- spec("raizento.plugins.lazygit")
--- spec("raizento.plugins.oil")
+spec("raizento.plugins.oil")
 -- spec("raizento.plugins.transparent")
--- spec("raizento.plugins.which-key")
+spec("raizento.plugins.which-key")
 
 -- TODO maybe create another table for these lsp plugins
 -- spec("raizento.lsp.lazydev")

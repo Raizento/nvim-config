@@ -3,6 +3,20 @@ local M = {
   dependencies = { "nvim-tree/nvim-web-devicons" },
 }
 
-M.opts = { }
+M.opts = {
+  sections = {
+    lualine_b = {
+      'branch',
+      fmt = M.shorten_branch_name,
+    },
+  },
+  options = {
+      globalstatus = true,
+  },
+}
+
+M.shorten_branch_name = function(text, context)
+  return text:sub(1,40)
+end
 
 return M

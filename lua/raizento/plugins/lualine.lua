@@ -3,6 +3,6 @@ local M = {
   dependencies = { "nvim-tree/nvim-web-devicons" },
 }
 
-M.config = true
+M.opts = { }
 
 return M

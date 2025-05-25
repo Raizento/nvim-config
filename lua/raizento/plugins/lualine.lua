@@ -5,7 +5,7 @@ local M = {
 
 M.shorten_branch_name = function(text, context)
   if text:len() > 40 then
-    return text:sub(1,37) .. "..."
+    return text:sub(1, 37) .. "..."
   else
     return text
   end
@@ -15,13 +15,13 @@ M.opts = {
   sections = {
     lualine_b = {
       {
-        'branch',
+        "branch",
         fmt = M.shorten_branch_name,
       },
     },
   },
   options = {
-      globalstatus = true,
+    globalstatus = true,
   },
 }
 

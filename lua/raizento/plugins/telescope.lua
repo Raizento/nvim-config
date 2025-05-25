@@ -7,23 +7,23 @@ local temp_cmdheight
 
 -- Save status for options and disable them
 function _G.global_telescope_find_pre()
-    temp_showtabline = vim.o.showtabline
-    temp_laststatus = vim.o.laststatus
-    temp_ruler = vim.o.ruler
-    temp_cmdheight = vim.o.cmdheight
+  temp_showtabline = vim.o.showtabline
+  temp_laststatus = vim.o.laststatus
+  temp_ruler = vim.o.ruler
+  temp_cmdheight = vim.o.cmdheight
 
-    vim.o.ruler = false
-    vim.o.showtabline = 0
-    vim.o.laststatus = 0
-    vim.o.cmdheight = 0
+  vim.o.ruler = false
+  vim.o.showtabline = 0
+  vim.o.laststatus = 0
+  vim.o.cmdheight = 0
 end
 
 -- Recover status from global_telescope_find_pre()
 function _G.global_telescope_leave_prompt()
-    vim.o.laststatus = temp_laststatus
-    vim.o.showtabline = temp_showtabline
-    vim.o.ruler = temp_ruler
-    vim.o.cmdheight = temp_cmdheight
+  vim.o.laststatus = temp_laststatus
+  vim.o.showtabline = temp_showtabline
+  vim.o.ruler = temp_ruler
+  vim.o.cmdheight = temp_cmdheight
 end
 
 -- Make Telescope UI fullscreen on opening it
@@ -36,10 +36,6 @@ vim.cmd([[
     augroup END
 ]])
 
-M.grep_string_description = function() 
-  return "Search for " .. vim.expand("<cword>")
-end
-
 -- TODO implement LSP bindings
 local M = {
   "nvim-telescope/telescope.nvim",
@@ -48,7 +44,12 @@ local M = {
   },
   keys = {
     { "<Leader>ff", "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>", desc = "find files" },
-    { "<Leader>f*", "<CMD>lua require('telescope.builtin').grep_string({})<CR>", desc = grep_string_description },
+    -- TODO have a look at which-key for dynamic description
+    {
+      "<Leader>f*",
+      "<CMD>lua require('telescope.builtin').grep_string({})<CR>",
+      desc = "search for string under cursor",
+    },
     { "<Leader>fg", "<CMD>Telescope live_grep<CR>", desc = "live grep" },
     { "<Leader>fb", "<CMD>Telescope buffers<CR>", desc = "buffers" },
     { "<Leader>fh", "<CMD>Telescope help_tags<CR>", desc = "help tags" },
@@ -63,41 +64,40 @@ local M = {
   },
   opts = {
     defaults = {
-        layout_strategy = "horizontal",
-        -- Use fullscreen for Telescope; preview uses 60%, results/prompt 40%
-        layout_config = {
-            width = { padding = 0 },
-            height = { padding = 0 },
-            preview_width = 0.6,
+      layout_strategy = "horizontal",
+      -- Use fullscreen for Telescope; preview uses 60%, results/prompt 40%
+      layout_config = {
+        width = { padding = 0 },
+        height = { padding = 0 },
+        preview_width = 0.6,
+      },
+
+      -- Empty borderchars will still keep the UI titles centered
+      borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+
+      path_display = { "filename_first" },
+
+      mappings = {
+        i = {
+          -- TODO don't really like these mappings; look for better ones
+          ["<C-Down>"] = require("telescope.actions").cycle_history_next,
+          ["<C-Up>"] = require("telescope.actions").cycle_history_prev,
         },
+      },
 
-        -- Empty borderchars will still keep the UI titles centered
-        borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
-
-        path_display = { "filename_first" },
-
-        mappings = {
-            i = {
-                -- TODO don't really like these mappings; look for better ones
-                ["<C-Down>"] = require('telescope.actions').cycle_history_next,
-                ["<C-Up>"] = require('telescope.actions').cycle_history_prev,
-            }
-        },
-
-        vimgrep_arguments = {
-            "rg",
-            "--color=never",
-            -- Also search through hidden files and directories when using rg
-            "--hidden",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case"
-        },
-    }
-
-  }
+      vimgrep_arguments = {
+        "rg",
+        "--color=never",
+        -- Also search through hidden files and directories when using rg
+        "--hidden",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--smart-case",
+      },
+    },
+  },
 }
 
 return M

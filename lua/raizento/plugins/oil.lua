@@ -1,7 +1,7 @@
 local util = require("raizento.util.fs")
 
 local M = {
-  'stevearc/oil.nvim',
+  "stevearc/oil.nvim",
   ---@module 'oil'
   ---@type oil.SetupOpts
   opts = {},
@@ -16,7 +16,7 @@ M.config = function()
   require("oil").setup({
     default_file_explorer = true,
     columns = {
-      "icon"
+      "icon",
     },
     prompt_save_on_select_new_entry = true,
     lsp_file_methods = {
@@ -48,8 +48,8 @@ M.config = function()
     },
     use_default_keymaps = false,
     view_options = {
-      show_hidden = true
-    }, 
+      show_hidden = true,
+    },
   })
 end
 
@@ -57,7 +57,7 @@ M.handle_oil_quit = function()
   -- See if oil already has a buffer cached
   -- If it does not, Oil was opened right after nvim was started without any file argument
   local is_buffer_cached, bufnr = pcall(vim.api.nvim_win_get_var, 0, "oil_original_buffer")
-    
+
   -- Return to "scratch" buffer if no buffer is cached
   -- If cached buffer still exists, return to it instead
   -- If there was a cached buffer but it does not exist anymore, quit the window
@@ -67,5 +67,5 @@ M.handle_oil_quit = function()
     vim.cmd.quit()
   end
 end
-  
+
 return M

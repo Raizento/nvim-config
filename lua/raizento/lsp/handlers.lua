@@ -49,7 +49,9 @@ M.on_attach = function(client, bufnr)
 
   if client.supports_method("textDocument/inlayHint") then
     vim.lsp.inlay_hint.enable(true)
-    vim.keymap.set("n", "<Leader>li", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "toggle inlay hints", buffer = bufnr })
+    vim.keymap.set("n", "<Leader>li", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end, { desc = "toggle inlay hints", buffer = bufnr })
   end
 
   if client.supports_method("textDocument/rename") then

@@ -1,5 +1,5 @@
 local M = {
-  "nvim-java/nvim-java"
+  "nvim-java/nvim-java",
 }
 
 M.config = function()

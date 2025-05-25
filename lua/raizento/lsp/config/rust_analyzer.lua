@@ -10,11 +10,21 @@ M.config = function(capabilities, on_attach)
           on_attach(client, bufnr)
 
           vim.keymap.set("n", "<Leader>lo", "<CMD>RustLsp openCargo<CR>", { desc = "open cargo file", buffer = bufnr })
-          vim.keymap.set("n", "<Leader>ld", "<CMD>RustLsp openDocs<CR>", { desc = "open documentation (docs.rs)", buffer = bufnr })
+          vim.keymap.set(
+            "n",
+            "<Leader>ld",
+            "<CMD>RustLsp openDocs<CR>",
+            { desc = "open documentation (docs.rs)", buffer = bufnr }
+          )
           vim.keymap.set("n", "<Leader>le", "<CMD>RustLsp explainError<CR>", { desc = "explain error", buffer = bufnr })
-          vim.keymap.set("n", "<Leader>lp", "<CMD>RustLsp parentModule<CR>", { desc = "go to parent module", buffer = bufnr })
+          vim.keymap.set(
+            "n",
+            "<Leader>lp",
+            "<CMD>RustLsp parentModule<CR>",
+            { desc = "go to parent module", buffer = bufnr }
+          )
         end,
-      }
+      },
     }
   end
 end

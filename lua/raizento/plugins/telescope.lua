@@ -36,6 +36,9 @@ vim.cmd([[
     augroup END
 ]])
 
+M.grep_string_description = function() 
+  return "Search for " .. vim.expand("<cword>")
+end
 
 -- TODO implement LSP bindings
 local M = {
@@ -45,10 +48,10 @@ local M = {
   },
   keys = {
     { "<Leader>ff", "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>", desc = "find files" },
+    { "<Leader>f*", "<CMD>lua require('telescope.builtin').grep_string({})<CR>", desc = grep_string_description },
     { "<Leader>fg", "<CMD>Telescope live_grep<CR>", desc = "live grep" },
     { "<Leader>fb", "<CMD>Telescope buffers<CR>", desc = "buffers" },
     { "<Leader>fh", "<CMD>Telescope help_tags<CR>", desc = "help tags" },
-    { "<Leader>ft", "<CMD>Telescope tags<CR>", desc = "tags" },
     { "<Leader>fc", "<CMD>Telescope commands<CR>", desc = "commands" },
     {
       "<Leader>fl",
@@ -58,11 +61,7 @@ local M = {
     { "<Leader>ft", "<CMD>Telescope tags<CR>", desc = "tags" },
     { "<Leader>fj", "<CMD>Telescope jumplist<CR>", desc = "jumps" },
   },
-}
-
-M.config = function()
-  local telescope = require("telescope")
-  telescope.setup({
+  opts = {
     defaults = {
         layout_strategy = "horizontal",
         -- Use fullscreen for Telescope; preview uses 60%, results/prompt 40%
@@ -98,7 +97,7 @@ M.config = function()
         },
     }
 
-  })
-end
+  }
+}
 
 return M

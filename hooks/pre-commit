@@ -11,6 +11,4 @@ IFS=$'\n' read -rd '' -a STAGED_LUA_FILES <<< "$STAGED_LUA_FILES"
 
 stylua "${STAGED_LUA_FILES[@]}"
 
-echo "Formatted following files: ${STAGED_LUA_FILES[@]}"
-
 git add "${STAGED_LUA_FILES[@]}"

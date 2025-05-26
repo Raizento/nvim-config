@@ -3,6 +3,10 @@
 STAGED_FILES=$(git diff --name-only --cached)
 STAGED_LUA_FILES=$(grep .lua <<< "$STAGED_FILES")
 
+if [[ -z $STAGED_LUA_FILES ]]; then
+    exit 0
+fi
+
 IFS=$'\n' read -rd '' -a STAGED_LUA_FILES <<< "$STAGED_LUA_FILES"
 
 echo "${STAGED_LUA_FILES}"

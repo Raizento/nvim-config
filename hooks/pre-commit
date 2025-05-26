@@ -1,7 +1,7 @@
 #!/bin/bash
 
 STAGED_FILES=$(git diff --name-only --cached)
-STAGED_LUA_FILES=$(grep .lua <<< "$STAGED_FILES")
+STAGED_LUA_FILES=$(grep --include="*.lua" <<< "$STAGED_FILES")
 
 if [[ -z $STAGED_LUA_FILES ]]; then
     exit 0

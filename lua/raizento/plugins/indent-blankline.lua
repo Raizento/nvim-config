@@ -3,6 +3,7 @@ local M = {
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
   },
+  main = "ibl",
   opts = {
     scope = {
       show_start = false,

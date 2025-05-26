@@ -53,6 +53,7 @@ local M = {
       "<CMD>lua vim.diagnostic.setloclist({ open = false })<CR><CMD>Telescope loclist<CR>",
       desc = "loclist",
     },
+    { "<Leader>fo", "<CMD>Telescope vim_options<CR>", desc = "vim options" },
   },
   opts = {
     defaults = {
@@ -97,6 +98,7 @@ M.description_grep_string = function()
 end
 
 M.config = function()
+  require("telescope").setup(M.opts)
   local wk = require("which-key")
   wk.add({
     {

@@ -47,43 +47,45 @@ M.textobjects = {
   },
 }
 
+M.opts = {
+  ensure_installed = {
+    "lua",
+    "vim",
+    "vimdoc",
+    "query",
+  },
+  auto_install = true,
+  ignore_install = {
+    "latex",
+  },
+  highlight = {
+    enable = true,
+    disable = { "latex" },
+    additional_vim_regex_highlighting = false,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  indent = {
+    enable = true,
+  },
+  refactor = {
+    highlight_definitions = {
+      enable = true,
+      clear_on_cursor_move = false,
+    },
+  },
+  textobjects = M.textobjects,
+}
+
 M.config = function()
-  require("nvim-treesitter.configs").setup({
-    ensure_installed = {
-      "lua",
-      "vim",
-      "vimdoc",
-      "query",
-    },
-    auto_install = true,
-    ignore_install = {
-      "latex",
-    },
-    highlight = {
-      enable = true,
-      disable = { "latex" },
-      additional_vim_regex_highlighting = false,
-    },
-    incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = "gnn",
-        node_incremental = "grn",
-        scope_incremental = "grc",
-        node_decremental = "grm",
-      },
-    },
-    indent = {
-      enable = true,
-    },
-    refactor = {
-      highlight_definitions = {
-        enable = true,
-        clear_on_cursor_move = false,
-      },
-    },
-    textobjects = M.textobjects,
-  })
+  require("nvim-treesitter.configs").setup(M.opts)
 
   vim.opt.foldmethod = "expr"
   vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"

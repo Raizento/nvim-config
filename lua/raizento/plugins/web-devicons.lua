@@ -1,7 +1,6 @@
 M = {
   "nvim-tree/nvim-web-devicons",
+  opts = {},
 }
-
-M.config = true
 
 return M

@@ -1,19 +1,25 @@
 local util = require("raizento.util.fs")
 
+M.handle_oil_quit = function()
+  -- See if oil already has a buffer cached
+  -- If it does not, Oil was opened right after nvim was started without any file argument
+  local is_buffer_cached, bufnr = pcall(vim.api.nvim_win_get_var, 0, "oil_original_buffer")
+
+  -- Return to "scratch" buffer if no buffer is cached
+  -- If cached buffer still exists, return to it instead
+  -- If there was a cached buffer but it does not exist anymore, quit the window
+  if (not is_buffer_cached) or util.does_file_exist_for_bufnr(bufnr) then
+    require("oil.actions").close.callback()
+  else
+    vim.cmd.quit()
+  end
+end
+
 local M = {
   "stevearc/oil.nvim",
   ---@module 'oil'
   ---@type oil.SetupOpts
-  opts = {},
-  -- Optional dependencies
-  dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
-  keys = {
-    { "<Leader>e", "<CMD>Oil<CR>", desc = "open Oil" },
-  },
-}
-
-M.config = function()
-  require("oil").setup({
+  opts = {
     default_file_explorer = true,
     columns = {
       "icon",
@@ -50,22 +56,12 @@ M.config = function()
     view_options = {
       show_hidden = true,
     },
-  })
-end
-
-M.handle_oil_quit = function()
-  -- See if oil already has a buffer cached
-  -- If it does not, Oil was opened right after nvim was started without any file argument
-  local is_buffer_cached, bufnr = pcall(vim.api.nvim_win_get_var, 0, "oil_original_buffer")
-
-  -- Return to "scratch" buffer if no buffer is cached
-  -- If cached buffer still exists, return to it instead
-  -- If there was a cached buffer but it does not exist anymore, quit the window
-  if (not is_buffer_cached) or util.does_file_exist_for_bufnr(bufnr) then
-    require("oil.actions").close.callback()
-  else
-    vim.cmd.quit()
-  end
-end
+  },
+  -- Optional dependencies
+  dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+  keys = {
+    { "<Leader>e", "<CMD>Oil<CR>", desc = "open Oil" },
+  },
+}
 
 return M

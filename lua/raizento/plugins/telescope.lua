@@ -43,13 +43,6 @@ local M = {
     "nvim-lua/plenary.nvim",
   },
   keys = {
-    { "<Leader>ff", "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>", desc = "find files" },
-    -- TODO have a look at which-key for dynamic description
-    {
-      "<Leader>f*",
-      "<CMD>lua require('telescope.builtin').grep_string({})<CR>",
-      desc = "search for string under cursor",
-    },
     { "<Leader>fg", "<CMD>Telescope live_grep<CR>", desc = "live grep" },
     { "<Leader>fb", "<CMD>Telescope buffers<CR>", desc = "buffers" },
     { "<Leader>fh", "<CMD>Telescope help_tags<CR>", desc = "help tags" },
@@ -59,8 +52,6 @@ local M = {
       "<CMD>lua vim.diagnostic.setloclist({ open = false })<CR><CMD>Telescope loclist<CR>",
       desc = "loclist",
     },
-    { "<Leader>ft", "<CMD>Telescope tags<CR>", desc = "tags" },
-    { "<Leader>fj", "<CMD>Telescope jumplist<CR>", desc = "jumps" },
   },
   opts = {
     defaults = {
@@ -99,5 +90,20 @@ local M = {
     },
   },
 }
+
+M.description_grep_string = function()
+  return "search for " .. vim.fn.expand("<cword>")
+end
+
+M.config = function()
+  local wk = require("which-key")
+  wk.add({
+    { 
+      "<Leader>f*", 
+      "<CMD>lua require('telescope.builtin').grep_string({})<CR>",
+      desc = M.description_grep_string
+    },
+  })
+end
 
 return M

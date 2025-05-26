@@ -43,6 +43,7 @@ local M = {
     "nvim-lua/plenary.nvim",
   },
   keys = {
+    { "<Leader>ff", "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>", desc = "find files" },
     { "<Leader>fg", "<CMD>Telescope live_grep<CR>", desc = "live grep" },
     { "<Leader>fb", "<CMD>Telescope buffers<CR>", desc = "buffers" },
     { "<Leader>fh", "<CMD>Telescope help_tags<CR>", desc = "help tags" },
@@ -98,10 +99,10 @@ end
 M.config = function()
   local wk = require("which-key")
   wk.add({
-    { 
-      "<Leader>f*", 
+    {
+      "<Leader>f*",
       "<CMD>lua require('telescope.builtin').grep_string({})<CR>",
-      desc = M.description_grep_string
+      desc = M.description_grep_string,
     },
   })
 end

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-STAGED_FILES=$(git diff --name-only --cached)
+STAGED_FILES=$(git diff --name-only --cached --diff-filter=ACM)
 STAGED_LUA_FILES=$(grep -e "\.lua$" <<< "$STAGED_FILES")
 
 if [[ -z $STAGED_LUA_FILES ]]; then

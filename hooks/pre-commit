@@ -1,0 +1,12 @@
+#!/bin/bash
+
+STAGED_FILES=$(git diff --name-only --cached)
+STAGED_LUA_FILES=$(grep .lua <<< "$STAGED_FILES")
+
+IFS=$'\n' read -rd '' -a STAGED_LUA_FILES <<< "$STAGED_LUA_FILES"
+
+echo "${STAGED_LUA_FILES}"
+
+stylua "${STAGED_LUA_FILES[@]}"
+
+git add "${STAGED_LUA_FILES[@]}"

@@ -1,10 +1,18 @@
-name: Check lua formatting
+name: Stylua Check
+
 on: [push]
+
 jobs:
   stylua:
-    - uses: actions/checkout@v4
-    - uses: JohnnyMorganz/stylua-action@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        version: v2.1.0
-        args: --check .
+    runs-on: ubuntu-latest
+    name: Run Stylua
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Stylua
+        uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --check .

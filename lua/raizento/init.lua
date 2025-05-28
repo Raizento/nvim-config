@@ -21,7 +21,8 @@ spec("raizento.plugins.which-key")
 -- spec("raizento.lsp.lazydev")
 -- spec("raizento.lsp.rustacean")
 
--- spec("raizento.lsp.lspconfig")
+spec("raizento.lsp.lspconfig")
 spec("raizento.lsp.mason")
 
+require("raizento.lsp.lsp")
 require("raizento.lazy")

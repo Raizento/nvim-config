@@ -3,7 +3,7 @@ local M = {
   dependencies = { "nvim-tree/nvim-web-devicons" },
 }
 
-require("lua.raizento.util.string")
+require("raizento.util.string")
 
 M.shorten_branch_name = function(text, context)
   return text:shorten(40, 3, ".")

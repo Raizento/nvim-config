@@ -70,6 +70,7 @@ local M = {
 
       path_display = { "filename_first" },
 
+      -- TODO This throws an error when freshly installing nvim because of the require("telescope.actions") since the module is not there prior to telescope installation
       mappings = {
         i = {
           -- TODO don't really like these mappings; look for better ones

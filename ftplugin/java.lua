@@ -28,19 +28,18 @@ local equinox_launcher_path = jdtls_install_path
 local config_path = jdtls_install_path .. jdtls_package.source.download[2].config
 local lombok_path = jdtls_install_path .. jdtls_package.share["jdtls/lombok.jar"]
 
--- TODO all of this does not work if data/lsp is not there
+-- Create workspace root + workspace for project if it does not exist
 local data_path = vim.fn.stdpath("data")
 local workspace_root = data_path .. "/lsp/jdtls/"
 
 local does_workspace_root_exist = vim.uv.fs_stat(workspace_root)
 
 if not does_workspace_root_exist then
-  vim.uv.fs_mkdir(workspace_root, tonumber("755", 8))
+  vim.fn.mkdir(workspace_root, "p")
   vim.print("Created workspace root for jdtls")
 end
 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-
 local project_workspace = workspace_root .. project_name
 
 local config = {

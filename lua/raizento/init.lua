@@ -23,6 +23,7 @@ spec("raizento.plugins.which-key")
 
 spec("raizento.lsp.lspconfig")
 spec("raizento.lsp.mason")
+spec("raizento.lsp.nvim-jdtls")
 
 require("raizento.lsp.lsp")
 require("raizento.lazy")

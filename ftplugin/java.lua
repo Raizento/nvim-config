@@ -67,6 +67,9 @@ local config = {
     "-data",
     project_workspace,
   },
+  on_init = function(client)
+    vim.lsp.inlay_hint.enable(true)
+  end,
 }
 
 require("jdtls").start_or_attach(config)

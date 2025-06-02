@@ -1,9 +1,14 @@
 local M = {}
 
+M.FILE_ENDING_REGEX = "%..*$"
+
+M.does_file_exist = function(filepath)
+  return vim.uv.fs_stat(filepath) and true or false
+end
+
 M.does_file_exist_for_bufnr = function(bufnr)
   local filepath = vim.api.nvim_buf_get_name(bufnr)
-  local does_file_exist, _ = pcall(vim.uv.fs_stat, filepath)
-  return does_file_exist
+  return M.does_file_exist(filepath)
 end
 
 M.get_files_in_directory = function(directory_path)
@@ -21,7 +26,7 @@ M.get_files_in_directory = function(directory_path)
 end
 
 M.remove_file_extension = function(filename)
-  return filename:gsub("%..*$", "")
+  return filename:gsub(M.FILE_ENDING_REGEX, "")
 end
 
 return M

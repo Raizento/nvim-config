@@ -131,6 +131,8 @@ local config = {
       },
     },
   },
+
+  on_attach = require("raizento.util.lsp").on_attach,
   
   on_init = function(client)
     create_choose_format_file_command()

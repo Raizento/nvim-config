@@ -131,10 +131,9 @@ local config = {
       },
     },
   },
-
+  
   on_init = function(client)
     create_choose_format_file_command()
-    vim.lsp.inlay_hint.enable(true)
   end,
 }
 

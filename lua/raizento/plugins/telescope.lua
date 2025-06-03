@@ -73,8 +73,8 @@ local M = {
       mappings = {
         i = {
           -- TODO don't really like these mappings; look for better ones
-          ["<C-Down>"] = 'cycle_history_next',
-          ["<C-Up>"] = 'cycle_history_prev',
+          ["<C-Down>"] = "cycle_history_next",
+          ["<C-Up>"] = "cycle_history_prev",
         },
       },
 

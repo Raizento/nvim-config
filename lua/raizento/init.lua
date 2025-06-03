@@ -17,10 +17,6 @@ spec("raizento.plugins.oil")
 spec("raizento.plugins.transparent")
 spec("raizento.plugins.which-key")
 
--- TODO maybe create another table for these lsp plugins
--- spec("raizento.lsp.lazydev")
--- spec("raizento.lsp.rustacean")
-
 spec("raizento.lsp.lspconfig")
 spec("raizento.lsp.mason")
 spec("raizento.lsp.nvim-jdtls")

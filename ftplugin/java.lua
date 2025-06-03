@@ -81,7 +81,16 @@ local read_format_file = function()
   local config_file_path = project_workspace .. "/config.json"
   local file = io.open(config_file_path, "r")
 
-  local config = vim.json.decode(file:read("*a"))
+  if not file then 
+    return nil
+  end
+
+  local content = file:read("*a")
+  if not content then
+    return nil
+  end
+
+  local config = vim.json.decode(content)
 
   return config.formatFilePath
 end

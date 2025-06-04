@@ -1,3 +1,4 @@
+-- TODO Use git files picker for Leader+ff
 -- Utilizes code from https://yeripratama.com/blog/customizing-nvim-telescope/
 -- Keep track of current options status
 local temp_showtabline

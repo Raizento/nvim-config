@@ -62,6 +62,22 @@ M.add_keymap_for_capabilities = function(client, bufnr)
     vim.keymap.set("n", "<Leader>lf", function()
       vim.lsp.buf.format({ async = true })
     end, { desc = "format", buffer = bufnr })
+
+    -- TODO This will always pick the first client even if multiple are attach; let user choose which one to use
+    vim.keymap.set("n", "<Leader>lF", function()
+      local bufnr = vim.fn.bufnr()
+      local client = vim.lsp.get_clients({
+        bufnr = bufnr,
+        method = vim.lsp.protocol.Methods.textDocument_formatting
+      })[1]
+
+      for bufnr, _ in pairs(client.attached_buffers) do
+        vim.api.nvim_buf_call(bufnr, function()
+          vim.lsp.buf.format({async = true})
+        end)
+      end
+    end, { desc = "format all attached buffers", buffer = bufnr }
+    )
   end
 
   if client:supports_method(vim.lsp.protocol.Methods.textDocument_codeAction) then

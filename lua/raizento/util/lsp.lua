@@ -16,12 +16,4 @@ M.on_attach = function(client, bufnr)
   require("raizento.lsp.workspace").add_keymap_for_capabilities(client, bufnr)
 end
 
----@param bufnr number
-M.enable_inlay_hints = function(bufnr)
-  vim.lsp.inlay_hint.enable(true)
-  vim.keymap.set("n", "<Leader>li", function()
-    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-  end, { desc = "toggle inlay hints", buffer = bufnr })
-end
-
 return M

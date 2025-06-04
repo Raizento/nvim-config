@@ -1,4 +1,18 @@
-local M = {}
+local M = {
+  __is_first_attach = true,
+}
+
+---@param bufnr number
+M.enable_inlay_hints = function(bufnr)
+  if M.__is_first_attach then
+    vim.lsp.inlay_hint.enable(true)
+    M.__is_first_attach = false
+  end
+
+  vim.keymap.set("n", "<Leader>li", function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+  end, { desc = "toggle inlay hints", buffer = bufnr })
+end
 
 -- TODO This definitely needs to get refactored
 ---@param client vim.lsp.Client
@@ -13,7 +27,7 @@ M.add_keymap_for_capabilities = function(client, bufnr)
   end
 
   if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-    require("raizento.util.lsp").enable_inlay_hints(bufnr)
+    M.enable_inlay_hints(bufnr)
   end
 
   if client:supports_method(vim.lsp.protocol.Methods.textDocument_rename) then

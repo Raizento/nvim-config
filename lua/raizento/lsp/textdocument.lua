@@ -64,10 +64,9 @@ M.add_keymap_for_capabilities = function(client, bufnr)
     end, { desc = "format", buffer = bufnr })
 
     -- TODO This will always pick the first client even if multiple are attach; let user choose which one to use
+    -- TODO If file for buffer has been deleted but buffer has not been deleted, this will probably cause errors
     vim.keymap.set("n", "<Leader>lF", function()
-      local bufnr = vim.fn.bufnr()
       local client = vim.lsp.get_clients({
-        bufnr = bufnr,
         method = vim.lsp.protocol.Methods.textDocument_formatting
       })[1]
 

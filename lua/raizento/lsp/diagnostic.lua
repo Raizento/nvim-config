@@ -12,7 +12,6 @@ vim.api.nvim_create_autocmd(
   'DiagnosticChanged',{
     callback = function(ev)
       local bufnr = ev.buf
-      vim.print(bufnr)
       local diagnostics = vim.diagnostic.get(bufnr)
 
       if #diagnostics > 0 then

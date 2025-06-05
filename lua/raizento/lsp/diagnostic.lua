@@ -22,3 +22,19 @@ vim.api.nvim_create_autocmd(
     end
   }
 )
+
+vim.keymap.set("n", "<Leader>do", function()
+  local tabpage_id = vim.api.nvim_get_current_tabpage()
+  local windows = vim.iter(vim.api.nvim_tabpage_list_wins(tabpage_id))
+
+  local buffers = windows:map(vim.api.nvim_win_get_buf)
+  local diagnostics = buffers:map(vim.diagnostic.get):totable()
+
+  if #diagnostics > 0 then
+    vim.print(diagnostics[1][1])
+    local qf_items = vim.diagnostic.toqflist(diagnostics[1])
+    vim.fn.setloclist(0, qf_items)
+  else
+    vim.notify("No diagnostics in current tab")
+  end
+end)

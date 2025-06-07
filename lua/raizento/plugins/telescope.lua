@@ -44,7 +44,8 @@ local M = {
     "nvim-lua/plenary.nvim",
   },
   keys = {
-    { "<Leader>ff", "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>", desc = "find files" },
+    { "<Leader>ff", "<CMD>Telescope git_files<CR>", desc = "find git tracked files" },
+    { "<Leader>fF", "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>", desc = "find all files" },
     { "<Leader>fg", "<CMD>Telescope live_grep<CR>", desc = "live grep" },
     { "<Leader>fb", "<CMD>Telescope buffers<CR>", desc = "buffers" },
     { "<Leader>fh", "<CMD>Telescope help_tags<CR>", desc = "help tags" },

@@ -67,16 +67,15 @@ M.add_keymap_for_capabilities = function(client, bufnr)
     -- TODO If file for buffer has been deleted but buffer has not been deleted, this will probably cause errors
     vim.keymap.set("n", "<Leader>lF", function()
       local client = vim.lsp.get_clients({
-        method = vim.lsp.protocol.Methods.textDocument_formatting
+        method = vim.lsp.protocol.Methods.textDocument_formatting,
       })[1]
 
       for bufnr, _ in pairs(client.attached_buffers) do
         vim.api.nvim_buf_call(bufnr, function()
-          vim.lsp.buf.format({async = true})
+          vim.lsp.buf.format({ async = true })
         end)
       end
-    end, { desc = "format all attached buffers", buffer = bufnr }
-    )
+    end, { desc = "format all attached buffers", buffer = bufnr })
   end
 
   if client:supports_method(vim.lsp.protocol.Methods.textDocument_codeAction) then

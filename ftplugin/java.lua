@@ -14,7 +14,6 @@ if vim.fn.exepath("jdtls"):is_empty() and not vim.o.jdtls_message_shown then
   return
 end
 
-
 -- Only for LSP folder
 -- TODO this fires whenever nvim is loaded; not good; should only fire if jdtls starts
 if vim.fn.exepath("java"):is_empty() and not vim.env.JAVA_HOME then
@@ -43,45 +42,41 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local project_workspace = workspace_root .. project_name
 
 local create_choose_format_file_command = function()
-    vim.api.nvim_create_user_command(
-    "ChooseFormatFileForWorkspace",
-    function(opts)
-      local path = opts.fargs[1] or vim.fn.input('Path to Java format file: ')
-      local absolute_path = vim.fs.abspath(path)
-      local normalized_path = vim.fs.normalize(absolute_path)
+  vim.api.nvim_create_user_command("ChooseFormatFileForWorkspace", function(opts)
+    local path = opts.fargs[1] or vim.fn.input("Path to Java format file: ")
+    local absolute_path = vim.fs.abspath(path)
+    local normalized_path = vim.fs.normalize(absolute_path)
 
-      if not fs.does_file_exist(normalized_path) then
-        vim.notify("File at path " .. normalized_path .. " does not exist!", vim.log.levels.ERROR)
-        return
-      end
+    if not fs.does_file_exist(normalized_path) then
+      vim.notify("File at path " .. normalized_path .. " does not exist!", vim.log.levels.ERROR)
+      return
+    end
 
-      if not vim.endswith(normalized_path, "xml") then
-        vim.notify("Configuration file must be xml!", vim.log.levels.ERROR)
-        return
-      end
-      
-      local path_object = { formatFilePath = normalized_path }
-      path_object = vim.json.encode(path_object)
+    if not vim.endswith(normalized_path, "xml") then
+      vim.notify("Configuration file must be xml!", vim.log.levels.ERROR)
+      return
+    end
 
-      -- TODO Read content from file first; this will overwrite any existing config
-      local config_file_path = project_workspace .. "/config.json"
-      local file = io.open(config_file_path, "w")
+    local path_object = { formatFilePath = normalized_path }
+    path_object = vim.json.encode(path_object)
 
-      file:write(path_object)
-      file:flush()
-      file:close()
+    -- TODO Read content from file first; this will overwrite any existing config
+    local config_file_path = project_workspace .. "/config.json"
+    local file = io.open(config_file_path, "w")
 
-      vim.notify("Successfully saved config to " .. config_file_path)
-    end,
-    { nargs='?' }
-  )
+    file:write(path_object)
+    file:flush()
+    file:close()
+
+    vim.notify("Successfully saved config to " .. config_file_path)
+  end, { nargs = "?" })
 end
 
 local read_format_file = function()
   local config_file_path = project_workspace .. "/config.json"
   local file = io.open(config_file_path, "r")
 
-  if not file then 
+  if not file then
     return nil
   end
 
@@ -94,7 +89,6 @@ local read_format_file = function()
 
   return config.formatFilePath
 end
-
 
 local config = {
   cmd = {
@@ -133,7 +127,7 @@ local config = {
   },
 
   on_attach = require("raizento.util.lsp").on_attach,
-  
+
   on_init = function(client)
     create_choose_format_file_command()
   end,

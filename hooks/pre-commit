@@ -1,5 +1,7 @@
 #!/bin/bash
 
+TOP_LEVEL_DIR=$(git rev-parse --show-toplevel)
+
 STAGED_FILES=$(git diff --name-only --cached --diff-filter=ACM)
 STAGED_LUA_FILES=$(grep -e "\.lua$" <<< "$STAGED_FILES")
 
@@ -9,6 +11,6 @@ fi
 
 IFS=$'\n' read -rd '' -a STAGED_LUA_FILES <<< "$STAGED_LUA_FILES"
 
-stylua "${STAGED_LUA_FILES[@]}"
+stylua "${STAGED_LUA_FILES[@]}" -- "${TOP_LEVEL_DIR}"
 
 git add "${STAGED_LUA_FILES[@]}"

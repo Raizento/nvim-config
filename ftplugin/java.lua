@@ -8,7 +8,7 @@ vim.keymap.set(
 require("raizento.util.string")
 local fs = require("raizento.util.fs")
 
-if vim.fn.exepath("jdtls"):is_empty() and not vim.o.jdtls_message_shown then
+if vim.fn.exepath("jdtls"):is_blank() and not vim.o.jdtls_message_shown then
   vim.o.jdtls_message_shown = true
   vim.print("To use JDTLS, please install JDTLS via Mason: MasonInstall jdtls")
   return
@@ -16,7 +16,7 @@ end
 
 -- Only for LSP folder
 -- TODO this fires whenever nvim is loaded; not good; should only fire if jdtls starts
-if vim.fn.exepath("java"):is_empty() and not vim.env.JAVA_HOME then
+if vim.fn.exepath("java"):is_blank() and not vim.env.JAVA_HOME then
   error("To run JDTLS, you need to have Java installed.")
 end
 

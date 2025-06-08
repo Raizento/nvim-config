@@ -16,6 +16,12 @@ return {
         paramName = "All",
       },
     },
+    diagnostics = {
+      globals = {
+        "vim",
+        "require",
+      },
+    },
     workspace = {
       checkThirdParty = false,
       library = {

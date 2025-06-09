@@ -18,9 +18,7 @@ M.format_project = function()
   })[1]
 
   local filetypes = vim.lsp.config[client.name].filetypes
-  local files = vim.fs.find(function(name, _)
-    return M.is_filetype(name, filetypes)
-  end, { limit = math.huge, type = "file", path = client.root_dir })
+  local files = require("raizento.util.fs").find_files_of_type(client.root_dir, filetypes)
 
   local iter = vim.iter(files)
 
@@ -28,16 +26,6 @@ M.format_project = function()
     vim.fn.bufload(bufnr)
     vim.lsp.buf_attach_client(bufnr, client.id)
     M.format_buf(bufnr)
-  end)
-end
-
----@param filename string
----@param filetypes string[]
-M.is_filetype = function(filename, filetypes)
-  local iter = vim.iter(filetypes)
-
-  return iter:any(function(filetype)
-    return vim.endswith(filename, filetype)
   end)
 end
 

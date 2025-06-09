@@ -4,8 +4,8 @@ local lsp = require("raizento.util.lsp")
 local config_path = vim.fn.stdpath("config")
 local lsp_config_dir = config_path .. "/lsp"
 
-local filenames = fs.get_files_in_directory(lsp_config_dir)
-filenames:map(fs.remove_file_extension)
+local filenames = fs.find_all_files(lsp_config_dir)
+filenames = vim.iter(filenames):map(vim.fs.basename):map(fs.remove_file_extension)
 
 local original_handler = vim.lsp.handlers["client/registerCapability"]
 
@@ -27,6 +27,4 @@ vim.lsp.config["*"] = {
   on_attach = lsp.on_attach,
 }
 
-for filename in filenames do
-  vim.lsp.enable(filename)
-end
+filenames:each(vim.lsp.enable)

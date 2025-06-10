@@ -1,11 +1,17 @@
--- vim.print(vim.lsp.config[vim.lsp.get_clients()[1].name].filetypes)
-
 function add_diagnostic_keymaps(bufnr)
-  vim.keymap.set("n", "<Leader>de", vim.diagnostic.open_float, { buffer = bufnr })
+  vim.keymap.set("n", "<Leader>de", vim.diagnostic.open_float, { buffer = bufnr }, "open float")
+  vim.keymap.set("n", "<Leader>dl", function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local diagnostics = vim.diagnostic.get(bufnr)
+    vim.diagnostic.setloclist(diagnostics)
+  end, { buffer = bufnr }, "load diagnostics into loclist")
+  vim.keymap.set("n", "<Leader>dPq", get_diagnostics_for_project, { desc = "get diagnostics for project" })
 end
 
 function delete_diagnostic_keymaps(bufnr)
   vim.keymap.del("n", "<Leader>de", { buffer = bufnr })
+  vim.keymap.del("n", "<Leader>dl", { buffer = bufnr })
+  vim.keymap.del("n", "<Leader>dPq", { buffer = bufnr })
 end
 
 vim.api.nvim_create_autocmd("DiagnosticChanged", {
@@ -42,4 +48,31 @@ vim.keymap.set("n", "<Leader>dl", function()
   else
     vim.notify("No diagnostics in current tab")
   end
-end)
+end, { desc = "get diagnostics in tab" })
+
+function get_diagnostics_for_project()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local filetype = vim.bo[bufnr].filetype
+
+  local files = require("raizento.util.fs").find_files_of_type(vim.fn.getcwd(), { filetype })
+  local iter = vim.iter(files)
+
+  local clients = vim.lsp.get_clients()
+
+  local diagnostics = {}
+
+  iter:map(vim.fn.bufadd):each(function(bufnr)
+    vim.fn.bufload(bufnr)
+    for _, client in ipairs(clients) do
+      vim.lsp.buf_attach_client(bufnr, client.id)
+    end
+
+    -- Only read diagnostics once all LSPs have been attached
+    local buffer_diagnostics = vim.diagnostic.get(bufnr)
+    buffer_diagnostics = unpack(buffer_diagnostics)
+
+    table.insert(diagnostics, buffer_diagnostics)
+  end)
+
+  vim.diagnostic.setqflist(diagnostics)
+end

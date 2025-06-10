@@ -33,7 +33,7 @@ local M = {
   },
   run = { ":TransparentEnable" },
   keys = {
-    { "<Leader>tt", "<CMD>TransparentToggle<CR>", desc = "Toggle transparency" },
+    { "<Leader>tt", "<CMD>TransparentToggle<CR>", desc = "toggle transparency" },
   },
   lazy = false,
 }

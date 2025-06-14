@@ -15,20 +15,18 @@ jobs:
           sudo ln -s $(pwd)/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
           which nvim
       - name: Install lua
-        uses: leafo/gh-actions-lua@v11
-        with:
-          luaVersion: "5.1.5"
+        run: |
+          sudo apt install lua5.1
       - name: Install luarocks  
-        uses: leafo/gh-actions-luarocks@v4 
-        with:
-          luarocksVersion: "3.8.0"
+        run: |
+          sudo apt install luarocks
       - name: Install busted
         run: |
-          luarocks install busted
-          which luarocks
+          sudo luarocks install busted
       - name: Checkout
         uses: actions/checkout@v4
       - name: Run tests
         run: |
+          which nvim
           busted --run=all
 

@@ -8,15 +8,11 @@ jobs:
     name: Unit tests
 
     steps:
-      - name: Install bob
-        run: | 
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-          cargo install bob-nvim
       - name: Install nvim
         run: |
-          bob install 0.11.2
-          bob use 0.11.2
-          export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+          wget -O nvim.tar.gz https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-linux-x86_64.tar.gz
+          tar -xzvf nvim.tar.gz
+          sudo ln -s ./nvim-linux-x86_64/bin/nvim /usr/local/nvim
       - name: Install luarocks  
         uses: leafo/gh-actions-luarocks@v4 
         with:

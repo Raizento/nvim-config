@@ -14,7 +14,11 @@ jobs:
           tar -xzf nvim.tar.gz
           sudo ln -s $(pwd)/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
           which nvim
-          which lua 
+      - name: Install lua
+        run: |
+          sudo apt update
+          sudo apt install lua5.1
+          which lua
       - name: Install luarocks  
         uses: leafo/gh-actions-luarocks@v4 
         with:

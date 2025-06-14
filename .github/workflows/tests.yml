@@ -12,9 +12,9 @@ jobs:
         run: |
           wget -O nvim.tar.gz https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-linux-x86_64.tar.gz
           tar -xzf nvim.tar.gz
-          sudo ln -s ./nvim-linux-x86_64/bin/nvim /usr/local/bin
-          echo $PATH 
+          sudo ln -s $(pwd)/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
           which nvim
+          which lua 
       - name: Install luarocks  
         uses: leafo/gh-actions-luarocks@v4 
         with:

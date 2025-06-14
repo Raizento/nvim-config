@@ -15,10 +15,9 @@ jobs:
           sudo ln -s $(pwd)/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
           which nvim
       - name: Install lua
-        run: |
-          sudo apt update
-          sudo apt install lua5.1
-          which lua
+        uses: leafo/gh-actions-lua@v11
+        with:
+          luaVersion: "5.1.5"
       - name: Install luarocks  
         uses: leafo/gh-actions-luarocks@v4 
         with:

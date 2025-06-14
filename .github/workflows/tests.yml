@@ -1,0 +1,15 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  unit:
+    runs-on: ubuntu-24.04
+    name: Unit tests
+
+    steps:
+      - name: Install bob
+        run: | 
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+          rustup toolchain install cargo
+          cargo install bob-nvim

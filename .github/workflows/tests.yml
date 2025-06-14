@@ -12,3 +12,21 @@ jobs:
         run: | 
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           cargo install bob-nvim
+      - name: Install nvim
+        run: |
+          bob install 0.11.2
+          bob use 0.11.2
+          export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+      - name: Install luarocks  
+        uses: leafo/gh-actions-luarocks@v4 
+        with:
+          luarocksVersion: "3.8.0"
+      - name: Install busted
+        run: |
+          luarocks install busted
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run tests
+        run: |
+          busted --run=all
+

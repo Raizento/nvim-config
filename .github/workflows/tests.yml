@@ -25,6 +25,7 @@ jobs:
       - name: Install busted
         run: |
           luarocks install busted
+          which luarocks
       - name: Checkout
         uses: actions/checkout@v4
       - name: Run tests

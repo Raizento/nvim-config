@@ -7,5 +7,5 @@ string.shorten = function(text, max_length, characters_to_shorten, char_to_use)
 end
 
 string.is_blank = function(text)
-  return (text:len() == 0 or not text) and true or false
+  return (not text or text:len() == 0) and true or false
 end

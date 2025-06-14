@@ -1,0 +1,10 @@
+return {
+  _all = {
+    lua = "./tests/test-shim.sh",
+    coverage = true,
+    verbose = true,
+  },
+  all = {
+    ROOT = { "./tests" }
+  }
+}

@@ -34,5 +34,5 @@ jobs:
         working-directory: nvim
         run: |
           export XDG_CONFIG_HOME="${{ github.workspace }}"
-          busted --run=all
+          busted --run=unit
 

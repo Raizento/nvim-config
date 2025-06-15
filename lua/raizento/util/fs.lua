@@ -1,6 +1,6 @@
 local M = {}
 
-M.FILE_ENDING_REGEX = "%..*$"
+M.FILE_ENDING_REGEX = "^(%.?[^.]+).*"
 
 ---@param filepath string
 ---@return boolean
@@ -20,12 +20,13 @@ end
 M.remove_file_extension = function(filename)
   -- gsub returns two results; the result string and the number of substitutions
   -- Since we don't care about the number of substitutions, only return result string
-  local result, _ = filename:gsub(M.FILE_ENDING_REGEX, "")
+  local result, _ = filename:gsub(M.FILE_ENDING_REGEX, "%1")
   return result
 end
 
 ---@param filename string
 ---@param filetypes string[]
+---@return boolean
 M.is_filetype = function(filename, filetypes)
   local iter = vim.iter(filetypes)
 

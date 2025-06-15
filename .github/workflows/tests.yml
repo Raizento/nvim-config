@@ -2,6 +2,9 @@ name: Tests
 
 on: [push]
 
+env:
+  BIN_DIR: "${{ github.workspace }}/bin"
+
 jobs:
   unit:
     runs-on: ubuntu-24.04
@@ -10,9 +13,9 @@ jobs:
     steps:
       - name: Install nvim
         run: |
-          wget -O nvim.tar.gz https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-linux-x86_64.tar.gz
-          tar -xzf nvim.tar.gz
-          sudo ln -s $(pwd)/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+          wget --directory-prefix="$BIN_DIR" https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-linux-x86_64.tar.gz
+          tar -xzf nvim*.tar.gz
+          # sudo ln -s $(pwd)/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
           which nvim
       - name: Install lua
         run: |

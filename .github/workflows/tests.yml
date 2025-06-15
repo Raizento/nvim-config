@@ -29,12 +29,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          path: nvim-config
+          path: nvim
       - name: Run tests
-        working-directory: nvim-config
+        working-directory: nvim
         run: |
-          pwd
-          echo $HOME
-          export XDG_CONFIG_HOME="${{ github.workspace }}/nvim-config"
+          export XDG_CONFIG_HOME="${{ github.workspace }}"
           busted --run=all
 

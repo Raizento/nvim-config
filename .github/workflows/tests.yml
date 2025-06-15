@@ -28,7 +28,10 @@ jobs:
           sudo luarocks install luacov
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          path: nvim-config
       - name: Run tests
+        working-directory: nvim-config
         run: |
           busted --run=all
 

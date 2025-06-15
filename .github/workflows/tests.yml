@@ -14,9 +14,9 @@ jobs:
       - name: Install nvim
         run: |
           wget --directory-prefix="$BIN_DIR" https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-linux-x86_64.tar.gz
+          cd $BIN_DIR
           tar -xzf nvim*.tar.gz
-          # sudo ln -s $(pwd)/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
-          which nvim
+          echo "$BIN_DIR/nvim-linux-x86_64/bin" >> $GITHUB_PATH
       - name: Install lua
         run: |
           sudo apt install lua5.1

@@ -44,7 +44,11 @@ local M = {
     "nvim-lua/plenary.nvim",
   },
   keys = {
-    { "<Leader>ff", "<CMD>Telescope git_files<CR>", desc = "find git tracked files" },
+    {
+      "<Leader>ff",
+      "<CMD>Telescope git_files<CR>",
+      desc = "find git tracked files",
+    },
     { "<Leader>fF", "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>", desc = "find all files" },
     { "<Leader>fg", "<CMD>Telescope live_grep<CR>", desc = "live grep" },
     { "<Leader>fb", "<CMD>Telescope buffers<CR>", desc = "buffers" },
@@ -77,6 +81,18 @@ local M = {
           -- TODO don't really like these mappings; look for better ones
           ["<C-Down>"] = "cycle_history_next",
           ["<C-Up>"] = "cycle_history_prev",
+          ["<C-Q>"] = function()
+            local bufnr = vim.fn.bufnr()
+            local telescope = require("telescope.actions")
+            telescope.smart_send_to_qflist(bufnr)
+            telescope.open_qflist(bufnr)
+          end,
+          ["<C-L>"] = function()
+            local bufnr = vim.fn.bufnr()
+            local telescope = require("telescope.actions")
+            telescope.smart_send_to_loclist(bufnr)
+            telescope.open_loclist(bufnr)
+          end,
         },
       },
 

@@ -1,0 +1,47 @@
+-- TODO Need to think about this a bit more
+-- I would like to use an event issued by Lazy to determine when the embedded nvim instance is fully set up
+-- A dirty workaround would be to just wait ~10 seconds. However, this is not very nice and may be insufficient on slower systems.
+-- Will be commendted out for the time being
+
+-- local yd = require("yo-dawg")
+--
+-- local nvim = yd.start()
+-- nvim:exec_lua([[
+--   vim.api.nvim_create_autocmd(
+--   { "User" }, {
+--     pattern = "LazyDone",
+--     callback = function(ev)
+--      vim.g.raizento.lazy_done = true
+--     end
+--   })
+-- ]], {})
+--
+-- while true do
+--   local success, value = pcall(function() return nvim:eval('g:raizento.lazy_done') end)
+--   vim.print(value)
+--   if success then
+--     break
+--   end
+--   os.execute("sleep 1")
+-- end
+--
+--
+-- describe("Test", function()
+--   describe("Test", function()
+--     local nvim
+--
+--     before_each(function()
+--       nvim = yd.start()
+--     end)
+--
+--     after_each(function()
+--       yd.stop(nvim)
+--     end)
+--
+--     it("Hallo", function()
+--       nvim:command("normal 1 ff")
+--       local filetype = nvim:get_option_value("filetype", { buf = 0 })
+--       assert.is_equal("TelescopePrompt", filetype)
+--     end)
+--   end)
+-- end)

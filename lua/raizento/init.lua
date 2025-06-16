@@ -21,8 +21,6 @@ spec("raizento.lsp.lspconfig")
 spec("raizento.lsp.mason")
 spec("raizento.lsp.nvim-jdtls")
 
-spec("raizento.test.yo-dawg")
-
 require("raizento.lsp.diagnostic")
 require("raizento.lsp.lsp")
 require("raizento.lazy")

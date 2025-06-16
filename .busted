@@ -10,4 +10,7 @@ return {
   unit = {
     ROOT = { "./tests/unit/" }
   },
+  functional = {
+    ROOT = { "./tests/functional" }
+  },
 }

@@ -11,6 +11,7 @@ return {
     ROOT = { "./tests/unit/" }
   },
   functional = {
-    ROOT = { "./tests/functional" }
+    ROOT = { "./tests/functional" },
+    helper = "./tests/functional/initalize_nvim_config.lua"
   },
 }

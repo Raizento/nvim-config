@@ -11,8 +11,6 @@
 
 local yd = require("yo-dawg")
 
--- TODO This should ideally be run once before any test is executed; maybe have a look at busted's helper function
-
 describe("Test", function()
   describe("Test", function()
     local nvim

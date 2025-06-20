@@ -67,9 +67,6 @@ jobs:
       - name: Run tests
         working-directory: nvim
         run: |
-          env
           export XDG_CONFIG_HOME="${{ github.workspace }}"
-          pwd
-          ls -laR
           busted --run=functional
 

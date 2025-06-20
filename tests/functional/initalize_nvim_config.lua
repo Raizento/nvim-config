@@ -12,6 +12,6 @@ while true do
     vim.print("[Initialization successful]\n")
     break
   end
-  vim.print("[Waiting...]")
+  vim.print("[Waiting...]\n")
   os.execute("sleep 0.2")
 end

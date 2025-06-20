@@ -5,13 +5,14 @@ return {
     verbose = true,
   },
   all = {
-    ROOT = { "./tests/" }
+    ROOT = { "./tests/" },
+    helper = "./tests/functional/initalize_nvim_config.lua",
   },
   unit = {
-    ROOT = { "./tests/unit/" }
+    ROOT = { "./tests/unit/" },
   },
   functional = {
     ROOT = { "./tests/functional" },
-    helper = "./tests/functional/initalize_nvim_config.lua"
+    helper = "./tests/functional/initalize_nvim_config.lua",
   },
 }

@@ -16,7 +16,6 @@ vim.api.nvim_create_autocmd("User", {
   pattern = "LazyDone",
   callback = function(ev)
     vim.g.raizento = { lazy_done = true }
-    vim.print("Done")
   end,
 })
 

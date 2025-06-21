@@ -3,7 +3,8 @@ local M = {
   build = ":TSUpdate",
   dependencies = { "nvim-treesitter/nvim-treesitter-refactor", "nvim-treesitter/nvim-treesitter-textobjects" },
   lazy = false, -- lazy loading is not supported
-  branch = "main",
+  -- TODO Investigate why main fails in CI but master works
+  branch = "master",
 }
 
 M.textobjects = {

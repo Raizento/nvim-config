@@ -8,6 +8,7 @@ while true do
   local success, _ = pcall(function()
     return nvim:eval("g:raizento.lazy_done")
   end)
+
   if success then
     vim.print("[Initialization successful]\n")
     break

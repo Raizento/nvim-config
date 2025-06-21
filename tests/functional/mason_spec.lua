@@ -12,6 +12,6 @@ describe("Mason", function()
   end)
 
   it("Does Mason install block?", function()
-    nvim:cmd({ cmd = "MasonInstall", args = { "jdtls" } }, {})
+    nvim:cmd({ cmd = "MasonInstall", args = { "jdtls" } }, { output = true })
   end)
 end)

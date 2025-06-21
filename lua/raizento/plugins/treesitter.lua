@@ -56,6 +56,8 @@ M.opts = {
     "vimdoc",
     "query",
   },
+  -- TODO this is only temporary; need to find a way in which I can properly determine whether or not a parser is fully installed
+  sync_install = true,
   auto_install = true,
   ignore_install = {
     "latex",

@@ -5,7 +5,7 @@ local nvim = yd.start()
 vim.print("[Initializing Nvim config]\n")
 
 while true do
-  local lazy_done = nvim:cmd({ cmd = "lua", args = { "=_G.raizento.lazy_done" } }, { output = true })
+  local lazy_done = nvim:cmd({ cmd = "lua", args = { "=require('raizento.config').is_test" } }, { output = true })
 
   if lazy_done == "true" then
     vim.print("[Initialization successful]\n")

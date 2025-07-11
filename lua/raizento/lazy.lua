@@ -14,9 +14,8 @@ vim.opt.runtimepath:prepend(lazypath)
 -- TODO This is only needed for functional tests currently; need to have a look at how I can move this out of the main part
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyDone",
-  callback = function(ev)
-    vim.print("Done")
-    _G.raizento.lazy_done = true
+  callback = function(_)
+    require("raizento.config").is_test = true
   end,
 })
 

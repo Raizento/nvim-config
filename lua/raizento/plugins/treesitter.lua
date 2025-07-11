@@ -57,7 +57,7 @@ M.opts = {
     "query",
   },
   -- TODO this is only temporary; need to find a way in which I can properly determine whether or not a parser is fully installed
-  sync_install = true,
+  sync_install = require("raizento.config").is_test,
   auto_install = true,
   ignore_install = {
     "latex",

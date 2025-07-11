@@ -52,6 +52,3 @@ vim.opt.virtualedit = "block"
 
 vim.opt.inccommand = "split"
 vim.opt.cmdwinheight = 16
-
--- Initialize empty object for custom global variables
-_G.raizento = {}

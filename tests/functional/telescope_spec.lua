@@ -1,14 +1,3 @@
--- TODO This does not work yet but I don't know why
--- nvim:exec_lua([[
---   vim.api.nvim_create_autocmd(
---   { "User" }, {
---     pattern = "LazyDone",
---     callback = function(ev)
---      vim.g.raizento = { lazy_done = true }
---     end
---   })
--- ]], {})
-
 local yd = require("yo-dawg")
 
 describe("Telescope tests", function()

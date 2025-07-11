@@ -5,7 +5,7 @@ local M = {}
 
 local INV_ARGS_TEMPLATE = "Invalid arguments: %s"
 local INV_CMD_TEMPLATE = "Command not executable: %s"
-local COMMAND = { "nvim", "--embed", "--headless", "--cmd", "require('raizento.config').is_test = true" }
+local COMMAND = { "nvim", "--embed", "--headless", "--cmd", "lua require('raizento.config').is_test = true" }
 local DEFAULT_JOBOPTS = {
   rpc = true,
   width = 80,

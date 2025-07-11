@@ -15,7 +15,7 @@ vim.opt.runtimepath:prepend(lazypath)
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyDone",
   callback = function(_)
-    require("raizento.config").is_test = true
+    require("raizento.config").is_lazy_done = true
   end,
 })
 

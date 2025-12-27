@@ -1,0 +1,18 @@
+return {
+  _all = {
+    lua = "./tests/test-shim.sh",
+    coverage = true,
+    verbose = true,
+  },
+  all = {
+    ROOT = { "./tests/" },
+    helper = "./tests/functional/initalize_nvim_config.lua",
+  },
+  unit = {
+    ROOT = { "./tests/unit/" },
+  },
+  functional = {
+    ROOT = { "./tests/functional" },
+    helper = "./tests/functional/initalize_nvim_config.lua",
+  },
+}

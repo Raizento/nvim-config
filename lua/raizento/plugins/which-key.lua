@@ -21,9 +21,13 @@ M.config = function()
   wk.add({ "<Leader>j", group = "Jump to" })
 
   wk.add({ "<Leader>d", group = "Diagnostics" })
+  wk.add({ "<Leader>dP", group = "Project" })
 
   wk.add({ "<Leader>l", group = "LSP" })
   wk.add({ "<Leader>lw", group = "Workspace" })
+  wk.add({ "<Leader>lP", group = "Project" })
+
+  wk.add({ "<Leader>t", group = "Toggle" })
 end
 
 return M

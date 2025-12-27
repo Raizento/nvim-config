@@ -1,0 +1,72 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  unit:
+    runs-on: ubuntu-24.04
+    name: Unit tests
+
+    steps:
+      - name: Install nvim
+        run: |
+          wget https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-linux-x86_64.tar.gz
+          tar -xzf nvim*.tar.gz
+          sudo mv nvim-linux-x86_64 /opt/nvim
+          echo "/opt/nvim/bin" >> $GITHUB_PATH
+      - name: Install lua
+        run: |
+          sudo apt install lua5.1
+      - name: Install luarocks  
+        run: |
+          sudo apt install luarocks
+      - name: Install busted
+        run: |
+          sudo luarocks install busted
+      - name: Install LuaCov
+        run: |
+          sudo luarocks install luacov
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: nvim
+      - name: Run tests
+        working-directory: nvim
+        run: |
+          export XDG_CONFIG_HOME="${{ github.workspace }}"
+          busted --run=unit
+
+  # TODO This is super lazy; need to refactor this
+  functional:
+    runs-on: ubuntu-24.04
+    name: Functional tests
+
+    steps:
+      - name: Install nvim
+        run: |
+          wget https://github.com/neovim/neovim/releases/download/v0.11.2/nvim-linux-x86_64.tar.gz
+          tar -xzf nvim*.tar.gz
+          sudo mv nvim-linux-x86_64 /opt/nvim
+          echo "/opt/nvim/bin" >> $GITHUB_PATH
+      - name: Install lua
+        run: |
+          sudo apt install lua5.1
+      - name: Install luarocks  
+        run: |
+          sudo apt install luarocks
+      - name: Install busted
+        run: |
+          sudo luarocks install busted
+      - name: Install LuaCov
+        run: |
+          sudo luarocks install luacov
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: nvim
+      - name: Run tests
+        working-directory: nvim
+        run: |
+          export XDG_CONFIG_HOME="${{ github.workspace }}"
+          busted --run=functional
+

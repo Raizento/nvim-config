@@ -28,7 +28,3 @@ vim.keymap.set({ "n", "v" }, "<Leader>p", [["+p]], { noremap = true, silent = tr
 vim.keymap.set({ "n", "v" }, "<Leader>P", [["+P]], { noremap = true, silent = true, desc = "paste from clipboard" })
 
 vim.keymap.set("n", "<Leader>;", [[mmA;<Esc>`m]], { noremap = true, silent = true, desc = "place ; at end of line" })
-
--- Navigate quickfix
-vim.keymap.set("n", "[q", "<CMD>cprev<CR>", { noremap = true, silent = true, desc = "prev quickfix item" })
-vim.keymap.set("n", "]q", "<CMD>cnext<CR>", { noremap = true, silent = true, desc = "next quickfix item" })

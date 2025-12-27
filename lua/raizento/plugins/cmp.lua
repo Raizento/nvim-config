@@ -95,7 +95,8 @@ M.config = function()
     sources = cmp.config.sources({
       { name = "path" },
     }, {
-      { name = "cmdline",
+      {
+        name = "cmdline",
         -- Limit lagging on WSL
         -- If inside a WSL Distro, only start completing after 3 characters
         -- Lessens the effects the big WSL path (Windows path + Distro path) has on the synchronous search

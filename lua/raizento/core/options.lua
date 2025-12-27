@@ -2,53 +2,53 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = [[\]]
 
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.numberwidth = 4
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.numberwidth = 4
 
-vim.o.autoindent = true
-vim.o.smartindent = true
-vim.o.cindent = true
-vim.o.shiftwidth = 4
-vim.o.tabstop = 4
-vim.o.expandtab = true
-vim.o.smarttab = true
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.cindent = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.expandtab = true
+vim.opt.smarttab = true
 
-vim.o.mouse = "a"
+vim.opt.mouse = "a"
 
-vim.o.foldcolumn = "6"
+vim.opt.foldcolumn = "6"
 
-vim.o.incsearch = true
-vim.o.ignorecase = true
+vim.opt.incsearch = true
+vim.opt.ignorecase = true
 
-vim.o.backspace = "indent,eol,start"
-vim.o.matchpairs = "(:),{:},[:],<:>"
+vim.opt.backspace = "indent,eol,start"
+vim.opt.matchpairs = "(:),{:},[:],<:>"
 
-vim.o.magic = true -- plugins may break if this option is turned off
+vim.opt.magic = true -- plugins may break if this option is turned off
 
-vim.o.ruler = true
+vim.opt.ruler = true
 
-vim.o.undofile = true
+vim.opt.undofile = true
 
-vim.o.splitright = true
-vim.o.splitbelow = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
-vim.o.scrolloff = 4
-vim.o.sidescrolloff = 8
+vim.opt.scrolloff = 4
+vim.opt.sidescrolloff = 8
 
-vim.o.wrap = false
+vim.opt.wrap = false
 
-vim.o.termguicolors = true
+vim.opt.termguicolors = true
 
-vim.o.title = true
+vim.opt.title = true
 
-vim.o.showmode = false -- Lualine takes care of indicating the mode
+vim.opt.showmode = false -- Lualine takes care of indicating the mode
 
-vim.o.foldlevelstart = 99
+vim.opt.foldlevelstart = 99
 
-vim.o.updatetime = 100 -- TreeSitter updates definition highlighting every {updatetime} ms
+vim.opt.updatetime = 100 -- TreeSitter updates definition highlighting every {updatetime} ms
 
-vim.o.virtualedit = "block"
+vim.opt.virtualedit = "block"
 
-vim.o.inccommand = "split"
-vim.o.cmdwinheight = 16
+vim.opt.inccommand = "split"
+vim.opt.cmdwinheight = 16

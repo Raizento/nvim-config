@@ -32,8 +32,10 @@ local M = {
     exclude_groups = {}, -- table: groups you don't want to clear
   },
   run = { ":TransparentEnable" },
+  keys = {
+    { "<Leader>tt", "<CMD>TransparentToggle<CR>", desc = "toggle transparency" },
+  },
+  lazy = false,
 }
-
-M.config = true
 
 return M

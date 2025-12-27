@@ -4,15 +4,12 @@ local M = {
     "nvim-treesitter/nvim-treesitter",
   },
   main = "ibl",
-}
-
-M.config = function()
-  require("ibl").setup({
+  opts = {
     scope = {
       show_start = false,
       show_end = false,
     },
-  })
-end
+  },
+}
 
 return M

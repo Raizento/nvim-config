@@ -11,6 +11,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
+-- TODO This is only needed for functional tests currently; need to have a look at how I can move this out of the main part
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyDone",
+  callback = function(_)
+    require("raizento.config").is_lazy_done = true
+  end,
+})
+
 require("lazy").setup({
   spec = LAZY_PLUGIN_SPEC,
 })

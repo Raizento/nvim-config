@@ -6,10 +6,7 @@ local M = {
     { "<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>", desc = "k" },
     { "<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>", desc = "r" },
   },
+  opts = {},
 }
-
-M.config = function()
-  require("nvim-tmux-navigation").setup({})
-end
 
 return M

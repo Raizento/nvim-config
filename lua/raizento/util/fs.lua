@@ -44,12 +44,4 @@ M.find_files_of_type = function(path, filetypes)
   end, { limit = math.huge, type = "file", path = path })
 end
 
----@param path string: Path from which to start searching
----@return string[]
-M.find_all_files = function(path)
-  return vim.fs.find(function(_, _)
-    return true
-  end, { limit = math.huge, type = "file", path = path })
-end
-
 return M

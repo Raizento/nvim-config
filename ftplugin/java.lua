@@ -8,8 +8,8 @@ vim.keymap.set(
 require("raizento.util.string")
 local fs = require("raizento.util.fs")
 
-if vim.fn.exepath("jdtls"):is_blank() and not vim.o.jdtls_message_shown then
-  vim.o.jdtls_message_shown = true
+if vim.fn.exepath("jdtls"):is_blank() and not vim.g.jdtls_message_shown then
+  vim.g.jdtls_message_shown = true
   vim.print("To use JDTLS, please install JDTLS via Mason: MasonInstall jdtls")
   return
 end

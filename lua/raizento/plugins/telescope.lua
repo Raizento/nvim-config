@@ -8,23 +8,23 @@ local temp_cmdheight
 
 -- Save status for options and disable them
 function _G.global_telescope_find_pre()
-  temp_showtabline = vim.o.showtabline
-  temp_laststatus = vim.o.laststatus
-  temp_ruler = vim.o.ruler
-  temp_cmdheight = vim.o.cmdheight
+  temp_showtabline = vim.opt.showtabline
+  temp_laststatus = vim.opt.laststatus
+  temp_ruler = vim.opt.ruler
+  temp_cmdheight = vim.opt.cmdheight
 
-  vim.o.ruler = false
-  vim.o.showtabline = 0
-  vim.o.laststatus = 0
-  vim.o.cmdheight = 0
+  vim.opt.ruler = false
+  vim.opt.showtabline = 0
+  vim.opt.laststatus = 0
+  vim.opt.cmdheight = 0
 end
 
 -- Recover status from global_telescope_find_pre()
 function _G.global_telescope_leave_prompt()
-  vim.o.laststatus = temp_laststatus
-  vim.o.showtabline = temp_showtabline
-  vim.o.ruler = temp_ruler
-  vim.o.cmdheight = temp_cmdheight
+  vim.opt.laststatus = temp_laststatus
+  vim.opt.showtabline = temp_showtabline
+  vim.opt.ruler = temp_ruler
+  vim.opt.cmdheight = temp_cmdheight
 end
 
 -- Make Telescope UI fullscreen on opening it

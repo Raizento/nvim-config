@@ -10,19 +10,35 @@ vim.lsp.handlers["client/registerCapability"] = function(err, result, ctx)
   local attached_buffers = client.attached_buffers
 
   for bufnr, attached in pairs(attached_buffers) do
-    lsp.on_attach(client, bufnr)
+    client.config.on_attach(client, bufnr)
   end
 
   return ret
 end
 
-vim.lsp.config["*"] = {
-  capabilities = lsp.capabilities(),
-  on_attach = lsp.on_attach,
-}
+local packages = require("mason-registry").get_installed_packages()
 
-local config_path = vim.fn.stdpath("config")
-local lsp_config_dir = config_path .. "/lsp"
+local lsp_names = vim
+  .iter(packages)
+  :map(function(package)
+    return package.spec
+  end)
+  :filter(function(spec)
+    return vim.tbl_contains(spec.categories, "LSP")
+  end)
+  :map(function(spec)
+    return spec.neovim.lspconfig
+  end)
+  :totable()
 
-local filenames = fs.find_all_files(lsp_config_dir)
-vim.iter(filenames):map(vim.fs.basename):map(fs.remove_file_extension):each(vim.lsp.enable)
+for _, lsp_name in ipairs(lsp_names) do
+  local on_attach = lsp.wrap_on_attach(lsp_name)
+  local capabilities = lsp.merge_capabilities(lsp_name)
+
+  vim.lsp.config(lsp_name, {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+
+  vim.lsp.enable(lsp_name)
+end

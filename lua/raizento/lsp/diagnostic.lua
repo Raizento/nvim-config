@@ -1,5 +1,11 @@
 function add_diagnostic_keymaps(bufnr)
-  vim.keymap.set("n", "<Leader>de", vim.diagnostic.open_float, { buffer = bufnr }, "open float")
+  vim.keymap.set("n", "<Leader>de", function()
+    local bufnr, winid = vim.diagnostic.open_float()
+    vim.bo[bufnr].filetype = "DiagnosticFloat"
+
+    -- Prevent any other buffers to be opened in the float
+    vim.wo[winid].winfixbuf = true
+  end, { buffer = bufnr }, "open float")
   vim.keymap.set("n", "<Leader>dl", function()
     local bufnr = vim.api.nvim_get_current_buf()
     local diagnostics = vim.diagnostic.get(bufnr)

@@ -1,11 +1,15 @@
-function add_diagnostic_keymaps(bufnr)
-  vim.keymap.set("n", "<Leader>de", function()
-    local bufnr, winid = vim.diagnostic.open_float()
-    vim.bo[bufnr].filetype = "DiagnosticFloat"
+local original_open_floating_window = vim.lsp.util.open_floating_preview
 
-    -- Prevent any other buffers to be opened in the float
-    vim.wo[winid].winfixbuf = true
-  end, { buffer = bufnr }, "open float")
+-- Patch internal function to set winfixbuf option
+-- Prevents switching the buffer inside of the "informational" LSP/diagnostic floating windows
+vim.lsp.util.open_floating_preview = function(contents, format, config)
+  local bufnr, winid = original_open_floating_window(contents, format, config)
+  vim.wo[winid].winfixbuf = true
+  return bufnr, winid
+end
+
+function add_diagnostic_keymaps(bufnr)
+  vim.keymap.set("n", "<Leader>de", vim.diagnostic.open_float, { buffer = bufnr }, "open float")
   vim.keymap.set("n", "<Leader>dl", function()
     local bufnr = vim.api.nvim_get_current_buf()
     local diagnostics = vim.diagnostic.get(bufnr)

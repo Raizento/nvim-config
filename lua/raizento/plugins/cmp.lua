@@ -43,6 +43,7 @@ M.config = function()
           trigger_characters_ft = {},
         },
       },
+      { name = "lazydev" },
       { name = "luasnip" },
       { name = "nvim_lua" },
       { name = "lazydev" },

@@ -26,6 +26,8 @@ local jdtls_install_path = vim.env.MASON .. "/packages/jdtls/"
 local jdtls_package = require("mason-registry").get_package("jdtls").spec
 local equinox_launcher_path = jdtls_install_path
   .. jdtls_package.share["jdtls/plugins/org.eclipse.equinox.launcher.jar"]
+
+---@diagnostic disable-next-line: undefined-field
 local config_path = jdtls_install_path .. jdtls_package.source.download[2].config
 local lombok_path = jdtls_install_path .. jdtls_package.share["jdtls/lombok.jar"]
 
@@ -57,12 +59,17 @@ local create_choose_format_file_command = function()
       return
     end
 
-    local path_object = { formatFilePath = normalized_path }
-    path_object = vim.json.encode(path_object)
+    local temp = { formatFilePath = normalized_path }
+    local path_object = vim.json.encode(temp)
 
     -- TODO Read content from file first; this will overwrite any existing config
     local config_file_path = project_workspace .. "/config.json"
     local file = io.open(config_file_path, "w")
+
+    if file == nil then
+      vim.notify("Could not save config, please check permissions at " .. config_file_path, vim.log.levels.ERROR)
+      return
+    end
 
     file:write(path_object)
     file:flush()
@@ -128,7 +135,7 @@ local config = {
 
   on_attach = require("raizento.util.lsp").on_attach,
 
-  on_init = function(client)
+  on_init = function(_)
     create_choose_format_file_command()
   end,
 }

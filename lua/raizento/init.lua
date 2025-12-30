@@ -25,5 +25,5 @@ spec("raizento.lsp.plugins.lazydev")
 spec("raizento.lsp.plugins.nvim-jdtls")
 
 require("raizento.lazy")
-require("raizento.lsp.diagnostic")
+require("raizento.lsp.diagnostics")
 require("raizento.lsp.lsp")

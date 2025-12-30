@@ -106,8 +106,10 @@ M.config = function()
     }),
   })
 
-  function leave_snippet()
+  function _G.leave_snippet()
     if
+      -- old_mode and new_mode exist; see :h ModeChanged
+      ---@diagnostic disable-next-line: undefined-field
       ((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
       and require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
       and not require("luasnip").session.jump_active

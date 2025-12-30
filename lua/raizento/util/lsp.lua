@@ -17,7 +17,6 @@ M.on_attach = function(client, bufnr)
 end
 
 ---@param lsp_name string: Name used to configure the lsp
-
 ---Wrap the "default" on_attach provided by nvim-lspconfig (if there is one) and our own on_attach.
 ---Allows us to use funtionality provided by lspconfig without having to explicitly set it anywhere.
 M.wrap_on_attach = function(lsp_name)
@@ -29,7 +28,6 @@ M.wrap_on_attach = function(lsp_name)
 end
 
 --- @param lsp_name string: Name used to configure the lsp
-
 ---Merge "default" capabilities provided by nvim-lspconfig (if there are any) and our own capabilities.
 ---Allows us to use funtionality provided by lspconfig without having to explicitly set it anywhere.
 M.merge_capabilities = function(lsp_name)

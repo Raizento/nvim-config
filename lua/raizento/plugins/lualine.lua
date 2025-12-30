@@ -5,7 +5,7 @@ local M = {
 
 require("raizento.util.string")
 
-M.shorten_branch_name = function(text, context)
+M.shorten_branch_name = function(text, _)
   return text:shorten(40, 3, ".")
 end
 

@@ -1,4 +1,3 @@
-local fs = require("raizento.util.fs")
 local lsp = require("raizento.util.lsp")
 
 local original_handler = vim.lsp.handlers["client/registerCapability"]
@@ -7,9 +6,14 @@ vim.lsp.handlers["client/registerCapability"] = function(err, result, ctx)
   local ret = original_handler(err, result, ctx)
 
   local client = vim.lsp.get_client_by_id(ctx.client_id)
+
+  if client == nil then
+    return
+  end
+
   local attached_buffers = client.attached_buffers
 
-  for bufnr, attached in pairs(attached_buffers) do
+  for bufnr, _ in pairs(attached_buffers) do
     client.config.on_attach(client, bufnr)
   end
 

@@ -18,6 +18,13 @@ M.format_project = function()
   })[1]
 
   local filetypes = vim.lsp.config[client.name].filetypes
+
+  -- If the client does not have filetypes, it also cannot format any files
+  if filetypes == nil then
+    return
+  end
+
+  -- TODO What do we do if the client does not have a root_dir? This can happen if there is no workspace
   local files = require("raizento.util.fs").find_files_of_type(client.root_dir, filetypes)
 
   local iter = vim.iter(files)

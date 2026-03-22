@@ -12,7 +12,7 @@ local M = {
       show_start = false,
       show_end = false,
     },
-  }
+  },
 }
 
 return Plugin:new(M)

@@ -5,7 +5,7 @@ local M = {}
 ---@return file*? file handle
 function M.open_json_file(path, mode)
   if not vim.endswith(path, ".json") then
-    error("Path " .. path " does not end in .json")
+    error("Path " .. path(" does not end in .json"))
   end
 
   local normalized_path = vim.fs.normalize(path)

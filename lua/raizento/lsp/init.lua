@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = ev.buf
 
     lsp.attach(client, ev.buf)
-  end
+  end,
 })
 
 local lsp_names = lsp.get_mason_lsp_names()

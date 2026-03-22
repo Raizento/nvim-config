@@ -19,7 +19,7 @@ vim.keymap.set("n", "<Leader>fj", function()
       "--glob",
       "*.gradle",
       "--glob",
-      "!.gradle/*"
+      "!.gradle/*",
     },
   })
 end, { buffer = vim.fn.bufnr() })
@@ -39,7 +39,7 @@ local jdtls_install_path = vim.env.MASON .. "/packages/" .. JDTLS .. "/"
 -- TODO not a big fan of this; this is very dependent on mason's structure to stay the same
 local jdtls_package = require("mason-registry").get_package(JDTLS).spec
 local equinox_launcher_path = jdtls_install_path
-    .. jdtls_package.share[JDTLS .. "/plugins/org.eclipse.equinox.launcher.jar"]
+  .. jdtls_package.share[JDTLS .. "/plugins/org.eclipse.equinox.launcher.jar"]
 
 ---@diagnostic disable-next-line: undefined-field
 local config_path = jdtls_install_path .. jdtls_package.source.download[2].config
@@ -95,7 +95,6 @@ local jdtls_config = {
     project_workspace,
   },
 
-
   settings = {
     java = {
       format = {
@@ -119,14 +118,14 @@ local jdtls_config = {
         end
 
         jdtls.organize_imports()
-      end
+      end,
     })
 
     vim.api.nvim_create_autocmd("LspAttach", {
       group = jdtls_augroup,
       callback = function(ev)
         vim.keymap.set("n", "<Leader>js", jdtls.super_implementation, { buffer = ev.buf })
-      end
+      end,
     })
 
     vim.api.nvim_create_autocmd("LspAttach", {
@@ -160,15 +159,15 @@ local jdtls_config = {
             end
           end)
         end, { buffer = ev.buf })
-      end
+      end,
     })
 
     vim.api.nvim_create_autocmd("LspDetach", {
       callback = function(ev)
         vim.api.nvim_clear_autocmds({ group = jdtls_augroup })
-      end
+      end,
     })
-  end
+  end,
 }
 
 -- Load this into the config so we can change this later when dynamically changing settings (e.g. the formatting path)

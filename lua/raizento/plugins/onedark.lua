@@ -8,5 +8,4 @@ local M = {
   end,
 }
 
-
-return Plugin:new(M) 
+return Plugin:new(M)

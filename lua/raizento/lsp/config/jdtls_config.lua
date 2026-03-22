@@ -1,7 +1,6 @@
 ---@class JdtlsConfig
 ---@field formatting_settings_path string Path to the formatting file jdtls should use
-local JdtlsConfig = {
-}
+local JdtlsConfig = {}
 
 function JdtlsConfig:new(o)
   o = o or {}

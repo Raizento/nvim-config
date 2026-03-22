@@ -13,23 +13,21 @@ vim.api.nvim_create_autocmd("DiagnosticChanged", {
   end,
 })
 
-local diagnostic_list = {
-
-}
+local diagnostic_list = {}
 
 vim.api.nvim_create_autocmd({ "DiagnosticChanged" }, {
   callback = function(ev)
     diagnostic_list[ev.file] = ev.data.diagnostics
-  end
+  end,
 })
 
-vim.keymap.set("n", "<Leader>dt", function() vim.print(diagnostic_list) end)
-vim.keymap.set("n", "<Leader>dT", 
-  function() 
-    local sum = 0
-    for _, diagnostics in pairs(diagnostic_list) do
-      sum = sum + #diagnostics 
-    end
-    vim.print(sum)
-  end)
-
+vim.keymap.set("n", "<Leader>dt", function()
+  vim.print(diagnostic_list)
+end)
+vim.keymap.set("n", "<Leader>dT", function()
+  local sum = 0
+  for _, diagnostics in pairs(diagnostic_list) do
+    sum = sum + #diagnostics
+  end
+  vim.print(sum)
+end)

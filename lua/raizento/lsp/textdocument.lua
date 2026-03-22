@@ -67,7 +67,7 @@ M.add_keymap_for_capabilities = function(client, bufnr)
       buffer = bufnr,
       callback = function(_)
         vim.lsp.buf.format({ async = false })
-      end
+      end,
     })
   end
 

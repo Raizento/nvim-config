@@ -7,7 +7,7 @@ local M = {
         "rg",
         "--files",
         "--type",
-        filetype
+        filetype,
       },
       attach_mappings = function(prompt_bufnr, _)
         local actions = require("telescope.actions")
@@ -26,9 +26,9 @@ local M = {
         end)
 
         return true
-      end
+      end,
     })
-  end
+  end,
 }
 
 return M

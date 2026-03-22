@@ -39,14 +39,13 @@ vim.cmd([[
 ]])
 
 _G.is_git_dir = function()
-    local result = vim.system({"git", "rev-parse"}, { text = true }):wait()
-    if result.code == 0 then
-        return true
-    end
+  local result = vim.system({ "git", "rev-parse" }, { text = true }):wait()
+  if result.code == 0 then
+    return true
+  end
 
-    return false
+  return false
 end
-
 
 -- TODO implement LSP bindings
 ---@type Plugin
@@ -60,25 +59,31 @@ local M = {
       "n",
       "<Leader>ff",
       function()
-          if not is_git_dir() then
-              vim.print("Not a git dir; can't use git_files picker")
-              return
-          end
-          vim.cmd([[Telescope git_files]])
+        if not is_git_dir() then
+          vim.print("Not a git dir; can't use git_files picker")
+          return
+        end
+        vim.cmd([[Telescope git_files]])
       end,
       { desc = "find git tracked files" },
     },
-    { "n", "<Leader>fF", "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>", { desc = "find all files" } },
+    {
+      "n",
+      "<Leader>fF",
+      "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>",
+      { desc = "find all files" },
+    },
     { "n", "<Leader>fg", "<CMD>Telescope live_grep<CR>", { desc = "live grep" } },
     { "n", "<Leader>fb", "<CMD>Telescope buffers<CR>", { desc = "buffers" } },
     { "n", "<Leader>fh", "<CMD>Telescope help_tags<CR>", { desc = "help tags" } },
     { "n", "<Leader>fc", "<CMD>Telescope commands<CR>", { desc = "commands" } },
     {
-      "n", "<Leader>fl",
+      "n",
+      "<Leader>fl",
       "<CMD>lua vim.diagnostic.setloclist({ open = false })<CR><CMD>Telescope loclist<CR>",
       { desc = "loclist" },
     },
-    { "n", "<Leader>fo", "<CMD>Telescope vim_options<CR>", { desc = "vim options"} },
+    { "n", "<Leader>fo", "<CMD>Telescope vim_options<CR>", { desc = "vim options" } },
   },
   opts = {
     defaults = {
@@ -133,7 +138,6 @@ local M = {
 M.description_grep_string = function()
   return "search for " .. vim.fn.expand("<cword>")
 end
-
 
 M.setup = function()
   require("telescope").setup(M.opts)

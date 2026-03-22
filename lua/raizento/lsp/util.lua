@@ -24,20 +24,20 @@ M.get_mason_lsp_names = function()
   local packages = require("mason-registry").get_installed_packages()
 
   return vim
-      .iter(packages)
-      ---@param package Package
-      :map(function(package)
-        return package.spec
-      end)
-      ---@param spec RegistryPackageSpec
-      :filter(function(spec)
-        return vim.tbl_contains(spec.categories, "LSP")
-      end)
-      ---@param spec RegistryPackageSpec
-      :map(function(spec)
-        return spec.neovim.lspconfig
-      end)
-      :totable()
+    .iter(packages)
+    ---@param package Package
+    :map(function(package)
+      return package.spec
+    end)
+    ---@param spec RegistryPackageSpec
+    :filter(function(spec)
+      return vim.tbl_contains(spec.categories, "LSP")
+    end)
+    ---@param spec RegistryPackageSpec
+    :map(function(spec)
+      return spec.neovim.lspconfig
+    end)
+    :totable()
 end
 
 return M

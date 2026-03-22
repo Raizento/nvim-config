@@ -13,7 +13,7 @@ local M = {
     { url = "https://github.com/hrsh7th/cmp-nvim-lsp-signature-help", name = "cmp_nvim_lsp_signature_help" },
     { url = "https://github.com/delphinus/cmp-ctags", name = "cmp_ctags" },
     { url = "https://github.com/hrsh7th/cmp-nvim-lua", name = "cmp_nvim_lua" },
-    "https://github.com/saadparwaiz1/cmp_luasnip"
+    "https://github.com/saadparwaiz1/cmp_luasnip",
   },
 }
 

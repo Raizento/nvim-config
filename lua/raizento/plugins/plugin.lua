@@ -33,22 +33,25 @@ function Plugin:new(o)
   o.opts = o.opts or {}
   o.dependencies = o.dependencies or {}
   o.keys = o.keys or {}
-  o.setup = o.setup or function()
-    local success, module = pcall(function() return require(o.name) end)
+  o.setup = o.setup
+    or function()
+      local success, module = pcall(function()
+        return require(o.name)
+      end)
 
-    -- Some plugins (like friendly snippets) aren't lua and will error when trying to require them
-    -- If they are not lua, exit early since we also cannot set them up
-    if not success then
-      return
-    end
+      -- Some plugins (like friendly snippets) aren't lua and will error when trying to require them
+      -- If they are not lua, exit early since we also cannot set them up
+      if not success then
+        return
+      end
 
-    -- Plugins like e.g. plenary might "shadow" their setup index
-    -- using a metatable; use rawget to get the actual function
-    local setup = rawget(module, "setup")
-    if setup ~= nil then
-      setup(o.opts)
+      -- Plugins like e.g. plenary might "shadow" their setup index
+      -- using a metatable; use rawget to get the actual function
+      local setup = rawget(module, "setup")
+      if setup ~= nil then
+        setup(o.opts)
+      end
     end
-  end
 
   o.hooks = o.hooks or {}
 
@@ -74,7 +77,7 @@ function Plugin:setup_hooks()
             end
             hook()
           end
-        end
+        end,
       })
     end
   end
@@ -92,7 +95,7 @@ function Plugin:setup_hooks()
             end
             hook()
           end
-        end
+        end,
       })
     end
   end

@@ -4,13 +4,13 @@ local Plugin = require("raizento.plugins.plugin")
 local M = {
   url = "https://github.com/nvim-lualine/lualine.nvim",
   dependencies = {
-    "https://github.com/nvim-tree/nvim-web-devicons"
+    "https://github.com/nvim-tree/nvim-web-devicons",
   },
   opts = {
     options = {
-      globalstatus = true
-    }
-  }
+      globalstatus = true,
+    },
+  },
 }
 
 return Plugin:new(M)

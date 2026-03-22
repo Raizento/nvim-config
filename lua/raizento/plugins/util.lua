@@ -47,9 +47,7 @@ M.topological_order = function(plugins)
 
       -- TODO This doesn't work if we have some configuration file for the plugin
       if not nodes[url] then
-        local plugin = type(dependency) == "string"
-            and Plugin:new({ url = url })
-            or Plugin:new(dependency)
+        local plugin = type(dependency) == "string" and Plugin:new({ url = url }) or Plugin:new(dependency)
 
         local node = Node:new({ plugin = plugin })
         nodes[url] = node
@@ -68,9 +66,7 @@ M.topological_order = function(plugins)
     node.incoming_edges = #node.plugin.dependencies
 
     for _, dependency in ipairs(node.plugin.dependencies) do
-      local dependency_url = type(dependency) == "string"
-          and dependency
-          or dependency.url
+      local dependency_url = type(dependency) == "string" and dependency or dependency.url
       -- Since we can depend on proper plugins or raw dependencies, we have to
       -- look in both tables since raw dependencies will already be in start_nodes
       local dependency_node = nodes[dependency_url] or start_nodes[dependency_url]

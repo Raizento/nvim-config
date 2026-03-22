@@ -17,7 +17,7 @@ local M = {
 M.setup = function()
   require("gitsigns").setup(M.opts)
 
-  vim.api.nvim_create_autocmd({"BufAdd"}, {
+  vim.api.nvim_create_autocmd({ "BufAdd" }, {
     callback = function()
       local gs = package.loaded.gitsigns
 
@@ -55,7 +55,7 @@ M.setup = function()
         return "<Ignore>"
       end, { desc = "next chunk", buffer = bufnr, expr = true })
       vim.keymap.set({ "o", "x" }, "<Leader>gih", gs.select_hunk, { desc = "select hunk", buffer = bufnr })
-    end
+    end,
   })
 end
 

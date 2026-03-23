@@ -39,7 +39,7 @@ local jdtls_install_path = vim.env.MASON .. "/packages/" .. JDTLS .. "/"
 -- TODO not a big fan of this; this is very dependent on mason's structure to stay the same
 local jdtls_package = require("mason-registry").get_package(JDTLS).spec
 local equinox_launcher_path = jdtls_install_path
-    .. jdtls_package.share[JDTLS .. "/plugins/org.eclipse.equinox.launcher.jar"]
+  .. jdtls_package.share[JDTLS .. "/plugins/org.eclipse.equinox.launcher.jar"]
 
 ---@diagnostic disable-next-line: undefined-field
 local config_path = jdtls_install_path .. jdtls_package.source.download[2].config

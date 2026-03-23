@@ -33,6 +33,10 @@ M.get_mason_lsp_names = function()
     :filter(function(spec)
       return vim.tbl_contains(spec.categories, "LSP")
     end)
+    :filter(function(spec)
+      -- Some packages (like vscode-spring-boot-tools) are marked as LSPs but don't have an lspconfig equivalent; these need to be filtered out
+      return spec.neovim and true or false
+    end)
     ---@param spec RegistryPackageSpec
     :map(function(spec)
       return spec.neovim.lspconfig

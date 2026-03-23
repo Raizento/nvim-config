@@ -141,14 +141,6 @@ end
 
 M.setup = function()
   require("telescope").setup(M.opts)
-  -- local wk = require("which-key")
-  -- wk.add({
-  --   {
-  --     "<Leader>f*",
-  --     "<CMD>lua require('telescope.builtin').grep_string({})<CR>",
-  --     desc = M.description_grep_string,
-  --   },
-  -- })
 end
 
 return Plugin:new(M)

@@ -139,8 +139,4 @@ M.description_grep_string = function()
   return "search for " .. vim.fn.expand("<cword>")
 end
 
-M.setup = function()
-  require("telescope").setup(M.opts)
-end
-
 return Plugin:new(M)

@@ -63,12 +63,13 @@ M.add_keymap_for_capabilities = function(client, bufnr)
       vim.lsp.buf.format({ async = true })
     end, { desc = "format", buffer = bufnr })
 
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      callback = function(_)
-        vim.lsp.buf.format({ async = false })
-      end,
-    })
+    local on_save = vim.b[bufnr].on_save or {}
+
+    table.insert(on_save, function()
+      vim.lsp.buf.format({ async = false })
+    end)
+
+    vim.b[bufnr].on_save = on_save
   end
 
   if client:supports_method(vim.lsp.protocol.Methods.textDocument_codeAction) then

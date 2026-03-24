@@ -109,17 +109,33 @@ local jdtls_config = {
 
   ---@type vim.lsp.client.on_init_cb
   on_init = function(_)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      pattern = "*.java",
-      callback = function(_)
-        local client = vim.lsp.get_clients({ name = JDTLS })[1]
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(ev)
+        local buf_options = vim.b[ev.buf]
 
-        -- Might be the case if client was detached from a file or when server was shut down
-        if client == nil then
-          return
-        end
+        local on_save = buf_options.on_save or {}
 
-        jdtls.organize_imports()
+        table.insert(on_save, function(ev)
+          local client = vim.lsp.get_clients({ name = JDTLS })[1]
+
+          -- Might be the case if client was detached from a file or when server was shut down
+          if client == nil then
+            return
+          end
+
+          local params = vim.lsp.util.make_range_params(0, "utf-16")
+
+          local response = client:request_sync("java/organizeImports", params, 1000, ev.buf) or {}
+          if response.err then
+            print("Error on organize imports: " .. response.err.message)
+            return
+          end
+          if response.result then
+            vim.lsp.util.apply_workspace_edit(response.result, "utf-16")
+          end
+        end)
+
+        vim.b[ev.buf].on_save = on_save
       end,
     })
 
@@ -151,6 +167,7 @@ local jdtls_config = {
             local lsp_config = vim.lsp.config[JDTLS] --[[@as vim.lsp.Config]]
             lsp_config.settings.java.format.settings.url = config.formatting_settings_path
 
+            -- TODO the restart might not be needed at all; can maybe directly change the value
             vim.lsp.config(JDTLS, lsp_config)
             vim.lsp.enable(JDTLS, false)
 

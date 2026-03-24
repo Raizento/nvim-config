@@ -1,3 +1,14 @@
+local JDTLS = "jdtls"
+local PICK_FORMAT_KEYMAP = "<Leader>lcf"
+
+local JdtlsConfig = require("raizento.lsp.config.jdtls_config")
+local json = require("raizento.util.json")
+local telescope_picker = require("raizento.util.telescope_picker")
+local fs = require("raizento.util.fs")
+local on_save_util = require("raizento.util.on_save")
+
+local jdtls = require("jdtls")
+
 vim.keymap.set(
   "n",
   "<Localleader>s",
@@ -23,16 +34,6 @@ vim.keymap.set("n", "<Leader>fj", function()
     },
   })
 end, { buffer = vim.fn.bufnr() })
-
-local JDTLS = "jdtls"
-local PICK_FORMAT_KEYMAP = "<Leader>lcf"
-
-local JdtlsConfig = require("raizento.lsp.config.jdtls_config")
-local json = require("raizento.util.json")
-local telescope_picker = require("raizento.util.telescope_picker")
-local fs = require("raizento.util.fs")
-
-local jdtls = require("jdtls")
 
 local jdtls_install_path = vim.env.MASON .. "/packages/" .. JDTLS .. "/"
 
@@ -111,11 +112,8 @@ local jdtls_config = {
   on_init = function(_)
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(ev)
-        local buf_options = vim.b[ev.buf]
-
-        local on_save = buf_options.on_save or {}
-
-        table.insert(on_save, function(ev)
+        vim.print("mon")
+        on_save_util.add_to_on_save(ev.buf, "OrganizeImports", function(ev)
           local client = vim.lsp.get_clients({ name = JDTLS })[1]
 
           -- Might be the case if client was detached from a file or when server was shut down
@@ -134,8 +132,6 @@ local jdtls_config = {
             vim.lsp.util.apply_workspace_edit(response.result, "utf-16")
           end
         end)
-
-        vim.b[ev.buf].on_save = on_save
       end,
     })
 

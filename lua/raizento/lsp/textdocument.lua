@@ -1,3 +1,5 @@
+local on_save_util = require("raizento.util.on_save")
+
 local M = {
   __is_first_attach = true,
 }
@@ -63,13 +65,9 @@ M.add_keymap_for_capabilities = function(client, bufnr)
       vim.lsp.buf.format({ async = true })
     end, { desc = "format", buffer = bufnr })
 
-    local on_save = vim.b[bufnr].on_save or {}
-
-    table.insert(on_save, function()
+    on_save_util.add_to_on_save(bufnr, "Format", function()
       vim.lsp.buf.format({ async = false })
     end)
-
-    vim.b[bufnr].on_save = on_save
   end
 
   if client:supports_method(vim.lsp.protocol.Methods.textDocument_codeAction) then

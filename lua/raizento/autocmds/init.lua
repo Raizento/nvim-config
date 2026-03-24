@@ -1,1 +1,1 @@
-require("raizento.autocmds.bufwritepre")
+require("raizento.autocmds.on_save")

@@ -13,21 +13,28 @@ vim.api.nvim_create_autocmd("DiagnosticChanged", {
   end,
 })
 
-local diagnostic_list = {}
+---@param severity vim.diagnostic.Severity
+local function set_diagnostic_qflist(severity)
+  local opts = severity and { severity = severity } or nil
+  local diagnostics = vim.diagnostic.get(nil, opts)
+  local qflist = vim.diagnostic.toqflist(diagnostics)
+  vim.fn.setqflist(qflist)
 
-vim.api.nvim_create_autocmd({ "DiagnosticChanged" }, {
-  callback = function(ev)
-    diagnostic_list[ev.file] = ev.data.diagnostics
-  end,
-})
-
-vim.keymap.set("n", "<Leader>dt", function()
-  vim.print(diagnostic_list)
-end)
-vim.keymap.set("n", "<Leader>dT", function()
-  local sum = 0
-  for _, diagnostics in pairs(diagnostic_list) do
-    sum = sum + #diagnostics
+  if not vim.tbl_isempty(qflist) then
+    vim.cmd.copen()
   end
-  vim.print(sum)
+end
+
+vim.keymap.set("n", "<Leader>dw", function()
+  set_diagnostic_qflist(vim.diagnostic.severity.WARN)
 end)
+vim.keymap.set("n", "<Leader>di", function()
+  set_diagnostic_qflist(vim.diagnostic.severity.INFO)
+end)
+vim.keymap.set("n", "<Leader>de", function()
+  set_diagnostic_qflist(vim.diagnostic.severity.ERROR)
+end)
+vim.keymap.set("n", "<Leader>dh", function()
+  set_diagnostic_qflist(vim.diagnostic.severity.HINT)
+end)
+vim.keymap.set("n", "<Leader>da", set_diagnostic_qflist)

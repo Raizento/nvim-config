@@ -14,7 +14,7 @@ local plugins = {
   require("raizento.plugins.indent-blankline"),
   require("raizento.plugins.lualine"),
   require("raizento.lsp.mason"),
-  require("raizento.lsp.plugins.jdtls"),
+  require("raizento.lsp.plugins.java"),
   require("raizento.lsp.plugins.lazydev"),
   require("raizento.lsp.plugins.lspconfig"),
 }

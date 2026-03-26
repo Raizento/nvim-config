@@ -48,7 +48,10 @@ function Plugin:new(o)
       -- Plugins like e.g. plenary might "shadow" their setup index
       -- using a metatable; use rawget to get the actual function
       local setup = rawget(module, "setup")
-      if setup ~= nil then
+
+      -- Need to make sure that setup it actually a function
+      -- E.g. JDTLS' setup entry is a table
+      if setup ~= nil and type(setup) == "function" then
         setup(o.opts)
       end
     end

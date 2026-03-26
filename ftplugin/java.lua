@@ -142,6 +142,12 @@ local jdtls_config = {
       group = jdtls_augroup,
       callback = function(ev)
         vim.keymap.set("n", "<Leader>js", jdtls.super_implementation, { buffer = ev.buf })
+        vim.keymap.set(
+          "n",
+          "<Leader>fl",
+          require("telescope.builtin").lsp_dynamic_workspace_symbols,
+          { buffer = ev.buf }
+        )
       end,
     })
 

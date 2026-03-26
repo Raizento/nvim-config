@@ -70,6 +70,7 @@ local config = JdtlsConfig:new(json.read_from_json(jdtls_config_path))
 
 local jdtls_augroup = vim.api.nvim_create_augroup("jdtls", { clear = false })
 
+---@type vim.lsp.ClientConfig
 local jdtls_config = {
   cmd = {
     vim.fn.exepath("java"),
@@ -94,6 +95,9 @@ local jdtls_config = {
 
     "-data",
     project_workspace,
+  },
+  init_options = {
+    bundles = require("spring_boot").java_extensions(),
   },
 
   -- List of all settings:

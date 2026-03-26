@@ -1,8 +1,8 @@
 ---@class JdtlsConfig
 ---@field formatting_settings_path string Path to the formatting file jdtls should use
-local JdtlsConfig = {}
+local JdtlsSettings = {}
 
-function JdtlsConfig:new(o)
+function JdtlsSettings:new(o)
   o = o or {}
 
   setmetatable(o, self)
@@ -13,4 +13,4 @@ function JdtlsConfig:new(o)
   return o
 end
 
-return JdtlsConfig
+return JdtlsSettings

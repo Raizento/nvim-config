@@ -1,7 +1,7 @@
 local JDTLS = "jdtls"
 local PICK_FORMAT_KEYMAP = "<Leader>lcf"
 
-local JdtlsConfig = require("raizento.lsp.config.jdtls_config")
+local JdtlsConfig = require("raizento.lsp.config.jdtls_settings")
 local json = require("raizento.util.json")
 local telescope_picker = require("raizento.util.telescope_picker")
 local fs = require("raizento.util.fs")
@@ -112,7 +112,6 @@ local jdtls_config = {
   on_init = function(_)
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(ev)
-        vim.print("mon")
         on_save_util.add_to_on_save(ev.buf, "OrganizeImports", function(ev)
           local client = vim.lsp.get_clients({ name = JDTLS })[1]
 

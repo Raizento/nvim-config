@@ -202,7 +202,7 @@ local jdtls_config = {
     })
 
     vim.api.nvim_create_autocmd("LspDetach", {
-      callback = function(ev)
+      callback = function(_)
         vim.api.nvim_clear_autocmds({ group = jdtls_augroup })
       end,
     })

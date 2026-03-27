@@ -30,8 +30,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
 
-    local bufnr = ev.buf
-
     lsp.attach(client, ev.buf)
   end,
 })

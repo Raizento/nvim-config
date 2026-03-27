@@ -9,6 +9,21 @@ local on_save_util = require("raizento.util.on_save")
 
 local jdtls = require("jdtls")
 
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+    if client == nil then
+      return
+    end
+
+    if client.name == "spring-boot" then
+      -- Spring tools will also be queried for inlay hints but doesn't know how to properly resolve them
+      client.server_capabilities.inlayHintProvider = false
+    end
+  end,
+})
+
 vim.keymap.set(
   "n",
   "<Localleader>s",

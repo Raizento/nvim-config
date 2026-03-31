@@ -6,13 +6,13 @@ local M = {
   dependencies = {
     "https://github.com/L3MON4D3/LuaSnip",
     { url = "https://github.com/hrsh7th/cmp-nvim-lsp", name = "cmp_nvim_lsp" },
-    { url = "https://github.com/hrsh7th/cmp-buffer", name = "cmp_buffer" },
+    { url = "https://github.com/hrsh7th/cmp-buffer",   name = "cmp_buffer" },
     "https://github.com/rafamadriz/friendly-snippets",
-    { url = "https://github.com/hrsh7th/cmp-path", name = "cmp_path" },
-    { url = "https://github.com/hrsh7th/cmp-cmdline", name = "cmp_cmdline" },
+    { url = "https://github.com/hrsh7th/cmp-path",                    name = "cmp_path" },
+    { url = "https://github.com/hrsh7th/cmp-cmdline",                 name = "cmp_cmdline" },
     { url = "https://github.com/hrsh7th/cmp-nvim-lsp-signature-help", name = "cmp_nvim_lsp_signature_help" },
-    { url = "https://github.com/delphinus/cmp-ctags", name = "cmp_ctags" },
-    { url = "https://github.com/hrsh7th/cmp-nvim-lua", name = "cmp_nvim_lua" },
+    { url = "https://github.com/delphinus/cmp-ctags",                 name = "cmp_ctags" },
+    { url = "https://github.com/hrsh7th/cmp-nvim-lua",                name = "cmp_nvim_lua" },
     "https://github.com/saadparwaiz1/cmp_luasnip",
   },
 }
@@ -57,20 +57,6 @@ M.setup = function()
 
         cmp.confirm()
       end, { "i", "s" }),
-      ["<Tab>"] = cmp.mapping(function(fallback)
-        if luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        else
-          fallback()
-        end
-      end, { "i", "s" }),
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, { "i", "s" }),
     }),
   })
 
@@ -100,10 +86,10 @@ M.setup = function()
 
   function _G.leave_snippet()
     if
-      ---@diagnostic disable-next-line: undefined-field
-      ((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
-      and require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
-      and not require("luasnip").session.jump_active
+    ---@diagnostic disable-next-line: undefined-field
+        ((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
+        and require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
+        and not require("luasnip").session.jump_active
     then
       require("luasnip").unlink_current()
     end

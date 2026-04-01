@@ -28,3 +28,7 @@ vim.keymap.set({ "n", "v" }, "<Leader>p", [["+p]], { noremap = true, silent = tr
 vim.keymap.set({ "n", "v" }, "<Leader>P", [["+P]], { noremap = true, silent = true, desc = "paste from clipboard" })
 
 vim.keymap.set("n", "<Leader>;", [[mmA;<Esc>`m]], { noremap = true, silent = true, desc = "place ; at end of line" })
+
+vim.keymap.set("n", "<Leader>u", function()
+  require("undotree").open({ command = "15new" })
+end, { noremap = true, silent = true })

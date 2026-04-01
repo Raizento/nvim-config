@@ -1,3 +1,5 @@
+vim.cmd.packadd("nvim.undotree")
+
 require("raizento.core")
 require("raizento.autocmds")
 require("raizento.plugins")

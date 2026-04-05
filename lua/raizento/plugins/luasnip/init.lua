@@ -1,6 +1,4 @@
-local Plugin = require("raizento.plugins.plugin")
-
----@type Plugin
+---@type vpaw.PluginSpec
 local M = {
   url = "https://github.com/L3MON4D3/LuaSnip",
   dependencies = {
@@ -53,4 +51,4 @@ local M = {
   },
 }
 
-return Plugin:new(M)
+return M

@@ -1,5 +1,3 @@
-local Plugin = require("raizento.plugins.plugin")
-
 -- Utilizes code from https://yeripratama.com/blog/customizing-nvim-telescope/
 -- Keep track of current options status
 local temp_showtabline
@@ -48,7 +46,7 @@ _G.is_git_dir = function()
 end
 
 -- TODO implement LSP bindings
----@type Plugin
+---@type vpaw.PluginSpec
 local M = {
   url = "https://github.com/nvim-telescope/telescope.nvim",
   dependencies = {
@@ -139,4 +137,4 @@ M.description_grep_string = function()
   return "search for " .. vim.fn.expand("<cword>")
 end
 
-return Plugin:new(M)
+return M

@@ -1,6 +1,4 @@
-local Plugin = require("raizento.plugins.plugin")
-
----@type Plugin
+---@type vpaw.PluginSpec
 local M = {
   name = "oil",
   url = "https://github.com/stevearc/oil.nvim",
@@ -31,4 +29,4 @@ local M = {
   },
 }
 
-return Plugin:new(M)
+return M

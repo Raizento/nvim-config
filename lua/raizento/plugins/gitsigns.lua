@@ -1,6 +1,4 @@
-local Plugin = require("raizento.plugins.plugin")
-
----@type Plugin
+---@type vpaw.PluginSpec
 local M = {
   url = "https://github.com/lewis6991/gitsigns.nvim",
   opts = {
@@ -59,4 +57,4 @@ M.setup = function()
   })
 end
 
-return Plugin:new(M)
+return M

@@ -1,6 +1,4 @@
-local Plugin = require("raizento.plugins.plugin")
-
----@type Plugin
+---@type vpaw.PluginSpec
 local M = {
   url = "https://github.com/folke/lazydev.nvim",
   opts = {
@@ -12,4 +10,4 @@ local M = {
   },
 }
 
-return Plugin:new(M)
+return M

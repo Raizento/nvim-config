@@ -1,6 +1,4 @@
-local Plugin = require("raizento.plugins.plugin")
-
----@type Plugin
+---@type vpaw.PluginSpec
 local M = {
   url = "https://www.github.com/navarasu/onedark.nvim",
   setup = function()
@@ -8,4 +6,4 @@ local M = {
   end,
 }
 
-return Plugin:new(M)
+return M

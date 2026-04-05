@@ -1,8 +1,6 @@
-local Plugin = require("raizento.plugins.plugin")
-
----@type Plugin
+---@type vpaw.PluginSpec
 local M = {
   url = "https://www.github.com/windwp/nvim-autopairs",
 }
 
-return Plugin:new(M)
+return M

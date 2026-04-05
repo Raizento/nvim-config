@@ -1,5 +1,3 @@
-local Plugin = require("raizento.plugins.plugin")
-
 local select_keys = {
   {
     { "x", "o" },
@@ -126,8 +124,8 @@ local move_keys = {
 
 local keys = vim.list_extend(select_keys, move_keys)
 
----@type Plugin
-local M = {
+---@type vpaw.PluginSpec
+return {
   url = "https://github.com/nvim-treesitter/nvim-treesitter",
   dependencies = {
     "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
@@ -177,5 +175,3 @@ local M = {
     })
   end,
 }
-
-return Plugin:new(M)

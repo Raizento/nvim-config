@@ -1,6 +1,4 @@
-local Plugin = require("raizento.plugins.plugin")
-
----@type Plugin
+---@type vpaw.PluginSpec
 local M = {
   name = "nvim-tmux-navigation",
   url = "https://github.com/alexghergh/nvim-tmux-navigation",
@@ -13,4 +11,4 @@ local M = {
   },
 }
 
-return Plugin:new(M)
+return M

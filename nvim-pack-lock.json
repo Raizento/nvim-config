@@ -119,6 +119,10 @@
     "telescope.nvim": {
       "rev": "5255aa27c422de944791318024167ad5d40aad20",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
+    },
+    "vpaw": {
+      "rev": "4cdb4a1fe6fabe0a188049728fb69c48f51ec780",
+      "src": "https://github.com/Raizento/vpaw"
     }
   }
 }

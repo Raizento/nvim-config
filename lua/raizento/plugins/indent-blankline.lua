@@ -1,6 +1,4 @@
-local Plugin = require("raizento.plugins.plugin")
-
----@type Plugin
+---@type vpaw.PluginSpec
 local M = {
   url = "https://github.com/lukas-reineke/indent-blankline.nvim",
   name = "ibl",
@@ -15,4 +13,4 @@ local M = {
   },
 }
 
-return Plugin:new(M)
+return M

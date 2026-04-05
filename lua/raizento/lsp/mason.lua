@@ -1,6 +1,4 @@
-local Plugin = require("raizento.plugins.plugin")
-
----@type Plugin
+---@type vpaw.PluginSpec
 local M = {
   url = "https://github.com/mason-org/mason.nvim",
   opts = {
@@ -14,4 +12,4 @@ local M = {
   },
 }
 
-return Plugin:new(M)
+return M

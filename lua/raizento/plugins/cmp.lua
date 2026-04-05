@@ -1,6 +1,4 @@
-local Plugin = require("raizento.plugins.plugin")
-
----@type Plugin
+---@type vpaw.PluginSpec
 local M = {
   url = "https://github.com/hrsh7th/nvim-cmp",
   dependencies = {
@@ -97,4 +95,4 @@ M.setup = function()
   vim.api.nvim_command([[ autocmd ModeChanged * lua leave_snippet() ]])
 end
 
-return Plugin:new(M)
+return M

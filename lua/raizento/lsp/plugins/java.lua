@@ -1,6 +1,4 @@
-local Plugin = require("raizento.plugins.plugin")
-
----@type Plugin
+---@type vpaw.PluginSpec
 local M = {
   dependencies = {
     { url = "https://github.com/mfussenegger/nvim-jdtls", name = "jdtls" },
@@ -10,4 +8,4 @@ local M = {
   name = "spring_boot",
 }
 
-return Plugin:new(M)
+return M

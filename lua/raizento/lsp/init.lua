@@ -50,6 +50,7 @@ end
 -- This is a very hacky solution to https://github.com/Raizento/nvim-config/issues/23;
 -- won't work if nvim is used headless
 -- Open issue in Mason: https://github.com/mason-org/mason.nvim/issues/2074
+-- For this to work it also needs the Mason window to stay open until the LSP was installed successfully. If it's closed beforehand the LSP won't be enabled
 vim.api.nvim_create_autocmd("BufLeave", {
   callback = function(_)
     local ft = vim.o.filetype

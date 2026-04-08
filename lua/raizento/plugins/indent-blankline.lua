@@ -1,9 +1,10 @@
+---@type vpaw.PluginSpec
 local M = {
-  "lukas-reineke/indent-blankline.nvim",
+  url = "https://github.com/lukas-reineke/indent-blankline.nvim",
+  name = "ibl",
   dependencies = {
-    "nvim-treesitter/nvim-treesitter",
+    "https://github.com/nvim-treesitter/nvim-treesitter",
   },
-  main = "ibl",
   opts = {
     scope = {
       show_start = false,

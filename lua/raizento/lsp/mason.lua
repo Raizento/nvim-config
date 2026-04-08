@@ -1,5 +1,6 @@
+---@type vpaw.PluginSpec
 local M = {
-  "mason-org/mason.nvim",
+  url = "https://github.com/mason-org/mason.nvim",
   opts = {
     ui = {
       icons = {

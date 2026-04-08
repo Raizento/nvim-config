@@ -1,29 +1,21 @@
+---@type vpaw.PluginSpec
 local M = {
-  "hrsh7th/nvim-cmp",
+  url = "https://github.com/hrsh7th/nvim-cmp",
   dependencies = {
-    "L3MON4D3/LuaSnip",
-    "rafamadriz/friendly-snippets",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/cmp-nvim-lsp-signature-help",
-    "delphinus/cmp-ctags",
-    "hrsh7th/cmp-nvim-lua",
+    "https://github.com/L3MON4D3/LuaSnip",
+    { url = "https://github.com/hrsh7th/cmp-nvim-lsp", name = "cmp_nvim_lsp" },
+    { url = "https://github.com/hrsh7th/cmp-buffer", name = "cmp_buffer" },
+    { url = "https://github.com/hrsh7th/cmp-path", name = "cmp_path" },
+    { url = "https://github.com/hrsh7th/cmp-cmdline", name = "cmp_cmdline" },
+    { url = "https://github.com/hrsh7th/cmp-nvim-lsp-signature-help", name = "cmp_nvim_lsp_signature_help" },
+    { url = "https://github.com/hrsh7th/cmp-nvim-lua", name = "cmp_nvim_lua" },
+    "https://github.com/saadparwaiz1/cmp_luasnip",
   },
 }
 
-M.config = function()
+M.setup = function()
   local cmp = require("cmp")
   local luasnip = require("luasnip")
-
-  -- Additional snippets from friendly-snippets
-  require("luasnip.loaders.from_vscode").lazy_load()
-
-  local check_backspace = function()
-    local col = vim.fn.col(".") - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match(" %s")
-  end
 
   cmp.setup({
     snippet = {
@@ -35,18 +27,9 @@ M.config = function()
     sources = cmp.config.sources({
       { name = "nvim_lsp" },
       { name = "nvim_lsp_signature_help" },
-      {
-        name = "ctags",
-        option = {
-          executable = "ctags",
-          trigger_characters = { "." },
-          trigger_characters_ft = {},
-        },
-      },
       { name = "lazydev" },
       { name = "luasnip" },
       { name = "nvim_lua" },
-      { name = "lazydev" },
       { name = "buffer" },
       { name = "path" },
     }),
@@ -56,28 +39,19 @@ M.config = function()
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.abort(),
-      ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-      ["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
+      ["<C-y>"] = cmp.mapping(function(fallback)
+        if not cmp.visible() then
+          fallback()
+          return
+        end
+
+        -- Automatically select first entry if there is no selected entry yet
+        -- First hit is often the one you want; makes completing that a bit easier
+        if cmp.get_selected_entry() == nil then
           cmp.select_next_item()
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        elseif check_backspace() then
-          fallback()
-        else
-          fallback()
         end
-      end, { "i", "s" }),
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        elseif check_backspace() then
-          fallback()
-        else
-          fallback()
-        end
+
+        cmp.confirm()
       end, { "i", "s" }),
     }),
   })
@@ -108,7 +82,6 @@ M.config = function()
 
   function _G.leave_snippet()
     if
-      -- old_mode and new_mode exist; see :h ModeChanged
       ---@diagnostic disable-next-line: undefined-field
       ((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
       and require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
@@ -118,7 +91,7 @@ M.config = function()
     end
   end
 
-  -- stop snippets when you leave to normal mode
+  -- stop snippets when you leave insert mode
   vim.api.nvim_command([[ autocmd ModeChanged * lua leave_snippet() ]])
 end
 

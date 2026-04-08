@@ -1,3 +1,29 @@
+local JDTLS = "jdtls"
+local PICK_FORMAT_KEYMAP = "<Leader>lcf"
+
+local JdtlsConfig = require("raizento.lsp.config.jdtls_settings")
+local json = require("raizento.util.json")
+local telescope_picker = require("raizento.util.telescope_picker")
+local fs = require("raizento.util.fs")
+local on_save_util = require("raizento.util.on_save")
+
+local jdtls = require("jdtls")
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+    if client == nil then
+      return
+    end
+
+    if client.name == "spring-boot" then
+      -- Spring tools will also be queried for inlay hints but doesn't know how to properly resolve them
+      client.server_capabilities.inlayHintProvider = false
+    end
+  end,
+})
+
 vim.keymap.set(
   "n",
   "<Localleader>s",
@@ -5,35 +31,39 @@ vim.keymap.set(
   { desc = "split string into two lines starting from cursor position" }
 )
 
-require("raizento.util.string")
-local fs = require("raizento.util.fs")
+vim.keymap.set("n", "<Leader>fj", function()
+  require("telescope.builtin").find_files({
+    find_command = {
+      "rg",
+      "--files",
+      "--glob",
+      "*.java",
+      "--glob",
+      "*.properties",
+      "--glob",
+      "application.*.y(a|)ml",
+      "--glob",
+      "*.gradle",
+      "--glob",
+      "!.gradle/*",
+    },
+  })
+end, { buffer = vim.fn.bufnr() })
 
-if vim.fn.exepath("jdtls"):is_blank() and not vim.g.jdtls_message_shown then
-  vim.g.jdtls_message_shown = true
-  vim.print("To use JDTLS, please install JDTLS via Mason: MasonInstall jdtls")
-  return
-end
-
--- Only for LSP folder
--- TODO this fires whenever nvim is loaded; not good; should only fire if jdtls starts
-if vim.fn.exepath("java"):is_blank() and not vim.env.JAVA_HOME then
-  error("To run JDTLS, you need to have Java installed.")
-end
-
-local jdtls_install_path = vim.env.MASON .. "/packages/jdtls/"
+local jdtls_install_path = vim.env.MASON .. "/packages/" .. JDTLS .. "/"
 
 -- TODO not a big fan of this; this is very dependent on mason's structure to stay the same
-local jdtls_package = require("mason-registry").get_package("jdtls").spec
+local jdtls_package = require("mason-registry").get_package(JDTLS).spec
 local equinox_launcher_path = jdtls_install_path
-  .. jdtls_package.share["jdtls/plugins/org.eclipse.equinox.launcher.jar"]
+  .. jdtls_package.share[JDTLS .. "/plugins/org.eclipse.equinox.launcher.jar"]
 
 ---@diagnostic disable-next-line: undefined-field
 local config_path = jdtls_install_path .. jdtls_package.source.download[2].config
-local lombok_path = jdtls_install_path .. jdtls_package.share["jdtls/lombok.jar"]
+local lombok_path = jdtls_install_path .. jdtls_package.share[JDTLS .. "/lombok.jar"]
 
 -- Create workspace root + workspace for project if it does not exist
 local data_path = vim.fn.stdpath("data")
-local workspace_root = data_path .. "/lsp/jdtls/"
+local workspace_root = data_path .. "/lsp/" .. JDTLS .. "/"
 
 if not fs.does_file_exist(workspace_root) then
   vim.fn.mkdir(workspace_root, "p")
@@ -43,61 +73,20 @@ end
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local project_workspace = workspace_root .. project_name
 
-local create_choose_format_file_command = function()
-  vim.api.nvim_create_user_command("ChooseFormatFileForWorkspace", function(opts)
-    local path = opts.fargs[1] or vim.fn.input("Path to Java format file: ")
-    local absolute_path = vim.fs.abspath(path)
-    local normalized_path = vim.fs.normalize(absolute_path)
+local jdtls_config_path = project_workspace .. "/config.json"
 
-    if not fs.does_file_exist(normalized_path) then
-      vim.notify("File at path " .. normalized_path .. " does not exist!", vim.log.levels.ERROR)
-      return
-    end
-
-    if not vim.endswith(normalized_path, "xml") then
-      vim.notify("Configuration file must be xml!", vim.log.levels.ERROR)
-      return
-    end
-
-    local temp = { formatFilePath = normalized_path }
-    local path_object = vim.json.encode(temp)
-
-    -- TODO Read content from file first; this will overwrite any existing config
-    local config_file_path = project_workspace .. "/config.json"
-    local file = io.open(config_file_path, "w")
-
-    if file == nil then
-      vim.notify("Could not save config, please check permissions at " .. config_file_path, vim.log.levels.ERROR)
-      return
-    end
-
-    file:write(path_object)
-    file:flush()
-    file:close()
-
-    vim.notify("Successfully saved config to " .. config_file_path)
-  end, { nargs = "?" })
+if not fs.does_file_exist(project_workspace) then
+  vim.fn.mkdir(project_workspace, "p")
+  vim.print("Created project workspace for " .. project_name)
 end
 
-local read_format_file = function()
-  local config_file_path = project_workspace .. "/config.json"
-  local file = io.open(config_file_path, "r")
+---@type JdtlsConfig
+local config = JdtlsConfig:new(json.read_from_json(jdtls_config_path))
 
-  if not file then
-    return nil
-  end
+local jdtls_augroup = vim.api.nvim_create_augroup("jdtls", { clear = false })
 
-  local content = file:read("*a")
-  if not content then
-    return nil
-  end
-
-  local config = vim.json.decode(content)
-
-  return config.formatFilePath
-end
-
-local config = {
+---@type vim.lsp.ClientConfig
+local jdtls_config = {
   cmd = {
     vim.fn.exepath("java"),
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -122,22 +111,104 @@ local config = {
     "-data",
     project_workspace,
   },
+  init_options = {
+    bundles = require("spring_boot").java_extensions(),
+  },
 
+  -- List of all settings:
+  -- https://github.com/eclipse-jdtls/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line
   settings = {
     java = {
       format = {
         settings = {
-          url = read_format_file(),
+          url = config.formatting_settings_path,
         },
       },
     },
   },
 
-  on_attach = require("raizento.util.lsp").on_attach,
-
+  ---@type vim.lsp.client.on_init_cb
   on_init = function(_)
-    create_choose_format_file_command()
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(ev)
+        on_save_util.add_to_on_save(ev.buf, "OrganizeImports", function(ev)
+          local client = vim.lsp.get_clients({ name = JDTLS })[1]
+
+          -- Might be the case if client was detached from a file or when server was shut down
+          if client == nil then
+            return
+          end
+
+          local params = vim.lsp.util.make_range_params(0, "utf-16")
+
+          local response = client:request_sync("java/organizeImports", params, 1000, ev.buf) or {}
+          if response.err then
+            print("Error on organize imports: " .. response.err.message)
+            return
+          end
+          if response.result then
+            vim.lsp.util.apply_workspace_edit(response.result, "utf-16")
+          end
+        end)
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = jdtls_augroup,
+      callback = function(ev)
+        vim.keymap.set("n", "<Leader>js", jdtls.super_implementation, { buffer = ev.buf })
+        vim.keymap.set(
+          "n",
+          "<Leader>fl",
+          require("telescope.builtin").lsp_dynamic_workspace_symbols,
+          { buffer = ev.buf }
+        )
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = jdtls_augroup,
+      callback = function(ev)
+        vim.keymap.set("n", PICK_FORMAT_KEYMAP, function()
+          telescope_picker.pick_file_path("xml", function(file_path)
+            -- User has selected file which is already registered to be the current formatting file
+            -- exit early since we don't need to restart the LSP in that case
+            if file_path == config.formatting_settings_path then
+              return
+            end
+
+            local client = vim.lsp.get_clients({ bufnr = vim.fn.bufnr(), name = JDTLS })[1]
+
+            local attached_buffers = client.attached_buffers
+
+            config.formatting_settings_path = file_path
+            json.write_as_json(jdtls_config_path, config)
+
+            local lsp_config = vim.lsp.config[JDTLS] --[[@as vim.lsp.Config]]
+            lsp_config.settings.java.format.settings.url = config.formatting_settings_path
+
+            -- TODO the restart might not be needed at all; can maybe directly change the value
+            vim.lsp.config(JDTLS, lsp_config)
+            vim.lsp.enable(JDTLS, false)
+
+            for bufnr, _ in pairs(attached_buffers) do
+              vim.api.nvim_buf_call(bufnr, function()
+                jdtls.start_or_attach(vim.lsp.config.jdtls)
+              end)
+            end
+          end)
+        end, { buffer = ev.buf })
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("LspDetach", {
+      callback = function(_)
+        vim.api.nvim_clear_autocmds({ group = jdtls_augroup })
+      end,
+    })
   end,
 }
 
-require("jdtls").start_or_attach(config)
+-- Load this into the config so we can change this later when dynamically changing settings (e.g. the formatting path)
+vim.lsp.config(JDTLS, jdtls_config)
+jdtls.start_or_attach(vim.lsp.config.jdtls)

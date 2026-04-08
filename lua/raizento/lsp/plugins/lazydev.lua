@@ -1,6 +1,6 @@
-return {
-  "folke/lazydev.nvim",
-  ft = "lua", -- only load on lua files
+---@type vpaw.PluginSpec
+local M = {
+  url = "https://github.com/folke/lazydev.nvim",
   opts = {
     library = {
       -- See the configuration section for more details
@@ -9,3 +9,5 @@ return {
     },
   },
 }
+
+return M

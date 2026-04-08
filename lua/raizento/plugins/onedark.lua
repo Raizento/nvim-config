@@ -1,10 +1,9 @@
+---@type vpaw.PluginSpec
 local M = {
-  "navarasu/onedark.nvim",
-  priority = 1000,
+  url = "https://www.github.com/navarasu/onedark.nvim",
+  setup = function()
+    require("onedark").load()
+  end,
 }
-
-M.config = function()
-  require("onedark").load()
-end
 
 return M

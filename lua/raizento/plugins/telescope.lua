@@ -1,4 +1,3 @@
--- TODO Use git files picker for Leader+ff
 -- Utilizes code from https://yeripratama.com/blog/customizing-nvim-telescope/
 -- Keep track of current options status
 local temp_showtabline
@@ -37,29 +36,52 @@ vim.cmd([[
     augroup END
 ]])
 
+_G.is_git_dir = function()
+  local result = vim.system({ "git", "rev-parse" }, { text = true }):wait()
+  if result.code == 0 then
+    return true
+  end
+
+  return false
+end
+
 -- TODO implement LSP bindings
+---@type vpaw.PluginSpec
 local M = {
-  "nvim-telescope/telescope.nvim",
+  url = "https://github.com/nvim-telescope/telescope.nvim",
   dependencies = {
-    "nvim-lua/plenary.nvim",
+    "https://github.com/nvim-lua/plenary.nvim",
   },
   keys = {
     {
+      "n",
       "<Leader>ff",
-      "<CMD>Telescope git_files<CR>",
-      desc = "find git tracked files",
+      function()
+        if not is_git_dir() then
+          vim.print("Not a git dir; can't use git_files picker")
+          return
+        end
+        vim.cmd([[Telescope git_files]])
+      end,
+      { desc = "find git tracked files" },
     },
-    { "<Leader>fF", "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>", desc = "find all files" },
-    { "<Leader>fg", "<CMD>Telescope live_grep<CR>", desc = "live grep" },
-    { "<Leader>fb", "<CMD>Telescope buffers<CR>", desc = "buffers" },
-    { "<Leader>fh", "<CMD>Telescope help_tags<CR>", desc = "help tags" },
-    { "<Leader>fc", "<CMD>Telescope commands<CR>", desc = "commands" },
     {
+      "n",
+      "<Leader>fF",
+      "<CMD>lua require('telescope.builtin').find_files({hidden = true})<CR>",
+      { desc = "find all files" },
+    },
+    { "n", "<Leader>fg", "<CMD>Telescope live_grep<CR>", { desc = "live grep" } },
+    { "n", "<Leader>fb", "<CMD>Telescope buffers<CR>", { desc = "buffers" } },
+    { "n", "<Leader>fh", "<CMD>Telescope help_tags<CR>", { desc = "help tags" } },
+    { "n", "<Leader>fc", "<CMD>Telescope commands<CR>", { desc = "commands" } },
+    {
+      "n",
       "<Leader>fl",
       "<CMD>lua vim.diagnostic.setloclist({ open = false })<CR><CMD>Telescope loclist<CR>",
-      desc = "loclist",
+      { desc = "loclist" },
     },
-    { "<Leader>fo", "<CMD>Telescope vim_options<CR>", desc = "vim options" },
+    { "n", "<Leader>fo", "<CMD>Telescope vim_options<CR>", { desc = "vim options" } },
   },
   opts = {
     defaults = {
@@ -113,18 +135,6 @@ local M = {
 
 M.description_grep_string = function()
   return "search for " .. vim.fn.expand("<cword>")
-end
-
-M.config = function()
-  require("telescope").setup(M.opts)
-  local wk = require("which-key")
-  wk.add({
-    {
-      "<Leader>f*",
-      "<CMD>lua require('telescope.builtin').grep_string({})<CR>",
-      desc = M.description_grep_string,
-    },
-  })
 end
 
 return M

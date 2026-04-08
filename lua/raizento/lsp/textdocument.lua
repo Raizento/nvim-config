@@ -1,3 +1,5 @@
+local on_save_util = require("raizento.util.on_save")
+
 local M = {
   __is_first_attach = true,
 }
@@ -63,18 +65,9 @@ M.add_keymap_for_capabilities = function(client, bufnr)
       vim.lsp.buf.format({ async = true })
     end, { desc = "format", buffer = bufnr })
 
-    vim.keymap.set(
-      "n",
-      "<Leader>lF",
-      require("raizento.lsp.formatting").format_all_attached_buffers,
-      { desc = "format all attached buffers", buffer = bufnr }
-    )
-    vim.keymap.set(
-      "n",
-      "<Leader>lPf",
-      require("raizento.lsp.formatting").format_project,
-      { desc = "format project", buffer = bufnr }
-    )
+    on_save_util.add_to_on_save(bufnr, "Format", function()
+      vim.lsp.buf.format({ async = false })
+    end)
   end
 
   if client:supports_method(vim.lsp.protocol.Methods.textDocument_codeAction) then

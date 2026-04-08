@@ -34,13 +34,32 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-local lsp_names = lsp.get_mason_lsp_names()
+local function enable_lsps_installed_with_mason()
+  local lsp_names = lsp.get_mason_lsp_names()
 
-for _, lsp_name in ipairs(lsp_names) do
-  vim.lsp.config(lsp_name, {
-    -- Capabilities automatically get merged
-    capabilities = require("cmp_nvim_lsp").default_capabilities(),
-  })
+  for _, lsp_name in ipairs(lsp_names) do
+    vim.lsp.config(lsp_name, {
+      -- Capabilities automatically get merged
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
+    })
 
-  vim.lsp.enable(lsp_name)
+    vim.lsp.enable(lsp_name)
+  end
 end
+
+-- This is a very hacky solution to https://github.com/Raizento/nvim-config/issues/23;
+-- won't work if nvim is used headless
+-- Open issue in Mason: https://github.com/mason-org/mason.nvim/issues/2074
+vim.api.nvim_create_autocmd("BufLeave", {
+  callback = function(_)
+    local ft = vim.o.filetype
+
+    if ft ~= "mason" then
+      return
+    end
+
+    enable_lsps_installed_with_mason()
+  end
+})
+
+enable_lsps_installed_with_mason()

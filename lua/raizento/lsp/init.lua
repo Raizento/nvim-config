@@ -60,7 +60,7 @@ vim.api.nvim_create_autocmd("BufLeave", {
     end
 
     enable_lsps_installed_with_mason()
-  end
+  end,
 })
 
 enable_lsps_installed_with_mason()

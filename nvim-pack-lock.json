@@ -121,7 +121,7 @@
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "vpaw": {
-      "rev": "4cdb4a1fe6fabe0a188049728fb69c48f51ec780",
+      "rev": "4a70d8fb54d92cb72e090cdf630ba71048a2f657",
       "src": "https://github.com/Raizento/vpaw"
     }
   }

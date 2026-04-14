@@ -158,7 +158,7 @@ return {
           return
         end
 
-        treesitter.install({ filetype })
+        treesitter.install({ filetype }):wait(30000) -- 30 seconds
         vim.treesitter.start()
 
         vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"

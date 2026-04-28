@@ -69,7 +69,6 @@ local response_entity_choices = {
 local request_parameters = function(position, node_reference)
   return d(position, function(args)
     local text = args[1][1]
-    -- TODO This does not work correctly
     local _, number_of_path_paramters = text:gsub("{.-}", "")
 
     if number_of_path_paramters == 0 then

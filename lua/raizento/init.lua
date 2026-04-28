@@ -9,66 +9,117 @@ require("raizento.plugins")
 require("raizento.diagnostics")
 require("raizento.lsp")
 
-function _G.tabline()
-  local tabline = ""
-
-  for index = 1, vim.fn.tabpagenr("$") do
-    local winnr = vim.fn.tabpagewinnr(index)
-    local buflist = vim.fn.tabpagebuflist(index)
-    local current_buf = buflist[winnr]
-
-    local highlight_group = _G.get_tabpage_hightlight_group(index)
-    tabline = tabline .. highlight_group
-
-    tabline = tabline .. "%" .. index .. "T"
-
-    local changed_buffers = _G.get_number_of_changed_buffers(index)
-    local changed_marker = string.format(" %d+", changed_buffers)
-    if changed_buffers == 0 then
-      changed_marker = ""
-    end
-
-    local title = _G.get_tabpage_title(current_buf)
-    local last_tabpage = index == vim.fn.tabpagenr("#") and "(L)" or ""
-    local tabpage_title = string.format(" %s%s %s ", title, changed_marker, last_tabpage)
-
-    tabline = tabline .. tabpage_title
-  end
-
-  tabline = tabline .. "%#TabLineFill#%T"
-
-  return tabline
-end
-
----@param tabpagenr integer number of tabpage
----@return string highlight group
-function _G.get_tabpage_hightlight_group(tabpagenr)
-  if tabpagenr == vim.fn.tabpagenr() then
-    return "%#TabLineSel#"
-  end
-
-  return "%#TabLine#"
-end
-
-function _G.get_tabpage_title(bufnr)
-  local bufname = vim.fn.bufname(bufnr)
-  bufname = vim.fn.fnamemodify(bufname, ":t")
-
-  -- bufname is empty when in the buffer opened by nvim without passing a filename
-  if bufname == "" then
-    return "[No Name]"
-  end
-
-  return bufname
-end
-
-function _G.get_number_of_changed_buffers(tabpagenr)
-  local tab_id = vim.api.nvim_list_tabpages()[tabpagenr]
-  local wins = vim.api.nvim_tabpage_list_wins(tab_id)
-  local buffers = vim.iter(wins):map(function(winid) return vim.fn.winbufnr(winid) end):totable()
-  local number_changed = #vim.iter(buffers):filter(function(bufnr) return vim.bo[bufnr].modified end):totable()
-
-  return number_changed
-end
-
-vim.opt.tabline = "%!v:lua.tabline()"
+-- function _G.tabline()
+--   local tabline = ""
+--
+--   local active_buffers = {}
+--   for index = 1, vim.fn.tabpagenr("$") do
+--     local winnr = vim.fn.tabpagewinnr(index)
+--     local buflist = vim.fn.tabpagebuflist(index)
+--     local current_buf = buflist[winnr]
+--
+--     table.insert(active_buffers, index, current_buf)
+--   end
+--
+--   local bufnames = {}
+--   local temp = {}
+--   for index, bufnr in pairs(active_buffers) do
+--     local bufname = vim.fn.bufname(bufnr)
+--     local filename = vim.fn.fnamemodify(bufname, ":p")
+--     local parts = vim.fn.split(filename, "/")
+--     parts = vim.iter(parts):rev():totable()
+--
+--     if temp[parts[1]] then
+--       local first_iter = vim.iter(parts)
+--       local second_iter = vim.iter(temp[parts[1]])
+--
+--       local filename_one = { first_iter:next() }
+--       local filename_two = { second_iter:next() }
+--
+--       vim.print(first_iter:join(","))
+--       vim.print(second_iter:join(","))
+--
+--       while true do
+--         local part_one = first_iter:next()
+--         local part_two = second_iter:next()
+--
+--         table.insert(filename_one, part_one)
+--         table.insert(filename_two, part_two)
+--
+--         if part_one ~= part_two then
+--           goto continue
+--         end
+--       end
+--
+--       temp[filename_one] = parts
+--       temp[filename_two] = temp[parts[1]]
+--
+--       vim.print(filename_one)
+--       vim.print(filename_two)
+--     end
+--
+--     if not temp[parts[1]] then
+--       temp[parts[1]] = parts
+--     end
+--
+--     table.insert(bufnames, index, { parts = parts })
+--     ::continue::
+--   end
+--
+--   for index = 1, vim.fn.tabpagenr("$") do
+--     local highlight_group = _G.get_tabpage_hightlight_group(index)
+--     tabline = tabline .. highlight_group
+--
+--     tabline = tabline .. "%" .. index .. "T"
+--
+--     local changed_buffers = _G.get_number_of_changed_buffers(index)
+--     local changed_marker = string.format(" %d+", changed_buffers)
+--     if changed_buffers == 0 then
+--       changed_marker = ""
+--     end
+--
+--     vim.print(bufnames[index])
+--     local title = vim.iter(bufnames[index]):rev():join("/")
+--     local last_tabpage = index == vim.fn.tabpagenr("#") and " (L)" or ""
+--     local tabpage_title = string.format(" %s%s%s ", title, changed_marker, last_tabpage)
+--
+--     tabline = tabline .. tabpage_title
+--   end
+--
+--   tabline = tabline .. "%#TabLineFill#%T"
+--
+--   return tabline
+-- end
+--
+-- ---@param tabpagenr integer number of tabpage
+-- ---@return string highlight group
+-- function _G.get_tabpage_hightlight_group(tabpagenr)
+--   if tabpagenr == vim.fn.tabpagenr() then
+--     return "%#TabLineSel#"
+--   end
+--
+--   return "%#TabLine#"
+-- end
+--
+-- function _G.get_tabpage_title(bufnr)
+--   local bufname = vim.fn.bufname(bufnr)
+--   bufname = vim.fn.fnamemodify(bufname, ":t")
+--
+--   -- bufname is empty when in the buffer opened by nvim without passing a filename
+--   if bufname == "" then
+--     return "[No Name]"
+--   end
+--
+--   return bufname
+-- end
+--
+-- function _G.get_number_of_changed_buffers(tabpagenr)
+--   local tab_id = vim.api.nvim_list_tabpages()[tabpagenr]
+--   local wins = vim.api.nvim_tabpage_list_wins(tab_id)
+--   local buffers = vim.iter(wins):map(function(winid) return vim.fn.winbufnr(winid) end):totable()
+--   local number_changed = #vim.iter(buffers):filter(function(bufnr) return vim.bo[bufnr].modified end):totable()
+--
+--   return number_changed
+-- end
+--
+-- vim.opt.tabline = "%!v:lua.tabline()"

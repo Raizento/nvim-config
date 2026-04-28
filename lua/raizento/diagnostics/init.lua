@@ -1,5 +1,11 @@
 local diagnostic = require("raizento.diagnostics.util")
 
+vim.diagnostic.config({
+  float = {
+    source = true
+  }
+})
+
 vim.api.nvim_create_autocmd("DiagnosticChanged", {
   callback = function(ev)
     local bufnr = ev.buf
